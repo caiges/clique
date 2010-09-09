@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+    <head>
+        <title>{% block page_title %}Clique{% endblock %}</title>
+        <script type="text/javascript" src="/media/js/jquery-1.4.2.js"></script>
+        <script type="text/javascript" src="/media/js/tiny_mce/tiny_mce_jquery_src.js"></script>
+        <script type="text/javascript">
+            tinyMCE.init({
+            	mode : "textareas",
+            	theme : "simple",
+            	editor_selector : "mceEditor",
+            	editor_deselector : "mceNoEditor"
+            });
+        </script>
+        {% block extra_head %}{% endblock %}
+    </head>
+    
+    <body>
+        {% block content %}{% endblock %}
+    </body>
+
+</html>
