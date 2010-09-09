@@ -20,4 +20,5 @@ def product_association(request):
         products_json = json_serializer.serialize(products, ensure_ascii = False)
         return HttpResponse(products_json)
     elif(request.method == 'POST'):
+        # Insert association.
         pass
