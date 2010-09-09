@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Example:
     # (r'^clique/', include('clique.foo.urls')),
     (r'^$', 'clique.core.views.index'),
+    (r'^product-association/products.json/$', 'clique.core.views.product_association'),
     (r'^association-test/', 'clique.core.views.association_test'),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
