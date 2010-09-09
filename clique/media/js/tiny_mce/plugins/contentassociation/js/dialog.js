@@ -29,7 +29,9 @@ var ContentAssociationDialog = {
 
 	insert : function() {
 		// Insert the contents from the input into the document
-		tinyMCEPopup.editor.execCommand('mceInsertContent', false, document.forms[0].products.value);
+		var selectedText = tinyMCEPopup.editor.selection.getContent({format : 'text'});
+		//document.forms[0].products.value
+		tinyMCEPopup.editor.execCommand('mceInsertContent', false, '<a href="#">' + selectedText + '</a>');
 		tinyMCEPopup.close();
 	}
 };
