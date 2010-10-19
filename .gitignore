@@ -1,2 +1,3 @@
 env/*
+*.pycclique/media/product_images/*
 *.pyc

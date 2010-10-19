@@ -2,7 +2,7 @@ $(document).ready(function() {
    
     tinyMCE.init({
     	mode : "exact",
-    	elements : "id_long_description",
+    	elements : "id_long_description,id_product_details",
     	theme : "advanced",
     	plugins : "contentassociation,safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
     	theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
