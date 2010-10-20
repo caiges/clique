@@ -19,6 +19,6 @@ class BaseProduct(models.Model):
         return u'%s' % self.name
 
 class Product(BaseProduct):
-    category = models.ForeignKey(Category, related_name = 'product_categories', blank = False, null = False)
+    category = models.ManyToManyField(Category, related_name = 'product_categories', blank = False, null = False)
     product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d')
     store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)
