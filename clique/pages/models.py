@@ -15,4 +15,3 @@ class BasePage(models.Model):
 
 class Page(BasePage):
     category = models.ForeignKey(Category, related_name = 'page_categories', blank = False, null = False)
-    sub_category = models.ForeignKey(Subcategory, related_name = 'page_sub_categories', blank = True, null = True, default = None)

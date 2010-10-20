@@ -13,12 +13,3 @@ class Category(models.Model):
     
     class Meta:
         verbose_name_plural = 'Categories'
-
-class Subcategory(models.Model):
-    name = models.CharField(max_length = 100, blank = False, null = False)
-    category = models.ForeignKey('Category', related_name = 'sub_categories')
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
-
-    class Meta:
-        verbose_name_plural = 'Subcategories' 

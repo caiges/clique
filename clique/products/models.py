@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from core.models import Category, Subcategory
+from core.models import Category
 
 class BaseProduct(models.Model):
     name = models.CharField(max_length = 100, blank = False, null = False)
@@ -20,6 +20,5 @@ class BaseProduct(models.Model):
 
 class Product(BaseProduct):
     category = models.ForeignKey(Category, related_name = 'product_categories', blank = False, null = False)
-    sub_category = models.ForeignKey(Subcategory, related_name = 'product_sub_categories', blank = True, null = True, default = None)
     product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d')
     store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)
