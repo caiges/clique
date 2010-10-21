@@ -10,7 +10,7 @@ class ContentAssocation(BaseContentAssociation):
 
 class Page(BasePage):
     category = models.ForeignKey('PageCategory', related_name = 'page_categories', blank = False, null = False)
-    
+
 class PageCategory(BaseCategory):
     
     class Meta(BaseCategory.Meta):
@@ -27,7 +27,4 @@ class ProductCategory(BaseCategory):
         verbose_name_plural = 'Product Categories'
 
 class Recipe(BaseRecipe):
-    pass
-    
-class Page(BasePage):
     pass
