@@ -23,8 +23,14 @@ def content_association(request):
         return HttpResponse(items_json)
     elif(request.method == 'POST'):
         # Insert association.
+        source_item = request.POST['source_item'].split('-')
         item = request.POST['item'].split('-')
+        source_model = source_item[0]
+        source_model_id = source_item[1]
         target_model = item[0]
         target_model_id = item[1]
-        print "%s - %s" % (target_model, target_model_id)
-        return HttpResponse(item)
+        content_association = ContentAssocation.objects.get_or_create(source_model = source_model, source_model_id = source_model_id, target_model = target_model, target_model_id = target_model_id)[0]
+        content_association.target_model_count += 1
+        content_association.save()
+        return HttpResponse('Assocation saved.')
+

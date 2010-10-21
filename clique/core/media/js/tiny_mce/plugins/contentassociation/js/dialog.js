@@ -31,9 +31,9 @@ var ContentAssociationDialog = {
 	insert : function() {
 		// Insert the contents from the input into the document
 		var selectedText = tinyMCEPopup.editor.selection.getContent({format : 'text'});
-		//document.forms[0].products.value
         var selectedContentItem = $('#content-items').val();
-        var data = {item : selectedContentItem}
+        var sourceItem = tinyMCEPopup.getWin().document.getElementById('model_name').value + '-' + tinyMCEPopup.getWin().document.getElementById('model_id').value;
+        var data = {item : selectedContentItem, source_item : sourceItem}
 		var callbacks = {
             
             success : function(data) {
