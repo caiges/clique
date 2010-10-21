@@ -1,14 +1,12 @@
 from django.db import models
 from external_apps.categories.models import BaseCategory
+from external_apps.contentassociation.models import BaseContentAssociation
 from external_apps.pages.models import BasePage
 from external_apps.products.models import BaseProduct
 from external_apps.recipes.models import BaseRecipe
 
-class ContentAssocation(models.Model):
-    model_name = models.CharField(max_length = 100, blank = False, null = False)
-    model_id = models.IntegerField(blank = False, null = False)
-    target_model_name = models.CharField(max_length = 100, blank = False, null = False)
-    target_model_id = models.IntegerField(blank = False, null = False)
+class ContentAssocation(BaseContentAssociation):
+    pass
 
 class Page(BasePage):
     category = models.ForeignKey('PageCategory', related_name = 'page_categories', blank = False, null = False)
