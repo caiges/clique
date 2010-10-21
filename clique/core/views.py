@@ -13,12 +13,13 @@ def association_test(request):
     if(request.method == 'GET'):
         return render_to_response('core/association-test.html')
         
-def product_association(request):
+def item_association(request):
     if(request.method == 'GET'):
-        products = Product.objects.all()
+        items = Product.objects.all()
         json_serializer = serializers.get_serializer("json")()
-        products_json = json_serializer.serialize(products, ensure_ascii = False)
-        return HttpResponse(products_json)
+        items_json = json_serializer.serialize(items, ensure_ascii = False)
+        return HttpResponse(items_json)
     elif(request.method == 'POST'):
         # Insert association.
-        pass
+        print request.post
+        return HttpResponse(request.post)

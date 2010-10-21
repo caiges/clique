@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^/', 'core.views.index'),
-    (r'^product-association/products.json/$', 'core.views.product_association'),
+    (r'^content-association/content_items.json/$', 'core.views.item_association'),
     (r'^association-test/', 'core.views.association_test'),
     (r'^products/', include('external_apps.products.urls')),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
