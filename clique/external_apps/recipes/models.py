@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Recipe(models.Model):
+class BaseRecipe(models.Model):
     name = models.CharField(max_length = 100, blank = False, null = False)
     description = models.CharField(max_length = 200, blank = True, null = True, default = None)
     long_description = models.TextField(blank = True, null = True, default = None)
@@ -12,3 +12,6 @@ class Recipe(models.Model):
     
     def __unicode__(self):
         return u'%s' % self.name
+        
+    class Meta:
+        abstract = True
