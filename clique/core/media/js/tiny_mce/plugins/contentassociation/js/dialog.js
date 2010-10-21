@@ -11,7 +11,7 @@ var ContentAssociationDialog = {
                 var content_items = jQuery.parseJSON(data);
                 var optionsHTML = new Array();
                 for(var i = 0; i < content_items.length; i++ ) {
-                    optionsHTML.push('<option value="' + content_items[i].pk + '">' + content_items[i].fields.name + '</option>');
+                    optionsHTML.push('<option value="' + content_items[i].model + '-' + content_items[i].id + '">' + content_items[i].name + '</option>');
                 }            
                 $('#content-items').html(optionsHTML.join(''));
             },
@@ -32,6 +32,8 @@ var ContentAssociationDialog = {
 		// Insert the contents from the input into the document
 		var selectedText = tinyMCEPopup.editor.selection.getContent({format : 'text'});
 		//document.forms[0].products.value
+        var selectedContentItem = $('#content-items').val();
+        var data = {item : selectedContentItem}
 		var callbacks = {
             
             success : function(data) {
@@ -46,7 +48,7 @@ var ContentAssociationDialog = {
             }
         }
          
-        $.ajax({url : '/content-association/content_items.json', type : 'POST', success : callbacks.success, error : callbacks.error});
+        $.ajax({url : '/content-association/content_items.json', type : 'POST', data : data, success : callbacks.success, error : callbacks.error});
         
 	}
 };

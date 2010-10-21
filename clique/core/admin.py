@@ -20,6 +20,9 @@ class PageCategoryAdmin(BaseCategoryAdmin):
 admin.site.register(PageCategory, BaseCategoryAdmin)
 
 class ProductAdmin(BaseProductAdmin):
+    
+    save_on_top = True
+    
     class Media:
         css = {
             "all" : ('/media/css/admin/product.css',)
