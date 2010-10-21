@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from core.models import Category
 
 class BaseProduct(models.Model):
     name = models.CharField(max_length = 100, blank = False, null = False)
@@ -17,8 +16,3 @@ class BaseProduct(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.name
-
-class Product(BaseProduct):
-    category = models.ManyToManyField(Category, related_name = 'product_categories', blank = False, null = False)
-    product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d')
-    store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)

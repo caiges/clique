@@ -3,7 +3,7 @@ import simplejson as json
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.core import serializers 
-from products.models import *
+from models import *
 
 def index(request):
     if(request.method == 'GET'):
