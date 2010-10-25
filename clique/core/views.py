@@ -32,5 +32,6 @@ def content_association(request):
         content_association = ContentAssocation.objects.get_or_create(source_model = source_model, source_model_id = source_model_id, target_model = target_model, target_model_id = target_model_id)[0]
         content_association.target_model_count += 1
         content_association.save()
-        return HttpResponse('Assocation saved.')
+        json_serializer = serializers.get_serializer("json")()
+        return HttpResponse(json.dumps(dict(target_model = content_association.target_model)))
 
