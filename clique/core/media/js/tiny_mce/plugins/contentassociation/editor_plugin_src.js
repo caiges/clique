@@ -23,7 +23,7 @@
 		 */
 		init : function(ed, url) {
 			// Register the command so that it can be invoked by using tinyMCE.activeEditor.execCommand('mceExample');
-			ed.addCommand('mceContentAssociation', function() {
+			ed.addCommand('mceContentAssociationLinkContent', function() {
 				ed.windowManager.open({
 					file : url + '/dialog.htm',
 					width : 390 + parseInt(ed.getLang('contentassociation.delta_width', 0)),
@@ -34,16 +34,36 @@
 				});
 			});
 
-			// Register example button
-			ed.addButton('contentassociation', {
-				title : 'contentassociation.desc',
-				cmd : 'mceContentAssociation',
-				image : url + '/img/content-association.png'
+            // Register the command so that it can be invoked by using tinyMCE.activeEditor.execCommand('mceExample');
+			ed.addCommand('mceContentAssociationUnlinkContent', function() {
+				ed.windowManager.open({
+					file : url + '/dialog.htm',
+					width : 390 + parseInt(ed.getLang('contentassociation.delta_width', 0)),
+					height : 210 + parseInt(ed.getLang('contentassociation.delta_height', 0)),
+					inline : 1
+				}, {
+					plugin_url : url, // Plugin absolute URL
+				});
 			});
 
-			// Add a node change handler, selects the button in the UI when a image is selected
+			// Register link content button
+			ed.addButton('contentassociationlink', {
+				title : 'contentassociation.link',
+				cmd : 'mceContentAssociationLinkContent',
+				image : url + '/img/link-content.png'
+			});
+            
+            // Register link content button
+			ed.addButton('contentassociationunlink', {
+				title : 'contentassociation.unlink',
+				cmd : 'mceContentAssociationUnlinkContent',
+				image : url + '/img/unlink-content.png'
+			});
+			
+            // Add a node change handler, selects the button in the UI when a image is selected
 			ed.onNodeChange.add(function(ed, cm, n) {
-				cm.setActive('contentassociation', n.nodeName == 'IMG');
+				cm.setActive('contentassociationlink', n.nodeName == 'A');
+                cm.setActive('contentassociationunlink', n.nodeName == 'A');
 			});
 		},
 

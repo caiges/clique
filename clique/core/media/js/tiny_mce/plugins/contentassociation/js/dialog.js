@@ -37,10 +37,8 @@ var ContentAssociationDialog = {
 		var callbacks = {
             
             success : function(data) {
-                console.log('trace');
                 var content_association = jQuery.parseJSON(data);
-                console.log(tinyMCEPopup);
-        		tinyMCEPopup.editor.execCommand('mceInsertContent', false, '<a href="#">' + selectedText + '</a>');
+        		tinyMCEPopup.editor.execCommand('mceInsertContent', false, '<a href="' + content_association['target_model_link'] + '">' + selectedText + '</a>');
         		tinyMCEPopup.close();
             },
             

@@ -1,3 +1,5 @@
 tinyMCE.addI18n('en.contentassociation',{
-	desc : 'Content Association'
+	link : 'Link Content',
+    unlink : 'Unlink Content'
 });
+
