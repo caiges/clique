@@ -30,7 +30,7 @@ var ContentAssociationDialog = {
 
 	insert : function() {
 		// Insert the contents from the input into the document
-		var selectedText = tinyMCEPopup.editor.selection.getContent({format : 'text'});
+		var selectedNode = tinyMCEPopup.editor.selection.getNode();
         var selectedContentItem = $('#content-items').val();
         var sourceItem = tinyMCEPopup.getWin().document.getElementById('model_name').value + '-' + tinyMCEPopup.getWin().document.getElementById('model_id').value;
         var data = {item : selectedContentItem, source_item : sourceItem}
@@ -38,7 +38,7 @@ var ContentAssociationDialog = {
             
             success : function(data) {
                 var content_association = jQuery.parseJSON(data);
-        		tinyMCEPopup.editor.execCommand('mceInsertContent', false, '<a href="' + content_association['target_model_link'] + '">' + selectedText + '</a>');
+        		tinyMCEPopup.editor.execCommand('mceInsertContent', false, '<a class="' + content_association.target_model_link_class + '" href="' + content_association.target_model_link + '" rel="contentassociation">' + $(selectedNode).html() + '</a>');
         		tinyMCEPopup.close();
             },
             

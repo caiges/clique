@@ -38,5 +38,5 @@ def content_association(request):
         content_association.target_model_link = target_model_instance.get_absolute_url()
         content_association.save()
         json_serializer = serializers.get_serializer("json")()
-        return HttpResponse(json.dumps(dict(target_model = content_association.target_model)))
+        return HttpResponse(json.dumps(dict(target_model_link = content_association.target_model_link, target_model_link_class = content_association.target_model_link_class, target_model = content_association.target_model)))
 

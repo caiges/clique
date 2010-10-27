@@ -62,8 +62,15 @@
 			
             // Add a node change handler, selects the button in the UI when a image is selected
 			ed.onNodeChange.add(function(ed, cm, n) {
-				cm.setActive('contentassociationlink', n.nodeName == 'A');
-                cm.setActive('contentassociationunlink', n.nodeName == 'A');
+                var nodeRelAttr = $(n).attr('rel');
+                var validNode = n.nodeName == 'A' && nodeRelAttr == 'contentassociation';
+
+				cm.setActive('contentassociationlink', validNode);
+                cm.setActive('contentassociationunlink', validNode);
+                //cm.setDisabled('link', validNode);
+                //cm.setDisabled('unlink', validNode);
+                cm.get('link').setDisabled(true);
+
 			});
 		},
 
