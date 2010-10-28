@@ -37,19 +37,30 @@
             // Register the command so that it can be invoked by using tinyMCE.activeEditor.execCommand('mceExample');
 			ed.addCommand('mceContentAssociationUnlinkContent', function() {
 			    var se = ed.selection;
-
+                var selectedNode = se.getNode();
+                
 				// No selection and not in link
-				if (se.isCollapsed() && !ed.dom.getParent(se.getNode(), 'A'))
+				if (se.isCollapsed() && !ed.dom.getParent(selectedNode, 'A'))
 					return;
 					
-				ed.windowManager.open({
-					file : url + '/dialog.htm',
-					width : 390 + parseInt(ed.getLang('contentassociation.delta_width', 0)),
-					height : 210 + parseInt(ed.getLang('contentassociation.delta_height', 0)),
-					inline : 1
-				}, {
-					plugin_url : url, // Plugin absolute URL
-				});
+				var data = {link_name : $(selectedNode).attr('name')}
+		        var callbacks = {
+                    
+                    success : function(data) {
+                        //ed.getDoc().execCommand("unlink", false, null);
+                        // Remove link, preserve inner content.
+                		var content = $(selectedNode).html();
+                		alert(content);
+                		ed.dom.setOuterHTML(selectedNode, content);
+           
+                    },
+                    
+                    error : function(data) {
+                        alert('Problem with content association.');
+                    }
+                }
+                 
+                $.ajax({url : '/content-association/content_items/remove.json', type : 'POST', data : data, success : callbacks.success, error : callbacks.error});
 			});
 
 			// Register link content button
@@ -73,7 +84,7 @@
 				cm.setActive('contentassociationlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') == 'contentassociation');
 				
 				cm.setDisabled('contentassociationunlink', co && n.nodeName != 'A');
-				cm.setActive('contentassociationunlink', n.nodeName == 'A' && !n.name);
+				cm.setActive('contentassociationunlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') == 'contentassociation');
 				
 			});
 		},

@@ -31,8 +31,8 @@ def content_association(request):
         target_model = item[0]
         target_model_id = item[1]
         target_model_field = request.POST['model_field']
-        target_model_link_ident = str(uuid.uuid4()) if request.POST['link_ident'].strip() == '' else request.POST['link_ident'].strip()
-        content_association = ContentAssocation.objects.get_or_create(target_model_link_ident = target_model_link_ident)[0]
+        target_model_link_name = str(uuid.uuid4()) if request.POST['link_name'].strip() == '' else request.POST['link_name'].strip()
+        content_association = ContentAssociation.objects.get_or_create(target_model_link_name = target_model_link_name)[0]
         content_association.source_model = source_model
         content_association.source_model_id = source_model_id
         content_association.target_model = target_model
@@ -46,5 +46,12 @@ def content_association(request):
 
         content_association.save()
         json_serializer = serializers.get_serializer("json")()
-        return HttpResponse(json.dumps(dict(target_model_link = content_association.target_model_link, target_model_link_class = content_association.target_model_link_ident, target_model = content_association.target_model)))
+        return HttpResponse(json.dumps(dict(target_model_link = content_association.target_model_link, target_model_link_name = content_association.target_model_link_name, target_model = content_association.target_model)))
+        
+def remove_content_association(request):
+    if(request.method == 'POST'):
+        link_name = request.POST['link_name']
+        content_association = ContentAssociation.objects.filter(target_model_link_name__exact = link_name)
+        content_association.delete()
+        return HttpResponse("Content association removed")
 
