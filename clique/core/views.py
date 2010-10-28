@@ -1,4 +1,5 @@
 import simplejson as json
+import uuid
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
@@ -22,21 +23,28 @@ def content_association(request):
         items_json = json.dumps(items)
         return HttpResponse(items_json)
     elif(request.method == 'POST'):
-        # Insert association.
+        # Insert/Update association.
         source_item = request.POST['source_item'].split('-')
         item = request.POST['item'].split('-')
         source_model = source_item[0]
         source_model_id = source_item[1]
         target_model = item[0]
         target_model_id = item[1]
-        content_association = ContentAssocation.objects.get_or_create(source_model = source_model, source_model_id = source_model_id, target_model = target_model, target_model_id = target_model_id)[0]
-        content_association.target_model_count += 1
-
+        target_model_field = request.POST['model_field']
+        target_model_link_ident = str(uuid.uuid4()) if request.POST['link_ident'].strip() == '' else request.POST['link_ident'].strip()
+        content_association = ContentAssocation.objects.get_or_create(target_model_link_ident = target_model_link_ident)[0]
+        content_association.source_model = source_model
+        content_association.source_model_id = source_model_id
+        content_association.target_model = target_model
+        content_association.target_model_id = target_model_id
+        content_association.target_model_field = target_model_field
+                
         # Get real target model so that we can store it's URL.
         target_model_klass = getattr(m, target_model.capitalize())
         target_model_instance = target_model_klass.objects.get(pk = target_model_id)
         content_association.target_model_link = target_model_instance.get_absolute_url()
+
         content_association.save()
         json_serializer = serializers.get_serializer("json")()
-        return HttpResponse(json.dumps(dict(target_model_link = content_association.target_model_link, target_model_link_class = content_association.target_model_link_class, target_model = content_association.target_model)))
+        return HttpResponse(json.dumps(dict(target_model_link = content_association.target_model_link, target_model_link_class = content_association.target_model_link_ident, target_model = content_association.target_model)))
 

@@ -8,8 +8,9 @@ from external_apps.products.models import BaseProduct
 from external_apps.recipes.models import BaseRecipe
 
 class ContentAssocation(BaseContentAssociation):
+    target_model_field = models.CharField(max_length = 1000, blank = True, null = True, default = None)
     target_model_link = models.CharField(max_length = 1000, blank = True, null = True, default = None)
-    target_model_link_class = models.CharField(max_length = 36, blank = False, null = False, default = uuid.uuid4())
+    target_model_link_ident = models.CharField(max_length = 36, blank = False, null = False, default = uuid.uuid4())
 
 class Page(BasePage):
     category = models.ForeignKey('PageCategory', related_name = 'page_categories', blank = False, null = False)

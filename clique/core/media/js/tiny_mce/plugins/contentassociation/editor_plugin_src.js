@@ -36,6 +36,12 @@
 
             // Register the command so that it can be invoked by using tinyMCE.activeEditor.execCommand('mceExample');
 			ed.addCommand('mceContentAssociationUnlinkContent', function() {
+			    var se = ed.selection;
+
+				// No selection and not in link
+				if (se.isCollapsed() && !ed.dom.getParent(se.getNode(), 'A'))
+					return;
+					
 				ed.windowManager.open({
 					file : url + '/dialog.htm',
 					width : 390 + parseInt(ed.getLang('contentassociation.delta_width', 0)),
@@ -61,16 +67,14 @@
 			});
 			
             // Add a node change handler, selects the button in the UI when a image is selected
-			ed.onNodeChange.add(function(ed, cm, n) {
-                var nodeRelAttr = $(n).attr('rel');
-                var validNode = n.nodeName == 'A' && nodeRelAttr == 'contentassociation';
-
-				cm.setActive('contentassociationlink', validNode);
-                cm.setActive('contentassociationunlink', validNode);
-                //cm.setDisabled('link', validNode);
-                //cm.setDisabled('unlink', validNode);
-                cm.get('link').setDisabled(true);
-
+			ed.onNodeChange.add(function(ed, cm, n, co) {
+			
+                cm.setDisabled('contentassociationlink', co && n.nodeName != 'A' && $(n).attr('rel') != 'undefined');
+				cm.setActive('contentassociationlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') == 'contentassociation');
+				
+				cm.setDisabled('contentassociationunlink', co && n.nodeName != 'A');
+				cm.setActive('contentassociationunlink', n.nodeName == 'A' && !n.name);
+				
 			});
 		},
 
