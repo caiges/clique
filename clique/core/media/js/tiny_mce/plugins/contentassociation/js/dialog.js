@@ -37,14 +37,10 @@ var ContentAssociationDialog = {
             
             success : function(data) {
                 var content_association = jQuery.parseJSON(data);
+                // Update the link with the data coming from the API.
                 if(selectedNode.nodeName != 'A') { // New link.
         		    ed.execCommand('mceInsertContent', false, '<a name="' + content_association.target_model_link_name + '" href="' + content_association.target_model_link + '" rel="contentassociation">' + tinyMCEPopup.editor.selection.getContent({format : 'text'}) + '</a>');
         		} else { // Editing a link.
-        		    // Update the data being sent to the API.
-        		    //alert(content_association.target_model_link);
-        		    
-        		    //$(selectedNode).html(ed.selection.getContent({format : 'text'}));
-        		    //$(selectedNode).attr('href', content_association.target_model_link);
         		    ed.dom.setAttrib(selectedNode, 'href', content_association.target_model_link);
         		    
         		}

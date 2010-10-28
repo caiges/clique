@@ -50,7 +50,6 @@
                         //ed.getDoc().execCommand("unlink", false, null);
                         // Remove link, preserve inner content.
                 		var content = $(selectedNode).html();
-                		alert(content);
                 		ed.dom.setOuterHTML(selectedNode, content);
            
                     },

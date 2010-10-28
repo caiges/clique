@@ -95,3 +95,8 @@ INSTALLED_APPS = (
     'external_apps.products',
     'external_apps.recipes',
 )
+
+try:
+    from local_settings import *
+except ImportError, exp:
+    pass
