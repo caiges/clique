@@ -13,7 +13,11 @@ class ContentAssociation(BaseContentAssociation):
     target_model_link_name = models.CharField(max_length = 36, blank = False, null = False, default = uuid.uuid4())
 
 class Page(BasePage):
-    category = models.ForeignKey('PageCategory', related_name = 'page_categories', blank = False, null = False)
+    category = models.ManyToManyField('PageCategory', related_name = 'page_categories', blank = False, null = False)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('page_show', [str(self.id)])
 
 class PageCategory(BaseCategory):
     
@@ -28,6 +32,12 @@ class Product(BaseProduct):
     @models.permalink
     def get_absolute_url(self):
         return ('product_show', [str(self.id)])
+        
+    def get_associated_content_items(self):
+        content_associations = ContentAssociation.objects.filter(source_model__exact = self.__class__.__name__.lower(), source_model_id = self.id)
+        #content_association_target_instances = [getattr(__file__, ca.target_model.capitalize()).objects.get(pk = ca.target_model_id) for ca in content_associations]
+        print content_associations
+        #return content_association_target_instances
 
 class ProductCategory(BaseCategory):
     
@@ -35,4 +45,13 @@ class ProductCategory(BaseCategory):
         verbose_name_plural = 'Product Categories'
 
 class Recipe(BaseRecipe):
-    pass
+    category = models.ManyToManyField('RecipeCategory', related_name = 'recipe_categories', blank = False, null = False)
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('recipe_show', [str(self.id)])
+    
+class RecipeCategory(BaseCategory):
+    
+    class Meta(BaseCategory.Meta):
+        verbose_name_plural = 'Recipe Categories'

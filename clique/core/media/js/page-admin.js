@@ -12,7 +12,14 @@ $(document).ready(function() {
     	theme_advanced_toolbar_location : "top",
     	theme_advanced_toolbar_align : "left",
     	theme_advanced_statusbar_location : "bottom",
-    	theme_advanced_resizing : true
+    	theme_advanced_resizing : true,
+    	template_templates : [
+	        {
+		        title : "Standard Page",
+		        src : "/media/js/tiny_mce/templates/page.html",
+		        description : "Standard page template."
+	        }
+        ]
     });
     
 });

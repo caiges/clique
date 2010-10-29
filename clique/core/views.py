@@ -16,7 +16,12 @@ def association_test(request):
         
 def content_association(request):
     if(request.method == 'GET'):
-        items = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Product.objects.all()]
+        pages = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Page.objects.all()]
+        products = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Product.objects.all()]
+        recipes = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Recipe.objects.all()]
+        items = dict(Pages = pages, Products = products, Recipes = recipes)
+        # Merge the these three content sets into one object to filter on the dialog.
+        #items = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Product.objects.all()]
         items_json = json.dumps(items)
         return HttpResponse(items_json)
     elif(request.method == 'POST'):

@@ -2,18 +2,44 @@ tinyMCEPopup.requireLangPack();
 
 var ContentAssociationDialog = {
     
+    content_items : [],
+
+    update_content_items : function(label) {
+        
+        $('#content-items').html('');
+        var first = content_items[label];
+        var optionsHTML = new Array();
+        for(var i = 0; i < first.length; i++ ) {
+            optionsHTML.push('<option value="' + first[i].model + '-' + first[i].id + '">' + first[i].name + '</option>');
+        }            
+        $('#content-items').html(optionsHTML.join(''));
+        
+    },
+    
 	init : function() {
 		var f = document.forms[0];
         
         var callbacks = {
             
             success : function(data) {
-                var content_items = jQuery.parseJSON(data);
+                content_items = jQuery.parseJSON(data);
+                var labels = []
+                for(ci in content_items) {
+                    labels.push(ci);
+                }
+                labels.sort();
+                for(var f = 0; f < labels.length; f++) {
+                    $('#content-items-filter').append('<option value="' + labels[f] + '">' + labels[f] + '</option>');
+                }
+                var first = content_items[labels[0]];
                 var optionsHTML = new Array();
-                for(var i = 0; i < content_items.length; i++ ) {
-                    optionsHTML.push('<option value="' + content_items[i].model + '-' + content_items[i].id + '">' + content_items[i].name + '</option>');
+                for(var i = 0; i < first.length; i++ ) {
+                    optionsHTML.push('<option value="' + first[i].model + '-' + first[i].id + '">' + first[i].name + '</option>');
                 }            
                 $('#content-items').html(optionsHTML.join(''));
+                $('#content-items-filter').change(function() {
+                    ContentAssociationDialog.update_content_items($(this).val());
+                });
             },
             
             error : function(data) {
@@ -24,7 +50,7 @@ var ContentAssociationDialog = {
         $.ajax({url : '/content-association/content_items.json', success : callbacks.success, error : callbacks.error});
        
 	},
-
+    
 	insert : function() {
 		// Insert/Edit the contents from the input into the document
 		var ed = tinyMCEPopup.editor;

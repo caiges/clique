@@ -26,8 +26,8 @@
 			ed.addCommand('mceContentAssociationLinkContent', function() {
 				ed.windowManager.open({
 					file : url + '/dialog.htm',
-					width : 390 + parseInt(ed.getLang('contentassociation.delta_width', 0)),
-					height : 210 + parseInt(ed.getLang('contentassociation.delta_height', 0)),
+					width : 400 + parseInt(ed.getLang('contentassociation.delta_width', 0)),
+					height : 240 + parseInt(ed.getLang('contentassociation.delta_height', 0)),
 					inline : 1
 				}, {
 					plugin_url : url, // Plugin absolute URL
@@ -78,12 +78,17 @@
 			
             // Add a node change handler, selects the button in the UI when a image is selected
 			ed.onNodeChange.add(function(ed, cm, n, co) {
-			
-                cm.setDisabled('contentassociationlink', co && n.nodeName != 'A' && $(n).attr('rel') != 'undefined');
-				cm.setActive('contentassociationlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') == 'contentassociation');
+			    if($('#model_id').val() != '' && $('#model_name').val() != '') {
+			    
+                    cm.setDisabled('contentassociationlink', co && n.nodeName != 'A' && $(n).attr('rel') != 'undefined');
+				    cm.setActive('contentassociationlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') == 'contentassociation');
 				
-				cm.setDisabled('contentassociationunlink', co && n.nodeName != 'A');
-				cm.setActive('contentassociationunlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') == 'contentassociation');
+				    cm.setDisabled('contentassociationunlink', co && n.nodeName != 'A');
+				    cm.setActive('contentassociationunlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') == 'contentassociation');
+			    } else {
+			        cm.setDisabled('contentassociationlink', true);
+			        cm.setDisabled('contentassociationunlink', true);
+			    }
 				
 			});
 		},
