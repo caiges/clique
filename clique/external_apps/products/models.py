@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class BaseProduct(models.Model):
+    name = models.CharField(max_length = 100, blank = False, null = False)
     page_title = models.CharField(max_length = 200, blank = False, null = False)
     url = models.CharField(max_length = 1000, blank = False, null = False, help_text = "URL will be appended to /products/...")
     meta_description = models.CharField(max_length = 500, blank = True, null = True)
