@@ -107,9 +107,15 @@ class Product(BaseProduct):
        
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        content_association_target_instances = [globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id) for ca in content_associations]
-        return content_association_target_instances
-        #return content_association_target_instances
+        
+        # Argument a is an instance of ContentAssociation
+        """def flatten_associations(a, ca_list):
+            for ca in ca_list:
+                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
+                    ca.append(dict(instance))
+        """
+        content_association_source_instances = [dict(instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_names = '&links='.join([cal.target_model_link_name for cal in content_associations])) for ca in content_associations]
+        return content_association_source_instances
 
 class ProductCategory(CategoryPage):
 

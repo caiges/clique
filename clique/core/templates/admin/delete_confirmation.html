@@ -1,5 +1,7 @@
 {% extends "admin/base_site.html" %}
 {% load i18n %}
+{% load class_name_lookup %}
+
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -26,7 +28,7 @@
     <p>In addition, the following items are associated with {{ object }}:
     <ul>
         {% for ca in object.get_associated_content_items %}
-            <li><a href="{{ ca.get_admin_url }}" target="blank">{{ ca }}</a></li>
+            <li>{{ ca.instance|class_name_lookup|capfirst }}: <a href="{{ ca.instance.get_admin_url }}?links={{ ca.link_names }}" target="blank">{{ ca.instance }}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
