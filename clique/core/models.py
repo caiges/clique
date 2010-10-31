@@ -86,7 +86,7 @@ class Page(BasePage):
     @models.permalink
     def get_absolute_url(self):
         return ('page_show', [str(self.id)])
-
+                
 class PageCategory(CategoryPage):
         
     class Meta(CategoryPage.Meta):
@@ -101,11 +101,14 @@ class Product(BaseProduct):
     @models.permalink
     def get_absolute_url(self):
         return ('product_show', [str(self.id)])
-        
+    
+    def get_admin_url(self):
+        return "/admin/core/product/%i" % self.id
+       
     def get_associated_content_items(self):
-        content_associations = ContentAssociation.objects.filter(source_model__exact = self.__class__.__name__.lower(), source_model_id = self.id)
-        #content_association_target_instances = [getattr(__file__, ca.target_model.capitalize()).objects.get(pk = ca.target_model_id) for ca in content_associations]
-        print content_associations
+        content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
+        content_association_target_instances = [globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id) for ca in content_associations]
+        return content_association_target_instances
         #return content_association_target_instances
 
 class ProductCategory(CategoryPage):
