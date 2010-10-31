@@ -63,6 +63,19 @@
    <script type="text/javascript">document.getElementById("{{ adminform.first_field.auto_id }}").focus();</script>
 {% endif %}
 
+{% if adminform and change %}
+<script type="text/javascript">
+
+    $(document).ready(function() {
+       
+       $links = $('a[name|="' + $.url.param('links') + '"]');
+       console.log($links);
+        
+    });
+
+</script>
+{% endif %}
+
 {# JavaScript for prepopulated fields #}
 {% prepopulated_fields_js %}
 

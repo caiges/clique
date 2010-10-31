@@ -258,7 +258,7 @@ class ProductAdmin(BaseProductAdmin):
         css = {
             "all" : ('/media/css/admin/product.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/product-admin.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/product-admin.js')
         
     def save_model(self, request, obj, form, change): 
         instance = form.save(commit = False)
