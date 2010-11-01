@@ -10,9 +10,9 @@ class ArticleAdmin(admin.ModelAdmin):
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js', '/media/js/common-admin.js',)
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/common-admin.js',)
 
     def save_model(self, request, obj, form, change): 
         instance = form.save(commit = False)
@@ -29,13 +29,13 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
             'fields': ('name', 'category_description', 'category_image','default_category_page')
         }),
         ('Page Info', {
-            'fields': ('page_title', 'url', 'meta_description','body')
+            'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
@@ -53,9 +53,9 @@ class ExerciseAdmin(admin.ModelAdmin):
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/common-admin.js',)
 
     def save_model(self, request, obj, form, change): 
         instance = form.save(commit = False)
@@ -72,13 +72,13 @@ class ExerciseCategoryAdmin(admin.ModelAdmin):
             'fields': ('name', 'category_description', 'category_image','default_category_page')
         }),
         ('Page Info', {
-            'fields': ('page_title', 'url', 'meta_description','body')
+            'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
@@ -96,9 +96,9 @@ class FitnessTipAdmin(admin.ModelAdmin):
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/common-admin.js',)
 
     def save_model(self, request, obj, form, change): 
         instance = form.save(commit = False)
@@ -115,13 +115,13 @@ class FitnessTipCategoryAdmin(admin.ModelAdmin):
             'fields': ('name', 'category_description', 'category_image','default_category_page')
         }),
         ('Page Info', {
-            'fields': ('page_title', 'url', 'meta_description','body')
+            'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
@@ -139,9 +139,9 @@ class MythBusterAdmin(admin.ModelAdmin):
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/common-admin.js',)
 
     def save_model(self, request, obj, form, change): 
         instance = form.save(commit = False)
@@ -158,13 +158,13 @@ class MythBusterCategoryAdmin(admin.ModelAdmin):
             'fields': ('name', 'category_description', 'category_image','default_category_page')
         }),
         ('Page Info', {
-            'fields': ('page_title', 'url', 'meta_description','body')
+            'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
@@ -182,9 +182,9 @@ class NutritionTipAdmin(admin.ModelAdmin):
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/common-admin.js',)
 
     def save_model(self, request, obj, form, change): 
         instance = form.save(commit = False)
@@ -201,13 +201,13 @@ class NutritionTipCategoryAdmin(admin.ModelAdmin):
             'fields': ('name', 'category_description', 'category_image','default_category_page')
         }),
         ('Page Info', {
-            'fields': ('page_title', 'url', 'meta_description','body')
+            'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
@@ -225,9 +225,9 @@ class PageAdmin(BasePageAdmin):
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/page-admin.js',)
 
     def save_model(self, request, obj, form, change): 
         instance = form.save(commit = False)
@@ -244,7 +244,7 @@ class PageCategoryAdmin(BaseCategoryAdmin):
             'fields': ('name', 'category_description', 'category_image','default_category_page')
         }),
         ('Page Info', {
-            'fields': ('page_title', 'url', 'meta_description','body')
+            'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
     
@@ -256,7 +256,7 @@ class ProductAdmin(BaseProductAdmin):
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/product.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/product-admin.js')
         
@@ -275,13 +275,13 @@ class ProductCategoryAdmin(BaseCategoryAdmin):
             'fields': ('name', 'category_description', 'category_image','default_category_page')
         }),
         ('Page Info', {
-            'fields': ('page_title', 'url', 'meta_description','body')
+            'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
@@ -298,7 +298,10 @@ class RecipeAdmin(BaseRecipeAdmin):
     exclude = ('user',)
     
     class Media:
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/recipe-admin.js',)
+        css = {
+            "all" : ('/media/css/admin/common.css',)
+        }
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/recipe-admin.js',)
     
     def save_model(self, request, obj, form, change): 
         instance = form.save(commit = False)
@@ -315,13 +318,13 @@ class RecipeCategoryAdmin(admin.ModelAdmin):
             'fields': ('name', 'category_description', 'category_image','default_category_page')
         }),
         ('Page Info', {
-            'fields': ('page_title', 'url', 'meta_description','body')
+            'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
     
     class Media:
         css = {
-            "all" : ('/media/css/admin/page.css',)
+            "all" : ('/media/css/admin/common.css',)
         }
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 

@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.db.models.signals import post_save
 from external_apps.categories.models import BaseCategory
 from external_apps.contentassociation.models import BaseContentAssociation
 from external_apps.pages.models import BasePage
@@ -18,7 +19,20 @@ class CategoryPage(BasePage):
 class ContentAssociation(BaseContentAssociation):
     target_model_field = models.CharField(max_length = 1000, blank = True, null = True, default = None)
     target_model_link = models.CharField(max_length = 1000, blank = True, null = True, default = None)
-    target_model_link_name = models.CharField(max_length = 36, blank = False, null = False, default = uuid.uuid4())
+    target_model_link_id = models.CharField(max_length = 36, blank = False, null = False, default = uuid.uuid4())
+    
+    def orphan_association_check(sender, **kwargs):
+        # This is a post_save signal, we have access to sender, instance, and created (True if record was created)
+        
+        print sender
+        
+        # Loop through all sender associations.
+        
+        # Parse the target_model_field for target_model_link_id.
+        
+        # If target_model_link_id is not present, delete the association.
+        
+    post_save.connect(orphan_association_check)
 
 class Article(BasePage):
     category = models.ManyToManyField('ArticleCategory', related_name = 'article_categories', blank = False, null = False)
@@ -26,7 +40,22 @@ class Article(BasePage):
     @models.permalink
     def get_absolute_url(self):
         return ('article_show', [str(self.id)])
+    
+    def get_admin_url(self):
+        return "/admin/core/article/%i" % self.id
 
+    def get_associated_content_items(self):
+        content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
+        
+        # Argument a is an instance of ContentAssociation
+        """def flatten_associations(a, ca_list):
+            for ca in ca_list:
+                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
+                    ca.append(dict(instance))
+        """
+        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        return content_association_source_instances
+        
 class ArticleCategory(CategoryPage):
 
     class Meta(CategoryPage.Meta):
@@ -38,7 +67,22 @@ class Exercise(BasePage):
     @models.permalink
     def get_absolute_url(self):
         return ('exercise_show', [str(self.id)])
+    
+    def get_admin_url(self):
+        return "/admin/core/exercise/%i" % self.id
 
+    def get_associated_content_items(self):
+        content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
+        
+        # Argument a is an instance of ContentAssociation
+        """def flatten_associations(a, ca_list):
+            for ca in ca_list:
+                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
+                    ca.append(dict(instance))
+        """
+        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        return content_association_source_instances
+        
 class ExerciseCategory(CategoryPage):
 
     class Meta(CategoryPage.Meta):
@@ -50,6 +94,21 @@ class FitnessTip(BasePage):
     @models.permalink
     def get_absolute_url(self):
         return ('fitness_tip_show', [str(self.id)])
+        
+    def get_admin_url(self):
+        return "/admin/core/fitnesstip/%i" % self.id
+
+    def get_associated_content_items(self):
+        content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
+        
+        # Argument a is an instance of ContentAssociation
+        """def flatten_associations(a, ca_list):
+            for ca in ca_list:
+                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
+                    ca.append(dict(instance))
+        """
+        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        return content_association_source_instances
 
 class FitnessTipCategory(CategoryPage):
 
@@ -63,6 +122,21 @@ class MythBuster(BasePage):
     def get_absolute_url(self):
         return ('myth_buster_show', [str(self.id)])
 
+    def get_admin_url(self):
+        return "/admin/core/mythbuster/%i" % self.id
+
+    def get_associated_content_items(self):
+        content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
+        
+        # Argument a is an instance of ContentAssociation
+        """def flatten_associations(a, ca_list):
+            for ca in ca_list:
+                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
+                    ca.append(dict(instance))
+        """
+        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        return content_association_source_instances
+        
 class MythBusterCategory(CategoryPage):
 
     class Meta(CategoryPage.Meta):
@@ -74,7 +148,22 @@ class NutritionTip(BasePage):
     @models.permalink
     def get_absolute_url(self):
         return ('nutrition_tip_show', [str(self.id)])
+    
+    def get_admin_url(self):
+        return "/admin/core/nutritiontip/%i" % self.id
 
+    def get_associated_content_items(self):
+        content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
+        
+        # Argument a is an instance of ContentAssociation
+        """def flatten_associations(a, ca_list):
+            for ca in ca_list:
+                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
+                    ca.append(dict(instance))
+        """
+        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        return content_association_source_instances
+        
 class NutritionTipCategory(CategoryPage):
 
     class Meta(CategoryPage.Meta):
@@ -86,7 +175,22 @@ class Page(BasePage):
     @models.permalink
     def get_absolute_url(self):
         return ('page_show', [str(self.id)])
-                
+    
+    def get_admin_url(self):
+        return "/admin/core/page/%i" % self.id
+
+    def get_associated_content_items(self):
+        content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
+        
+        # Argument a is an instance of ContentAssociation
+        """def flatten_associations(a, ca_list):
+            for ca in ca_list:
+                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
+                    ca.append(dict(instance))
+        """
+        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        return content_association_source_instances
+        
 class PageCategory(CategoryPage):
         
     class Meta(CategoryPage.Meta):
@@ -104,7 +208,7 @@ class Product(BaseProduct):
     
     def get_admin_url(self):
         return "/admin/core/product/%i" % self.id
-       
+
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
         
@@ -114,7 +218,7 @@ class Product(BaseProduct):
                 if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
                     ca.append(dict(instance))
         """
-        content_association_source_instances = [dict(instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_names = '&links='.join([cal.target_model_link_name for cal in content_associations])) for ca in content_associations]
+        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
 
 class ProductCategory(CategoryPage):
@@ -128,6 +232,21 @@ class Recipe(BaseRecipe):
     @models.permalink
     def get_absolute_url(self):
         return ('recipe_show', [str(self.id)])
+        
+    def get_admin_url(self):
+        return "/admin/core/recipe/%i" % self.id
+
+    def get_associated_content_items(self):
+        content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
+        
+        # Argument a is an instance of ContentAssociation
+        """def flatten_associations(a, ca_list):
+            for ca in ca_list:
+                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
+                    ca.append(dict(instance))
+        """
+        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        return content_association_source_instances
     
 class RecipeCategory(CategoryPage):
 

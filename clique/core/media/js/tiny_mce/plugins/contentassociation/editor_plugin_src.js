@@ -43,7 +43,7 @@
 				if (se.isCollapsed() && !ed.dom.getParent(selectedNode, 'A'))
 					return;
 					
-				var data = {link_name : $(selectedNode).attr('name')}
+				var data = {link_id : $(selectedNode).attr('id')}
 		        var callbacks = {
                     
                     success : function(data) {

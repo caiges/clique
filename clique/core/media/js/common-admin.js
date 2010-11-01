@@ -2,10 +2,9 @@ $(document).ready(function() {
    
     tinyMCE.init({
     	mode : "exact",
-    	elements : "id_long_description,id_mobile_long_description",
+    	elements : "id_body",
     	theme : "advanced",
-        convert_urls : false,
-    	plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,contentassociation",
+    	plugins : "contentassociation,safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
     	theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
     	theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
     	theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
@@ -16,13 +15,11 @@ $(document).ready(function() {
     	theme_advanced_resizing : true,
     	template_templates : [
 	        {
-		        title : "Standard Product",
-		        src : "/media/js/tiny_mce/templates/product.html",
-		        description : "Standard product template."
+		        title : "Standard Page",
+		        src : "/media/js/tiny_mce/templates/page.html",
+		        description : "Standard page template."
 	        }
-        ],
-        width: '100%',
-        height: '500px'
+        ]
     });
     
 });

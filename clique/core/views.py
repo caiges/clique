@@ -16,12 +16,15 @@ def association_test(request):
         
 def content_association(request):
     if(request.method == 'GET'):
+        articles = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Article.objects.all()]
+        exercises = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Exercise.objects.all()]
+        fitnesstips = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in FitnessTip.objects.all()]
+        mythbusters = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in MythBuster.objects.all()]
+        nutritiontips = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in NutritionTip.objects.all()]
         pages = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Page.objects.all()]
         products = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Product.objects.all()]
         recipes = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Recipe.objects.all()]
-        items = dict(Pages = pages, Products = products, Recipes = recipes)
-        # Merge the these three content sets into one object to filter on the dialog.
-        #items = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Product.objects.all()]
+        items = dict(Articles = articles, Exercises = exercises, FitnessTips = fitnesstips, MythBusters = mythbusters, NutritionTips = nutritiontips, Pages = pages, Products = products, Recipes = recipes)
         items_json = json.dumps(items)
         return HttpResponse(items_json)
     elif(request.method == 'POST'):
@@ -33,8 +36,8 @@ def content_association(request):
         target_model = item[0]
         target_model_id = item[1]
         target_model_field = request.POST['model_field']
-        target_model_link_name = str(uuid.uuid4()) if request.POST['link_name'].strip() == '' else request.POST['link_name'].strip()
-        content_association = ContentAssociation.objects.get_or_create(target_model_link_name = target_model_link_name)[0]
+        target_model_link_id = str(uuid.uuid4()) if request.POST['link_id'].strip() == '' else request.POST['link_id'].strip()
+        content_association = ContentAssociation.objects.get_or_create(target_model_link_id = target_model_link_id)[0]
         content_association.source_model = source_model
         content_association.source_model_id = source_model_id
         content_association.target_model = target_model
@@ -47,12 +50,12 @@ def content_association(request):
         content_association.target_model_link = target_model_instance.get_absolute_url()
         content_association.save()
         
-        return HttpResponse(json.dumps(dict(target_model_link = content_association.target_model_link, target_model_link_name = content_association.target_model_link_name, target_model = content_association.target_model)))
+        return HttpResponse(json.dumps(dict(target_model_link = content_association.target_model_link, target_model_link_id = content_association.target_model_link_id, target_model = content_association.target_model)))
         
 def remove_content_association(request):
     if(request.method == 'POST'):
-        link_name = request.POST['link_name']
-        content_association = ContentAssociation.objects.filter(target_model_link_name__exact = link_name)
+        link_id = request.POST['link_id']
+        content_association = ContentAssociation.objects.filter(target_model_link_id__exact = link_id)
         content_association.delete()
         return HttpResponse("Content association removed")
 
