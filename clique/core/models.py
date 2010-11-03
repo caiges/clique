@@ -11,7 +11,7 @@ from external_apps.recipes.models import BaseRecipe
 class CategoryPage(BasePage):
     category_description = models.CharField(max_length = 200, blank = True, null = True)
     category_image = models.ImageField(upload_to = 'category_page_images/%Y/%m/%d', blank = True, null = True, default = None)
-    default_category_page = models.BooleanField(blank = False, null = False, default = False, help_text = "If checked, this will become the category index page.")
+    default_category = models.BooleanField(blank = False, null = False, default = False, help_text = "If checked, this will become the default category.")
     
     class Meta:
         abstract = True

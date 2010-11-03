@@ -26,7 +26,7 @@ admin.site.register(Article, ArticleAdmin)
 class ArticleCategoryAdmin(admin.ModelAdmin):
     exclude = ('user',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_description', 'category_image','default_category_page')
+            'fields': ('name', 'category_description', 'category_image','default_category')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -69,7 +69,7 @@ admin.site.register(Exercise, ExerciseAdmin)
 class ExerciseCategoryAdmin(admin.ModelAdmin):
     exclude = ('user',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_description', 'category_image','default_category_page')
+            'fields': ('name', 'category_description', 'category_image','default_category')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -112,7 +112,7 @@ admin.site.register(FitnessTip, FitnessTipAdmin)
 class FitnessTipCategoryAdmin(admin.ModelAdmin):
     exclude = ('user',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_description', 'category_image','default_category_page')
+            'fields': ('name', 'category_description', 'category_image','default_category')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -155,7 +155,7 @@ admin.site.register(MythBuster, MythBusterAdmin)
 class MythBusterCategoryAdmin(admin.ModelAdmin):
     exclude = ('user',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_description', 'category_image','default_category_page')
+            'fields': ('name', 'category_description', 'category_image','default_category')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -198,7 +198,7 @@ admin.site.register(NutritionTip, NutritionTipAdmin)
 class NutritionTipCategoryAdmin(admin.ModelAdmin):
     exclude = ('user',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_description', 'category_image','default_category_page')
+            'fields': ('name', 'category_description', 'category_image','default_category')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -241,7 +241,7 @@ admin.site.register(Page, PageAdmin)
 class PageCategoryAdmin(BaseCategoryAdmin):
     exclude = ('user',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_description', 'category_image','default_category_page')
+            'fields': ('name', 'category_description', 'category_image','default_category')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -272,7 +272,7 @@ admin.site.register(Product, ProductAdmin)
 class ProductCategoryAdmin(BaseCategoryAdmin):
     exclude = ('user',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_description', 'category_image','default_category_page')
+            'fields': ('name', 'category_description', 'category_image','default_category')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -315,7 +315,7 @@ admin.site.register(Recipe, RecipeAdmin)
 class RecipeCategoryAdmin(admin.ModelAdmin):
     exclude = ('user',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_description', 'category_image','default_category_page')
+            'fields': ('name', 'category_description', 'category_image','default_category')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
