@@ -8,6 +8,8 @@ from external_apps.pages.models import BasePage
 from external_apps.products.models import BaseProduct
 from external_apps.recipes.models import BaseRecipe
 
+from signal_handlers import common_signal_callback
+
 class CategoryPage(BasePage):
     category_description = models.CharField(max_length = 200, blank = True, null = True)
     category_image = models.ImageField(upload_to = 'category_page_images/%Y/%m/%d', blank = True, null = True, default = None)
@@ -19,20 +21,7 @@ class CategoryPage(BasePage):
 class ContentAssociation(BaseContentAssociation):
     target_model_field = models.CharField(max_length = 1000, blank = True, null = True, default = None)
     target_model_link = models.CharField(max_length = 1000, blank = True, null = True, default = None)
-    target_model_link_id = models.CharField(max_length = 36, blank = False, null = False, default = uuid.uuid4())
-    
-    def orphan_association_check(sender, **kwargs):
-        # This is a post_save signal, we have access to sender, instance, and created (True if record was created)
-        
-        print sender
-        
-        # Loop through all sender associations.
-        
-        # Parse the target_model_field for target_model_link_id.
-        
-        # If target_model_link_id is not present, delete the association.
-        
-    post_save.connect(orphan_association_check)
+    target_model_link_id = models.CharField(max_length = 36, blank = False, null = False, default = uuid.uuid4())   
 
 class Article(BasePage):
     category = models.ManyToManyField('ArticleCategory', related_name = 'article_categories', blank = False, null = False)
@@ -55,7 +44,7 @@ class Article(BasePage):
         """
         content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
-        
+    
 class ArticleCategory(CategoryPage):
 
     class Meta(CategoryPage.Meta):
@@ -220,6 +209,9 @@ class Product(BaseProduct):
         """
         content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
+        
+    def orphan_fields(self):
+        return ['long_description', 'product_details', 'mobile_long_description']
 
 class ProductCategory(CategoryPage):
 
@@ -228,6 +220,7 @@ class ProductCategory(CategoryPage):
 
 class Recipe(BaseRecipe):
     category = models.ManyToManyField('RecipeCategory', related_name = 'recipe_categories', blank = False, null = False)
+    also_enjoy = models.ManyToManyField('self', blank = True, null = True)
     
     @models.permalink
     def get_absolute_url(self):
@@ -252,3 +245,13 @@ class RecipeCategory(CategoryPage):
 
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Recipe Categories'
+
+# Register models with the orphan association check callback.
+post_save.connect(common_signal_callback, sender = Article)
+post_save.connect(common_signal_callback, sender = Exercise)    
+post_save.connect(common_signal_callback, sender = FitnessTip)
+post_save.connect(common_signal_callback, sender = MythBuster)    
+post_save.connect(common_signal_callback, sender = NutritionTip)
+post_save.connect(common_signal_callback, sender = Page)
+post_save.connect(common_signal_callback, sender = Product)
+post_save.connect(common_signal_callback, sender = Recipe)
