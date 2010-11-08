@@ -7,6 +7,7 @@ from external_apps.contentassociation.models import BaseContentAssociation
 from external_apps.pages.models import BasePage
 from external_apps.products.models import BaseProduct
 from external_apps.recipes.models import BaseRecipe
+from external_apps.tags.models import BaseTag
 
 from signal_handlers import common_signal_callback
 
@@ -103,7 +104,10 @@ class FitnessTipCategory(CategoryPage):
 
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Fitness Tip Categories'
-        
+
+class FunctionalAttribute(BaseTag):
+    pass
+       
 class MythBuster(BasePage):
     category = models.ManyToManyField('MythBusterCategory', related_name = 'myth_buster_categories', blank = False, null = False)
 
@@ -130,6 +134,9 @@ class MythBusterCategory(CategoryPage):
 
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Myth Buster Categories'
+
+class NutritionalAttribute(BaseTag):
+    pass
 
 class NutritionTip(BasePage):
     category = models.ManyToManyField('NutritionTipCategory', related_name = 'nutrition_tip_categories', blank = False, null = False)
@@ -192,7 +199,9 @@ class Product(BaseProduct):
     mobile_long_description = models.TextField(blank = True, null = True, default = None)
     for_athletes = models.BooleanField(blank = True, null = False, default = False)
     featured = models.BooleanField(blank = True, null = False, default = False)
-
+    functional_attributes = models.ManyToManyField(FunctionalAttribute, blank = True, null = True)
+    nutritional_attributes = models.ManyToManyField(NutritionalAttribute, blank = True, null = True)    
+    
     @models.permalink
     def get_absolute_url(self):
         return ('product_show', [str(self.id)])

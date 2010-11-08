@@ -94,6 +94,7 @@ INSTALLED_APPS = (
     'external_apps.pages',
     'external_apps.products',
     'external_apps.recipes',
+    'external_apps.tags',
 )
 
 try:

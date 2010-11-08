@@ -134,6 +134,11 @@ class FitnessTipCategoryAdmin(admin.ModelAdmin):
     
 admin.site.register(FitnessTipCategory, FitnessTipCategoryAdmin)
 
+class FunctionalAttributeAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(FunctionalAttribute, FunctionalAttributeAdmin)
+
 class MythBusterAdmin(admin.ModelAdmin):
     exclude = ('user',)
     
@@ -176,6 +181,11 @@ class MythBusterCategoryAdmin(admin.ModelAdmin):
         return instance
     
 admin.site.register(MythBusterCategory, MythBusterCategoryAdmin)
+
+class NutritionalAttributeAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(NutritionalAttribute, NutritionalAttributeAdmin)
 
 class NutritionTipAdmin(admin.ModelAdmin):
     exclude = ('user',)

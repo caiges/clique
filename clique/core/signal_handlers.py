@@ -36,7 +36,7 @@ def orphan_association_check(sender, **kwargs):
                         e['id'] = na.target_model_link_id
                         link_ids.extend(["'%s'" % na.target_model_link_id])
 
-                setattr(inst, f, soup)
+                #setattr(inst, f, soup)
 
     
                 fields.append(f)
