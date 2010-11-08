@@ -1,7 +1,7 @@
 import uuid
 
 from BeautifulSoup import BeautifulSoup 
-    
+
 # Callback handler to check for orphaned objects.
 def orphan_association_check(sender, **kwargs):
     # This is a pre_save signal, we have access to sender, instance.
