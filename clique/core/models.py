@@ -1,7 +1,7 @@
 import uuid
 
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save
 from external_apps.categories.models import BaseCategory
 from external_apps.contentassociation.models import BaseContentAssociation
 from external_apps.pages.models import BasePage
@@ -76,7 +76,7 @@ class ExerciseCategory(CategoryPage):
 
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Exercise Categories'
-        
+
 class FitnessTip(BasePage):
     category = models.ManyToManyField('FitnessTipCategory', related_name = 'fitness_tip_categories', blank = False, null = False)
 
@@ -190,6 +190,8 @@ class Product(BaseProduct):
     product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d')
     store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)
     mobile_long_description = models.TextField(blank = True, null = True, default = None)
+    for_athletes = models.BooleanField(blank = True, null = False, default = False)
+    featured = models.BooleanField(blank = True, null = False, default = False)
 
     @models.permalink
     def get_absolute_url(self):
@@ -247,11 +249,11 @@ class RecipeCategory(CategoryPage):
         verbose_name_plural = 'Recipe Categories'
 
 # Register models with the orphan association check callback.
-post_save.connect(common_signal_callback, sender = Article)
-post_save.connect(common_signal_callback, sender = Exercise)    
-post_save.connect(common_signal_callback, sender = FitnessTip)
-post_save.connect(common_signal_callback, sender = MythBuster)    
-post_save.connect(common_signal_callback, sender = NutritionTip)
-post_save.connect(common_signal_callback, sender = Page)
-post_save.connect(common_signal_callback, sender = Product)
-post_save.connect(common_signal_callback, sender = Recipe)
+pre_save.connect(common_signal_callback, sender = Article)
+pre_save.connect(common_signal_callback, sender = Exercise)    
+pre_save.connect(common_signal_callback, sender = FitnessTip)
+pre_save.connect(common_signal_callback, sender = MythBuster)    
+pre_save.connect(common_signal_callback, sender = NutritionTip)
+pre_save.connect(common_signal_callback, sender = Page)
+pre_save.connect(common_signal_callback, sender = Product, dispatch_uid = uuid.uuid4())
+pre_save.connect(common_signal_callback, sender = Recipe)
