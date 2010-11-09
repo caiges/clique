@@ -6,6 +6,8 @@ from django.db import backend
 from django.db import models
 from django.db.models.signals import pre_save
 
+from multilingual.translation import TranslationModel
+
 from external_apps.categories.models import BaseCategory
 from external_apps.contentassociation.models import BaseContentAssociation
 from external_apps.pages.models import BasePage
@@ -198,12 +200,21 @@ class Product(BaseProduct):
     category = models.ManyToManyField('ProductCategory', related_name = 'product_categories', blank = False, null = False)
     product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d', blank = True)
     supplement_information_image = models.ImageField(upload_to = 'product_supplement_information_images/%Y/%m/%d', blank = True)
-    store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)
-    mobile_long_description = models.TextField(blank = True, null = True, default = None)
     for_athletes = models.BooleanField(blank = True, null = False, default = False)
     featured = models.BooleanField(blank = True, null = False, default = False)
     functional_attributes = models.ManyToManyField(FunctionalAttribute, blank = True, null = True)
-    nutritional_attributes = models.ManyToManyField(NutritionalAttribute, blank = True, null = True)    
+    nutritional_attributes = models.ManyToManyField(NutritionalAttribute, blank = True, null = True)
+    
+    class Translation(TranslationModel):
+        name = models.CharField(max_length = 100, blank = False, null = False)
+        page_title = models.CharField(max_length = 200, blank = False, null = False)
+        url = models.CharField(max_length = 1000, blank = False, null = False, help_text = "URL will be appended to /products/...")
+        meta_description = models.CharField(max_length = 500, blank = True, null = True)
+        meta_keywords = models.CharField(max_length = 500, blank = True, null = True, default = None, help_text = 'Format: (keyword-one, keyword-two)')
+        long_description = models.TextField(blank = True, null = True, default = None)
+        product_details = models.TextField(blank = True, null = True, default = None)
+        store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)
+        mobile_long_description = models.TextField(blank = True, null = True, default = None)
     
     @models.permalink
     def get_absolute_url(self):

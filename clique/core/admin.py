@@ -1,4 +1,7 @@
 from django.contrib import admin
+
+from multilingual.admin import MultilingualModelAdmin
+
 from models import *
 from external_apps.categories.admin import BaseCategoryAdmin
 from external_apps.pages.admin import BasePageAdmin
@@ -260,7 +263,7 @@ class PageCategoryAdmin(BaseCategoryAdmin):
     
 admin.site.register(PageCategory, BaseCategoryAdmin)
 
-class ProductAdmin(BaseProductAdmin):
+class ProductAdmin(MultilingualModelAdmin):
     exclude = ('user',)
     save_on_top = True
     

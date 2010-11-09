@@ -35,6 +35,11 @@ TIME_ZONE = 'America/Phoenix'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = (
+        ('en', 'English'),
+        ('fr', 'French'),
+    )
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -66,7 +71,13 @@ SECRET_KEY = 'vb=6iq01d@*)k7y+-6y)gk#8pp8v$&8z%go0yvo!=v(9j2t^%u'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.i18n',
+    'multilingual.context_processors.multilingual',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -95,6 +106,7 @@ INSTALLED_APPS = (
     'external_apps.products',
     'external_apps.recipes',
     'external_apps.tags',
+    'multilingual',
 )
 
 try:
