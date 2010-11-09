@@ -271,7 +271,6 @@ class ProductAdmin(BaseProductAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/product-admin.js')
         
     def save_model(self, request, obj, form, change): 
-        import rpdb2; rpdb2.start_embedded_debugger("password")
         inst = form.save(commit = False)
         inst.user = request.user
         inst.save()

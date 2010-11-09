@@ -1,15 +1,17 @@
 import uuid
 
+from BeautifulSoup import BeautifulSoup 
+
+from django.db import backend
 from django.db import models
 from django.db.models.signals import pre_save
+
 from external_apps.categories.models import BaseCategory
 from external_apps.contentassociation.models import BaseContentAssociation
 from external_apps.pages.models import BasePage
 from external_apps.products.models import BaseProduct
 from external_apps.recipes.models import BaseRecipe
 from external_apps.tags.models import BaseTag
-
-from signal_handlers import common_signal_callback
 
 class CategoryPage(BasePage):
     category_description = models.CharField(max_length = 200, blank = True, null = True)
@@ -194,7 +196,8 @@ class PageCategory(CategoryPage):
     
 class Product(BaseProduct):
     category = models.ManyToManyField('ProductCategory', related_name = 'product_categories', blank = False, null = False)
-    product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d')
+    product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d', blank = True)
+    supplement_information_image = models.ImageField(upload_to = 'product_supplement_information_images/%Y/%m/%d', blank = True)
     store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)
     mobile_long_description = models.TextField(blank = True, null = True, default = None)
     for_athletes = models.BooleanField(blank = True, null = False, default = False)
@@ -257,12 +260,69 @@ class RecipeCategory(CategoryPage):
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Recipe Categories'
 
+
+# Callback handler to check for orphaned objects.
+def orphan_association_check(sender, **kwargs):
+    # This is a pre_save signal, we have access to sender, instance.
+    
+    inst = kwargs['instance']
+    orphan_fields = inst.orphan_fields()
+    
+    if len(orphan_fields):
+        elements = []
+        link_ids = []
+        fields = []
+
+        #import rpdb2; rpdb2.start_embedded_debugger("password")
+        for f in orphan_fields:
+
+            if str(getattr(inst, f)).strip() != '':
+                soup = BeautifulSoup(str(getattr(inst, f)))
+                elements = soup.findAll('a', {'rel' : 'contentassociation'})
+                        
+                for e in elements:
+                    link_id = e['id']
+                    if link_ids.count("'%s'" % link_id) == 0:
+                        # New link.
+                        link_ids.append("'%s'" % link_id)                        
+                    else:
+                        # Duplicate.
+                        oa = ContentAssociation.objects.filter(target_model_link_id__exact = link_id)[0]
+                        na = ContentAssociation(source_model = oa.source_model, source_model_id = oa.source_model_id, target_model = oa.target_model, target_model_id = oa.target_model_id, target_model_field = oa.target_model_field, target_model_link = oa.target_model_link, target_model_link_id = uuid.uuid4())
+                        na.save()
+                        e['id'] = na.target_model_link_id
+                        link_ids.extend(["'%s'" % na.target_model_link_id])
+
+                setattr(inst, f, str(soup))
+
+    
+                fields.append(f)
+            
+        # Remove duplicates.
+        link_ids = list(set(link_ids))
+        #print link_ids
+        if len(link_ids):
+            orphan_content_associations = ContentAssociation.objects.raw("select * from core_contentassociation where (source_model = '%s' and source_model_id = '%i' and target_model_link_id not in (%s))" % (inst.__class__.__name__.lower(), inst.id, ','.join(link_ids)))
+            for oca in orphan_content_associations:
+                oca.delete()
+        
+# Callback handler to clean up html related to content association.
+def clean_association_html(sender, **kwargs):
+    print sender
+    #print instance.orphan_fields
+    
+# Callback handler to dispatch common signals.
+def common_signal_callback(sender, **kwargs):
+    orphan_association_check(sender, **kwargs)
+    #clean_association_html(sender, **kwargs)
+
+
 # Register models with the orphan association check callback.
-pre_save.connect(common_signal_callback, sender = Article)
-pre_save.connect(common_signal_callback, sender = Exercise)    
-pre_save.connect(common_signal_callback, sender = FitnessTip)
-pre_save.connect(common_signal_callback, sender = MythBuster)    
-pre_save.connect(common_signal_callback, sender = NutritionTip)
-pre_save.connect(common_signal_callback, sender = Page)
-pre_save.connect(common_signal_callback, sender = Product, dispatch_uid = uuid.uuid4())
-pre_save.connect(common_signal_callback, sender = Recipe)
+#pre_save.connect(common_signal_callback, sender = Article)
+#pre_save.connect(common_signal_callback, sender = Exercise)    
+#pre_save.connect(common_signal_callback, sender = FitnessTip)
+#pre_save.connect(common_signal_callback, sender = MythBuster)    
+#pre_save.connect(common_signal_callback, sender = NutritionTip)
+#pre_save.connect(common_signal_callback, sender = Page)
+pre_save.connect(orphan_association_check, sender = Product, dispatch_uid = uuid.uuid4())
+#pre_save.connect(common_signal_callback, sender = Recipe)
