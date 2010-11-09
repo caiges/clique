@@ -1,6 +1,7 @@
 import uuid
 
 from BeautifulSoup import BeautifulSoup 
+from clique.core.models import *
 
 # Callback handler to check for orphaned objects.
 def orphan_association_check(sender, **kwargs):
@@ -8,7 +9,8 @@ def orphan_association_check(sender, **kwargs):
     
     from django.db import backend
 
-    from models import *
+
+    
 
     inst = kwargs['instance']
     orphan_fields = inst.orphan_fields()
@@ -17,10 +19,13 @@ def orphan_association_check(sender, **kwargs):
         elements = []
         link_ids = []
         fields = []
-        
+
+        #import rpdb2; rpdb2.start_embedded_debugger("password")
+
         for f in orphan_fields:
-            if getattr(inst, f).strip() != '':
-                soup = BeautifulSoup(getattr(inst, f))
+
+            if str(getattr(inst, f)).strip() != '':
+                soup = BeautifulSoup(str(getattr(inst, f)))
                 elements = soup.findAll('a', {'rel' : 'contentassociation'})
                         
                 for e in elements:
@@ -36,7 +41,7 @@ def orphan_association_check(sender, **kwargs):
                         e['id'] = na.target_model_link_id
                         link_ids.extend(["'%s'" % na.target_model_link_id])
 
-                #setattr(inst, f, soup)
+                setattr(inst, f, soup)
 
     
                 fields.append(f)
