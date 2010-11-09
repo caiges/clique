@@ -1,18 +1,15 @@
-import os, sys, uuid
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'core' )))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
+import sys
+from core.models import *
 print sys.path
 
 from BeautifulSoup import BeautifulSoup 
 
-from clique.core.models import ContentAssociation
 
 # Callback handler to check for orphaned objects.
 def orphan_association_check(sender, **kwargs):
     # This is a pre_save signal, we have access to sender, instance.
+    ContentAssociation = sender.get_associated_content_items.func_globals["ContentAssociation"]
     
     from django.db import backend   
 
@@ -45,7 +42,7 @@ def orphan_association_check(sender, **kwargs):
                         e['id'] = na.target_model_link_id
                         link_ids.extend(["'%s'" % na.target_model_link_id])
 
-                setattr(inst, f, soup)
+                setattr(inst, f, str(soup))
 
     
                 fields.append(f)
