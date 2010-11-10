@@ -198,8 +198,10 @@ class PageCategory(CategoryPage):
     
 class Product(BaseProduct):
     category = models.ManyToManyField('ProductCategory', related_name = 'product_categories', blank = False, null = False)
-    product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d', blank = True)
-    supplement_information_image = models.ImageField(upload_to = 'product_supplement_information_images/%Y/%m/%d', blank = True)
+    product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d', blank = True, null = True)
+    remove_product_image = models.BooleanField(blank = True, default = False)
+    supplement_information_image = models.ImageField(upload_to = 'product_supplement_information_images/%Y/%m/%d', blank = True, null = True)
+    remove_supplement_information_image = models.BooleanField(blank = True, default = False)
     for_athletes = models.BooleanField(blank = True, null = False, default = False)
     featured = models.BooleanField(blank = True, null = False, default = False)
     functional_attributes = models.ManyToManyField(FunctionalAttribute, blank = True, null = True)

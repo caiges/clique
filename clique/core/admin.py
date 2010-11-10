@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import admin
 
 from multilingual.admin import MultilingualModelAdmin
@@ -275,6 +277,16 @@ class ProductAdmin(MultilingualModelAdmin):
         
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
+        if inst.remove_product_image and inst.product_image != '':
+            if os.path.exists(inst.product_image.path):
+                os.remove(inst.product_image.path)
+            inst.product_image = ''
+            inst.remove_product_image = False
+        if inst.remove_supplement_information_image and inst.supplement_information_image != '':
+            if os.path.exists(inst.supplement_information_image.path):
+                os.remove(inst.supplement_information_image.path)
+            inst.supplement_information_image = ''
+            inst.remove_supplement_information_image = False
         inst.user = request.user
         inst.save()
         form.save_m2m()
