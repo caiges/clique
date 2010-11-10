@@ -18,6 +18,7 @@ from external_apps.tags.models import BaseTag
 class CategoryPage(BasePage):
     category_description = models.CharField(max_length = 200, blank = True, null = True)
     category_image = models.ImageField(upload_to = 'category_page_images/%Y/%m/%d', blank = True, null = True, default = None)
+    remove_category_image = models.BooleanField(blank = True, default = False)
     default_category = models.BooleanField(blank = False, null = False, default = False, help_text = "If checked, this will become the default category.")
     
     class Meta:
@@ -57,7 +58,9 @@ class ArticleCategory(CategoryPage):
         
 class Exercise(BasePage):
     category = models.ManyToManyField('ExerciseCategory', related_name = 'exercise_categories', blank = False, null = False)
-
+    exercise_image = models.ImageField(upload_to = 'exercise_images/%Y/%m/%d', blank = True, null = True, default = None)
+    remove_exercise_image = models.BooleanField(blank = True, default = False)
+    
     @models.permalink
     def get_absolute_url(self):
         return ('exercise_show', [str(self.id)])
