@@ -20,6 +20,8 @@ class CategoryPage(BasePage):
     category_image = models.ImageField(upload_to = 'category_page_images/%Y/%m/%d', blank = True, null = True, default = None)
     remove_category_image = models.BooleanField(blank = True, default = False)
     default_category = models.BooleanField(blank = False, null = False, default = False, help_text = "If checked, this will become the default category.")
+    featured = models.BooleanField(blank = True)
+    sort_order = models.DecimalField(decimal_places = 5, max_digits = 5)
     
     class Meta:
         abstract = True
@@ -31,7 +33,9 @@ class ContentAssociation(BaseContentAssociation):
 
 class Article(BasePage):
     category = models.ManyToManyField('ArticleCategory', related_name = 'article_categories', blank = False, null = False)
-
+    featured = models.BooleanField(blank = True)
+    sort_order = models.DecimalField(decimal_places = 5, max_digits = 5)
+    
     @models.permalink
     def get_absolute_url(self):
         return ('article_show', [str(self.id)])
@@ -60,6 +64,8 @@ class Exercise(BasePage):
     category = models.ManyToManyField('ExerciseCategory', related_name = 'exercise_categories', blank = False, null = False)
     exercise_image = models.ImageField(upload_to = 'exercise_images/%Y/%m/%d', blank = True, null = True, default = None)
     remove_exercise_image = models.BooleanField(blank = True, default = False)
+    featured = models.BooleanField(blank = True)
+    sort_order = models.DecimalField(decimal_places = 5, max_digits = 5)
     
     @models.permalink
     def get_absolute_url(self):
@@ -87,7 +93,9 @@ class ExerciseCategory(CategoryPage):
 
 class FitnessTip(BasePage):
     category = models.ManyToManyField('FitnessTipCategory', related_name = 'fitness_tip_categories', blank = False, null = False)
-
+    featured = models.BooleanField(blank = True)
+    sort_order = models.DecimalField(decimal_places = 5, max_digits = 5)
+    
     @models.permalink
     def get_absolute_url(self):
         return ('fitness_tip_show', [str(self.id)])
@@ -117,7 +125,9 @@ class FunctionalAttribute(BaseTag):
        
 class MythBuster(BasePage):
     category = models.ManyToManyField('MythBusterCategory', related_name = 'myth_buster_categories', blank = False, null = False)
-
+    featured = models.BooleanField(blank = True)
+    sort_order = models.DecimalField(decimal_places = 5, max_digits = 5)
+    
     @models.permalink
     def get_absolute_url(self):
         return ('myth_buster_show', [str(self.id)])
@@ -147,7 +157,9 @@ class NutritionalAttribute(BaseTag):
 
 class NutritionTip(BasePage):
     category = models.ManyToManyField('NutritionTipCategory', related_name = 'nutrition_tip_categories', blank = False, null = False)
-
+    featured = models.BooleanField(blank = True)
+    sort_order = models.DecimalField(decimal_places = 5, max_digits = 5)
+    
     @models.permalink
     def get_absolute_url(self):
         return ('nutrition_tip_show', [str(self.id)])
@@ -174,7 +186,9 @@ class NutritionTipCategory(CategoryPage):
 
 class Page(BasePage):
     category = models.ManyToManyField('PageCategory', related_name = 'page_categories', blank = False, null = False)
-
+    featured = models.BooleanField(blank = True)
+    sort_order = models.DecimalField(decimal_places = 5, max_digits = 5)
+    
     @models.permalink
     def get_absolute_url(self):
         return ('page_show', [str(self.id)])
@@ -207,6 +221,7 @@ class Product(BaseProduct):
     remove_supplement_information_image = models.BooleanField(blank = True, default = False)
     for_athletes = models.BooleanField(blank = True, null = False, default = False)
     featured = models.BooleanField(blank = True, null = False, default = False)
+    sort_order = models.DecimalField(decimal_places = 5, max_digits = 5)
     functional_attributes = models.ManyToManyField(FunctionalAttribute, blank = True, null = True)
     nutritional_attributes = models.ManyToManyField(NutritionalAttribute, blank = True, null = True)
     
@@ -251,6 +266,8 @@ class ProductCategory(CategoryPage):
 class Recipe(BaseRecipe):
     category = models.ManyToManyField('RecipeCategory', related_name = 'recipe_categories', blank = False, null = False)
     also_enjoy = models.ManyToManyField('self', blank = True, null = True)
+    featured = models.BooleanField(blank = True)
+    sort_order = models.DecimalField(decimal_places = 5, max_digits = 5)
     
     @models.permalink
     def get_absolute_url(self):

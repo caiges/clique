@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class BaseRecipe(models.Model):
     name = models.CharField(max_length = 100, blank = False, null = False)
+    page_title = models.CharField(max_length = 100, blank = True, null = True, default = None, help_text = "Page Title")
     url = models.CharField(max_length = 1000, blank = False, null = False, help_text = "URL will be appended to /recipes/...")
     meta_description = models.CharField(max_length = 500, blank = True, null = True)
     meta_keywords = models.CharField(max_length = 500, blank = True, null = True, default = None, help_text = 'Format: (keyword-one, keyword-two)')
