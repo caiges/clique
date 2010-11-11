@@ -3,4 +3,5 @@ MySQL-Python
 simplejson
 PIL
 BeautifulSoup
--e git+https://github.com/jasondavies/django-multilingual-ng.git#egg=multilingual
+#-e git+https://github.com/jasondavies/django-multilingual-ng.git#egg=multilingual
+#-e svn+http://django-transmeta.googlecode.com/svn/trunk#egg=transmeta

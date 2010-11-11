@@ -77,7 +77,6 @@ TEMPLATE_LOADERS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.i18n',
-    'multilingual.context_processors.multilingual',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,7 +105,6 @@ INSTALLED_APPS = (
     'external_apps.products',
     'external_apps.recipes',
     'external_apps.tags',
-    'multilingual',
 )
 
 try:
