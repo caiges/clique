@@ -9,7 +9,7 @@ class BaseRecipe(models.Model):
     meta_keywords = models.CharField(max_length = 500, blank = True, null = True, default = None, help_text = 'Format: (keyword-one, keyword-two)')
     ingredients = models.TextField(blank = True, null = True, default = None)
     directions = models.TextField(blank = True, null = True, default = None)
-    is_active = models.BooleanField(default = True)
+    make_live = models.BooleanField(default = True)
     user = models.ForeignKey(User, related_name = '%(class)s_set')
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)

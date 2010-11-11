@@ -12,7 +12,12 @@ from external_apps.recipes.admin import BaseRecipeAdmin
 
 class ArticleAdmin(admin.ModelAdmin):
     exclude = ('user',)
-    
+    fieldsets = (('Basic Info', {
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'sort_order')
+                                 }
+    ),)
+    list_display = ('name', 'sort_order')
+    list_editable = ('sort_order',)
     class Media:
         css = {
             "all" : ('/media/css/admin/common.css',)
@@ -20,11 +25,11 @@ class ArticleAdmin(admin.ModelAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/common-admin.js',)
 
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
-        instance.user = request.user
-        instance.save()
+        inst = form.save(commit = False)
+        inst.user = request.user
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
         
 admin.site.register(Article, ArticleAdmin)
 
@@ -45,21 +50,27 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
+        inst = form.save(commit = False)
         if inst.remove_category_image and inst.category_image != '':
             if os.path.exists(inst.category_image.path):
                 os.remove(inst.category_image.path)
             inst.category_image = ''
             inst.remove_category_image = False
-        instance.user = request.user
-        instance.save()
+        inst.user = request.user
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
     
 admin.site.register(ArticleCategory, ArticleCategoryAdmin)
 
 class ExerciseAdmin(admin.ModelAdmin):
     exclude = ('user',)
+    fieldsets = (('Basic Info', {
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'exercise_image', 'remove_exercise_image', 'category', 'make_live', 'featured', 'sort_order')
+                                 }
+    ),)
+    list_display = ('name', 'sort_order')
+    list_editable = ('sort_order',)
     
     class Media:
         css = {
@@ -68,16 +79,16 @@ class ExerciseAdmin(admin.ModelAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/common-admin.js',)
 
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
+        inst = form.save(commit = False)
         if inst.remove_exercise_image and inst.exercise_image != '':
             if os.path.exists(inst.exercise_image.path):
                 os.remove(inst.exercise_image.path)
             inst.exercise_image = ''
             inst.remove_exercise_image = False
-        instance.user = request.user
-        instance.save()
+        inst.user = request.user
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
         
 admin.site.register(Exercise, ExerciseAdmin)
 
@@ -98,21 +109,27 @@ class ExerciseCategoryAdmin(admin.ModelAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
+        inst = form.save(commit = False)
         if inst.remove_category_image and inst.category_image != '':
             if os.path.exists(inst.category_image.path):
                 os.remove(inst.category_image.path)
             inst.category_image = ''
             inst.remove_category_image = False
-        instance.user = request.user
-        instance.save()
+        inst.user = request.user
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
     
 admin.site.register(ExerciseCategory, ExerciseCategoryAdmin)
 
 class FitnessTipAdmin(admin.ModelAdmin):
     exclude = ('user',)
+    fieldsets = (('Basic Info', {
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'sort_order')
+                                 }
+    ),)
+    list_display = ('name', 'sort_order')
+    list_editable = ('sort_order',)
     
     class Media:
         css = {
@@ -121,11 +138,11 @@ class FitnessTipAdmin(admin.ModelAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/common-admin.js',)
 
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
-        instance.user = request.user
-        instance.save()
+        inst = form.save(commit = False)
+        inst.user = request.user
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
         
 admin.site.register(FitnessTip, FitnessTipAdmin)
 
@@ -146,16 +163,16 @@ class FitnessTipCategoryAdmin(admin.ModelAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
+        inst = form.save(commit = False)
         if inst.remove_category_image and inst.category_image != '':
             if os.path.exists(inst.category_image.path):
                 os.remove(inst.category_image.path)
             inst.category_image = ''
             inst.remove_category_image = False
-        instance.user = request.user
-        instance.save()
+        inst.user = request.user
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
     
 admin.site.register(FitnessTipCategory, FitnessTipCategoryAdmin)
 
@@ -166,6 +183,12 @@ admin.site.register(FunctionalAttribute, FunctionalAttributeAdmin)
 
 class MythBusterAdmin(admin.ModelAdmin):
     exclude = ('user',)
+    fieldsets = (('Basic Info', {
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'sort_order')
+                                 }
+    ),)
+    list_display = ('name', 'sort_order')
+    list_editable = ('sort_order',)
     
     class Media:
         css = {
@@ -199,16 +222,16 @@ class MythBusterCategoryAdmin(admin.ModelAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
+        inst = form.save(commit = False)
         if inst.remove_category_image and inst.category_image != '':
             if os.path.exists(inst.category_image.path):
                 os.remove(inst.category_image.path)
             inst.category_image = ''
             inst.remove_category_image = False
-        instance.user = request.user
-        instance.save()
+        inst.user = request.user
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
     
 admin.site.register(MythBusterCategory, MythBusterCategoryAdmin)
 
@@ -219,6 +242,12 @@ admin.site.register(NutritionalAttribute, NutritionalAttributeAdmin)
 
 class NutritionTipAdmin(admin.ModelAdmin):
     exclude = ('user',)
+    fieldsets = (('Basic Info', {
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'sort_order')
+                                 }
+    ),)
+    list_display = ('name', 'sort_order')
+    list_editable = ('sort_order',)
     
     class Media:
         css = {
@@ -227,11 +256,11 @@ class NutritionTipAdmin(admin.ModelAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/jquery.url.js', '/media/js/common-admin.js',)
 
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
-        instance.user = request.user
-        instance.save()
+        inst = form.save(commit = False)
+        inst.user = request.user
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
         
 admin.site.register(NutritionTip, NutritionTipAdmin)
 
@@ -252,21 +281,27 @@ class NutritionTipCategoryAdmin(admin.ModelAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
+        inst = form.save(commit = False)
         if inst.remove_category_image and inst.category_image != '':
             if os.path.exists(inst.category_image.path):
                 os.remove(inst.category_image.path)
             inst.category_image = ''
             inst.remove_category_image = False
-        instance.user = request.user
-        instance.save()
+        inst.user = request.user
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
     
 admin.site.register(NutritionTipCategory, NutritionTipCategoryAdmin)
 
 class PageAdmin(BasePageAdmin):
     exclude = ('user',)
+    fieldsets = (('Basic Info', {
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'sort_order')
+                                 }
+    ),)
+    list_display = ('name', 'sort_order')
+    list_editable = ('sort_order',)
     
     class Media:
         css = {
@@ -294,22 +329,28 @@ class PageCategoryAdmin(BaseCategoryAdmin):
     )
     
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
+        inst = form.save(commit = False)
         if inst.remove_category_image and inst.category_image != '':
             if os.path.exists(inst.category_image.path):
                 os.remove(inst.category_image.path)
             inst.category_image = ''
             inst.remove_category_image = False
-        instance.save()
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
     
 admin.site.register(PageCategory, BaseCategoryAdmin)
 
 class ProductAdmin(MultilingualModelAdmin):
     exclude = ('user',)
+    """fieldsets = (('Basic Info', {
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'long_description', 'product_details', 'meta.translated_fields', 'mobile_long_description', 'product_image', 'remove_product_image', 'supplement_information_image', 'remove_supplement_information_image', 'store_link', 'category', 'functional_attributes', 'nutritional_attributes', 'for_athletes', 'make_live', 'featured', 'sort_order')
+                                 }
+    ),)"""
+    list_display = ('name', 'sort_order')
+    list_editable = ('sort_order',)
     save_on_top = True
-    
+    print locals()
     class Media:
         css = {
             "all" : ('/media/css/admin/common.css',)
@@ -352,22 +393,27 @@ class ProductCategoryAdmin(BaseCategoryAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
+        inst = form.save(commit = False)
         if inst.remove_category_image and inst.category_image != '':
             if os.path.exists(inst.category_image.path):
                 os.remove(inst.category_image.path)
             inst.category_image = ''
             inst.remove_category_image = False
-        instance.user = request.user
-        instance.save()
+        inst.user = request.user
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
     
 admin.site.register(ProductCategory, ProductCategoryAdmin)
 
 class RecipeAdmin(BaseRecipeAdmin):
     exclude = ('user',)
-    
+    fieldsets = (('Basic Info', {
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'ingredients', 'directions', 'category', 'also_enjoy', 'make_live', 'featured', 'sort_order')
+                                 }
+    ),)
+    list_display = ('name', 'sort_order')
+    list_editable = ('sort_order',)
     class Media:
         css = {
             "all" : ('/media/css/admin/common.css',)
@@ -400,15 +446,15 @@ class RecipeCategoryAdmin(admin.ModelAdmin):
         js = ('/media/js/jquery-1.4.2.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/js/page-admin.js',)
 
     def save_model(self, request, obj, form, change): 
-        instance = form.save(commit = False)
+        inst = form.save(commit = False)
         if inst.remove_category_image and inst.category_image != '':
             if os.path.exists(inst.category_image.path):
                 os.remove(inst.category_image.path)
             inst.category_image = ''
             inst.remove_category_image = False
-        instance.user = request.user
-        instance.save()
+        inst.user = request.user
+        inst.save()
         form.save_m2m()
-        return instance
+        return inst
     
 admin.site.register(RecipeCategory, RecipeCategoryAdmin)
