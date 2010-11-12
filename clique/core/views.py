@@ -9,7 +9,12 @@ import models as m
 def index(request):
     if(request.method == 'GET'):
         return render_to_response('core/index.html')
-        
+
+def article_show(request, url):
+    if(request.method == 'GET'):
+        article = Article.objects.filter(url__exact = url, make_live__exact = True)
+        return render_to_response('core/articles/show.html', {'article' : article})
+
 def association_test(request):
     if(request.method == 'GET'):
         return render_to_response('core/association-test.html')

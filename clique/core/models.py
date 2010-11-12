@@ -21,6 +21,7 @@ class CategoryPage(BasePage):
     default_category = models.BooleanField(blank = False, null = False, default = False, help_text = "If checked, this will become the default category.")
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    language = models.CharField(max_length = 20, blank = True, null = True, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     class Meta:
         abstract = True
@@ -34,6 +35,7 @@ class Article(BasePage):
     category = models.ManyToManyField('ArticleCategory', related_name = 'article_categories', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
     def get_absolute_url(self):
@@ -44,18 +46,14 @@ class Article(BasePage):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        
-        # Argument a is an instance of ContentAssociation
-        """def flatten_associations(a, ca_list):
-            for ca in ca_list:
-                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
-                    ca.append(dict(instance))
-        """
         content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
     
+    def orphan_fields(self):
+        return ['body']
+    
 class ArticleCategory(CategoryPage):
-
+    
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Article Categories'
         
@@ -65,6 +63,7 @@ class Exercise(BasePage):
     remove_exercise_image = models.BooleanField(blank = True, default = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
     def get_absolute_url(self):
@@ -75,18 +74,14 @@ class Exercise(BasePage):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        
-        # Argument a is an instance of ContentAssociation
-        """def flatten_associations(a, ca_list):
-            for ca in ca_list:
-                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
-                    ca.append(dict(instance))
-        """
         content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
-        
-class ExerciseCategory(CategoryPage):
 
+    def orphan_fields(self):
+        return ['body']
+            
+class ExerciseCategory(CategoryPage):
+        
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Exercise Categories'
 
@@ -94,6 +89,7 @@ class FitnessTip(BasePage):
     category = models.ManyToManyField('FitnessTipCategory', related_name = 'fitness_tip_categories', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
     def get_absolute_url(self):
@@ -104,18 +100,14 @@ class FitnessTip(BasePage):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        
-        # Argument a is an instance of ContentAssociation
-        """def flatten_associations(a, ca_list):
-            for ca in ca_list:
-                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
-                    ca.append(dict(instance))
-        """
         content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
 
-class FitnessTipCategory(CategoryPage):
+    def orphan_fields(self):
+        return ['body']
 
+class FitnessTipCategory(CategoryPage):
+    
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Fitness Tip Categories'
 
@@ -126,6 +118,7 @@ class MythBuster(BasePage):
     category = models.ManyToManyField('MythBusterCategory', related_name = 'myth_buster_categories', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
     def get_absolute_url(self):
@@ -136,18 +129,14 @@ class MythBuster(BasePage):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        
-        # Argument a is an instance of ContentAssociation
-        """def flatten_associations(a, ca_list):
-            for ca in ca_list:
-                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
-                    ca.append(dict(instance))
-        """
         content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
-        
-class MythBusterCategory(CategoryPage):
 
+    def orphan_fields(self):
+        return ['body']
+            
+class MythBusterCategory(CategoryPage):
+    
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Myth Buster Categories'
 
@@ -158,6 +147,7 @@ class NutritionTip(BasePage):
     category = models.ManyToManyField('NutritionTipCategory', related_name = 'nutrition_tip_categories', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
     def get_absolute_url(self):
@@ -168,18 +158,14 @@ class NutritionTip(BasePage):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        
-        # Argument a is an instance of ContentAssociation
-        """def flatten_associations(a, ca_list):
-            for ca in ca_list:
-                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
-                    ca.append(dict(instance))
-        """
         content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
+
+    def orphan_fields(self):
+        return ['body']
         
 class NutritionTipCategory(CategoryPage):
-
+    
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Nutrition Tip Categories'
 
@@ -187,6 +173,7 @@ class Page(BasePage):
     category = models.ManyToManyField('PageCategory', related_name = 'page_categories', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
     def get_absolute_url(self):
@@ -197,18 +184,14 @@ class Page(BasePage):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        
-        # Argument a is an instance of ContentAssociation
-        """def flatten_associations(a, ca_list):
-            for ca in ca_list:
-                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
-                    ca.append(dict(instance))
-        """
         content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
+ 
+    def orphan_fields(self):
+        return ['body']
         
 class PageCategory(CategoryPage):
-        
+    
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Page Categories'
     
@@ -236,13 +219,6 @@ class Product(BaseProduct):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        
-        # Argument a is an instance of ContentAssociation
-        """def flatten_associations(a, ca_list):
-            for ca in ca_list:
-                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
-                    ca.append(dict(instance))
-        """
         content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
         
@@ -250,7 +226,7 @@ class Product(BaseProduct):
         return ['long_description', 'product_details', 'mobile_description']
 
 class ProductCategory(CategoryPage):
-
+    
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Product Categories'
 
@@ -259,6 +235,7 @@ class Recipe(BaseRecipe):
     also_enjoy = models.ManyToManyField('self', blank = True, null = True)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
     def get_absolute_url(self):
@@ -269,18 +246,14 @@ class Recipe(BaseRecipe):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        
-        # Argument a is an instance of ContentAssociation
-        """def flatten_associations(a, ca_list):
-            for ca in ca_list:
-                if a.source_model == ca.source_model and a.source_model_id = ca.source_model_id and a.target_model = ca.target_model and a.target_model_id = ca.target_model_id
-                    ca.append(dict(instance))
-        """
         content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
+
+    def orphan_fields(self):
+        return ['ingredients', 'directions']
     
 class RecipeCategory(CategoryPage):
-
+    
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Recipe Categories'
 
