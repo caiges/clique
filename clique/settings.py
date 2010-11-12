@@ -2,6 +2,10 @@
 
 import os
 
+# This is defined here as a do-nothing function because we can't import
+# django.utils.translation -- that module depends on the settings.
+gettext_noop = lambda s: s
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -36,8 +40,8 @@ TIME_ZONE = 'America/Phoenix'
 LANGUAGE_CODE = 'en-us'
 
 LANGUAGES = (
-        ('en', 'English'),
-        ('fr', 'French'),
+        ('en', gettext_noop('English')),
+        ('fr', gettext_noop('French')),
     )
 
 SITE_ID = 1

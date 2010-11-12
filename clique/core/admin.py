@@ -2,8 +2,6 @@ import os
 
 from django.contrib import admin
 
-from multilingual.admin import MultilingualModelAdmin
-
 from models import *
 from external_apps.categories.admin import BaseCategoryAdmin
 from external_apps.pages.admin import BasePageAdmin
@@ -341,16 +339,16 @@ class PageCategoryAdmin(BaseCategoryAdmin):
     
 admin.site.register(PageCategory, BaseCategoryAdmin)
 
-class ProductAdmin(MultilingualModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     exclude = ('user',)
-    """fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'long_description', 'product_details', 'meta.translated_fields', 'mobile_long_description', 'product_image', 'remove_product_image', 'supplement_information_image', 'remove_supplement_information_image', 'store_link', 'category', 'functional_attributes', 'nutritional_attributes', 'for_athletes', 'make_live', 'featured', 'sort_order')
+    fieldsets = (('Basic Info', {
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'long_description', 'product_details', 'mobile_description', 'product_image', 'remove_product_image', 'supplement_information_image', 'remove_supplement_information_image', 'store_link', 'category', 'functional_attributes', 'nutritional_attributes', 'for_athletes', 'make_live', 'featured', 'sort_order', 'language')
                                  }
-    ),)"""
-    list_display = ('name', 'sort_order')
+    ),)
+    list_display = ('name', 'language', 'sort_order')
     list_editable = ('sort_order',)
     save_on_top = True
-    print locals()
+    
     class Media:
         css = {
             "all" : ('/media/css/admin/common.css',)

@@ -3,7 +3,7 @@ $(document).ready(function() {
     var highlightCallback = function(editor) {
         
         // Highlight each conflicting form field.
-        if($.url.param('field_ids') != undefined) {
+        if($.url.param('field_ids') != undefined && $.url.param('field_ids' != null)) {
             var $fields = $.url.param('field_ids').split(',');
 
             for(var i = 0; i < $fields.length; i++) {

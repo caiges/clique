@@ -5,9 +5,8 @@ from BeautifulSoup import BeautifulSoup
 from django.db import backend
 from django.db import models
 from django.db.models.signals import pre_save
+from django.conf import settings
 
-from multilingual.translation import TranslationModel
-from transmeta import TransMeta
 from external_apps.categories.models import BaseCategory
 from external_apps.contentassociation.models import BaseContentAssociation
 from external_apps.pages.models import BasePage
@@ -213,18 +212,8 @@ class PageCategory(CategoryPage):
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Page Categories'
     
-class Product(BaseProduct):
-    __metaclass__ = TransMeta
-    
-    name = models.CharField(max_length = 100, blank = False, null = False)
-    page_title = models.CharField(max_length = 200, blank = False, null = False)
-    url = models.CharField(max_length = 1000, blank = False, null = False, help_text = "URL will be appended to /products/...")
-    meta_description = models.CharField(max_length = 500, blank = True, null = True)
-    meta_keywords = models.CharField(max_length = 500, blank = True, null = True, default = None, help_text = 'Format: (keyword-one, keyword-two)')
-    long_description = models.TextField(blank = True, null = True, default = None)
-    product_details = models.TextField(blank = True, null = True, default = None)
-    store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)
-    mobile_long_description = models.TextField(blank = True, null = True, default = None)
+class Product(BaseProduct):   
+    mobile_description = models.TextField(blank = True, null = True, default = None)
     category = models.ManyToManyField('ProductCategory', related_name = 'product_categories', blank = False, null = False)
     product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d', blank = True, null = True)
     remove_product_image = models.BooleanField(blank = True, default = False)
@@ -235,19 +224,8 @@ class Product(BaseProduct):
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
     functional_attributes = models.ManyToManyField(FunctionalAttribute, blank = True, null = True)
     nutritional_attributes = models.ManyToManyField(NutritionalAttribute, blank = True, null = True)
-    
-    class Meta:
-        translate = ('name', 'page_title')
-    """class Translation(TranslationModel):
-        name = models.CharField(max_length = 100, blank = False, null = False)
-        page_title = models.CharField(max_length = 200, blank = False, null = False)
-        url = models.CharField(max_length = 1000, blank = False, null = False, help_text = "URL will be appended to /products/...")
-        meta_description = models.CharField(max_length = 500, blank = True, null = True)
-        meta_keywords = models.CharField(max_length = 500, blank = True, null = True, default = None, help_text = 'Format: (keyword-one, keyword-two)')
-        long_description = models.TextField(blank = True, null = True, default = None)
-        product_details = models.TextField(blank = True, null = True, default = None)
-        store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)
-        mobile_long_description = models.TextField(blank = True, null = True, default = None)"""
+    store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)
+    language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
     def get_absolute_url(self):
@@ -269,7 +247,7 @@ class Product(BaseProduct):
         return content_association_source_instances
         
     def orphan_fields(self):
-        return ['long_description', 'product_details', 'mobile_long_description']
+        return ['long_description', 'product_details', 'mobile_description']
 
 class ProductCategory(CategoryPage):
 
@@ -338,7 +316,6 @@ def orphan_association_check(sender, **kwargs):
                         na.save()
                         e['id'] = na.target_model_link_id
                         link_ids.extend(["'%s'" % na.target_model_link_id])
-
                 setattr(inst, f, str(soup))
 
     
