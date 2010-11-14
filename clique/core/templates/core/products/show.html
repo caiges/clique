@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Product Show</h1>
+<div id="product_category"><strong>Category:</strong> {{ category.name }}</div>
+<div id="product_name"><strong>Product Name:</strong> {{ product.name }}</div>
+<div id="product_description">{{ product.long_description|safe }}</div>
+
+{% endblock %}

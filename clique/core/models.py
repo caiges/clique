@@ -197,7 +197,7 @@ class PageCategory(CategoryPage):
     
 class Product(BaseProduct):   
     mobile_description = models.TextField(blank = True, null = True, default = None)
-    category = models.ManyToManyField('ProductCategory', related_name = 'product_categories', blank = False, null = False)
+    categories = models.ManyToManyField('ProductCategory', related_name = 'product_categories', blank = False, null = False)
     product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d', blank = True, null = True)
     remove_product_image = models.BooleanField(blank = True, default = False)
     supplement_information_image = models.ImageField(upload_to = 'product_supplement_information_images/%Y/%m/%d', blank = True, null = True)
@@ -209,6 +209,12 @@ class Product(BaseProduct):
     nutritional_attributes = models.ManyToManyField(NutritionalAttribute, blank = True, null = True)
     store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
+    
+    def product_categories(self):
+        return ', '.join([cat.name for cat in self.categories.all()])
+    
+    def product_language(self):
+        return self.language
     
     @models.permalink
     def get_absolute_url(self):
@@ -224,6 +230,7 @@ class Product(BaseProduct):
         
     def orphan_fields(self):
         return ['long_description', 'product_details', 'mobile_description']
+    
 
 class ProductCategory(CategoryPage):
     

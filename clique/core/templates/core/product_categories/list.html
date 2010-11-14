@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2>All Categories</h2>
+	<ul>
+	{% for cat in product_categories %}
+		<li>{{ cat.name }}</li>
+	{% empty %}
+		<li>No product categories.</li>
+	{% endfor %}
+	</ul>
+	
+	<h2>All Categories with product where "for athletes" is set.</h2>
+	<ul>
+	{% for cat in athlete_product_categories %}
+		<li>{{ cat.name }}</li>
+	{% empty %}
+		<li>No product categories.</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

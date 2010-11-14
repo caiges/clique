@@ -21,6 +21,7 @@
     </head>
     
     <body>
+    	<h1>Weider Nutrition Group</h1>
 	    <form action="/i18n/setlang/" method="post">
 		{% csrf_token %}
 		<input name="next" type="hidden" value="{{ request.path }}" />
@@ -31,8 +32,8 @@
 		</select>
 		<input type="submit" value="Go" />
 		</form>
+		{{ LANGUAGE_CODE }}
         {% block content %}{% endblock %}
-        {{ LANGUAGE_CODE }}
     </body>
 
 </html>

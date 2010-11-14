@@ -18,7 +18,39 @@ def article_show(request, url):
 def association_test(request):
     if(request.method == 'GET'):
         return render_to_response('core/association-test.html')
+
+""" Product Categories """
+def active_product_categories_list(request):
+    if(request.method == 'GET'):
+        product_categories = ProductCategory.objects.filter(product_categories__isnull = False).distinct()
+        return render_to_response('core/product_categories/active_list.html', {'product_categories' : product_categories})
+    
+def product_categories_list(request):
+    if(request.method == 'GET'):
+        product_categories = ProductCategory.objects.all()
+        athlete_product_categories = ProductCategory.objects.filter(product_categories__isnull = False, product_categories__for_athletes = True).distinct()
+        return render_to_response('core/product_categories/list.html', {'product_categories' : product_categories, 'athlete_product_categories' : athlete_product_categories})
+
+def product_category_show(request, product_category_name):
+    if(request.method == 'GET'):
+        product_category = ProductCategory.objects.filter(name__exact = product_category_name)[0]
+        return render_to_response('core/product_categories/show.html', {'product_category' : product_category})
         
+""" Products """
+def products_within_category(request, product_category_name):
+    if(request.method == 'GET'):
+        product_category = ProductCategory.objects.filter(name__exact = product_category_name)[0]
+        products = Product.objects.filter(categories__name__exact = product_category)
+        athlete_products = Product.objects.filter(categories__name__exact = product_category, for_athletes__exact = True)
+        return render_to_response('core/products/list.html', {'category' : product_category, 'products' : products, 'athlete_products' : athlete_products})
+
+def product_within_category_show(request, product_category_name, product_name):
+    if(request.method == 'GET'):
+        product_category = ProductCategory.objects.filter(name__exact = product_category_name)[0]
+        product = Product.objects.filter(categories__exact = product_category, name__exact = product_name)[0]
+        return render_to_response('core/products/show.html', {'category' : product_category, 'product' : product})
+
+""" Content Association """ 
 def content_association(request):
     if(request.method == 'GET'):
         articles = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Article.objects.all()]

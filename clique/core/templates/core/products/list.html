@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2>All Products within category: {{ category }}</h2>
+	<ul>
+	{% for product in products %}
+		<li>{{ product.name }}</li>
+	{% empty %}
+		<li>No products.</li>
+	{% endfor %}
+	</ul>
+	
+	<h2>All Products with "for athletes" set within category: {{ category }}</h2>
+	<ul>
+	{% for product in athlete_products %}
+		<li>{{ product.name }}</li>
+	{% empty %}
+		<li>No products.</li>
+	{% endfor %}
+	</ul>
+{% endblock %}
