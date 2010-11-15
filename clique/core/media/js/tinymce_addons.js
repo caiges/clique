@@ -3,7 +3,7 @@ $(document).ready(function() {
     var highlightCallback = function(editor) {
         
         // Highlight each conflicting form field.
-        if($.url.param('field_ids') != undefined && $.url.param('field_ids' != null)) {
+        if($.url != undefined && $.url != null && $.url.param('field_ids') != undefined && $.url.param('field_ids' != null)) {
             var $fields = $.url.param('field_ids').split(',');
 
             for(var i = 0; i < $fields.length; i++) {
@@ -14,12 +14,14 @@ $(document).ready(function() {
         }
         
         // Highlight each conflicting link.
-        var linkIds = $.url.param('links');
-        if(linkIds != 'undefined' && linkIds != null) {
-            linkIds = linkIds.split(',');
+        if($.url != undefined && $.url != null) {
+            var linkIds = $.url.param('links');
+            if(linkIds != 'undefined' && linkIds != null) {
+                linkIds = linkIds.split(',');
         
-            for(var j = 0; j < linkIds.length; j++) {
-                editor.dom.setStyle(linkIds[j], 'border', '2px solid red');
+                for(var j = 0; j < linkIds.length; j++) {
+                    editor.dom.setStyle(linkIds[j], 'border', '2px solid red');
+                }
             }
         }
     };
