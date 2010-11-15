@@ -216,9 +216,8 @@ class Product(BaseProduct):
     def product_language(self):
         return self.language
     
-    @models.permalink
     def get_absolute_url(self):
-        return ('product_show', [str(self.id)])
+        return "/products/%i" % self.id
     
     def get_admin_url(self):
         return "/admin/core/product/%i" % self.id
@@ -308,7 +307,7 @@ def orphan_association_check(sender, **kwargs):
             orphan_content_associations = ContentAssociation.objects.raw("select * from core_contentassociation where (source_model = '%s' and source_model_id = '%i' and target_model_link_id not in (%s))" % (inst.__class__.__name__.lower(), inst.id, ','.join(link_ids)))
             for oca in orphan_content_associations:
                 oca.delete()
-        else:
+        elif inst.id != None:
             orphan_content_associations = ContentAssociation.objects.raw("select * from core_contentassociation where (source_model = '%s' and source_model_id = '%i')" % (inst.__class__.__name__.lower(), inst.id))
             for oca in orphan_content_associations:
                 oca.delete()
