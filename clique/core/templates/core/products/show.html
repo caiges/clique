@@ -3,8 +3,46 @@
 {% block content %}
 
 <h1>Product Show</h1>
-<div id="product_category"><strong>Category:</strong> {{ category.name }}</div>
+<!--<div id="product_category"><strong>Category:</strong> {{ category.name }}</div>-->
 <div id="product_name"><strong>Product Name:</strong> {{ product.name }}</div>
-<div id="product_description">{{ product.long_description|safe }}</div>
+<div id="product_description"><strong>Description:</strong><br>{{ product.long_description|safe }}</div>
+<div id="product_details"><strong>Product Details:</strong><br>{{ product.product_details|safe }}</div>
+<div id="product_mobile_description"><strong>Mobile Description:</strong><br>{{ product.mobile_description|safe }}</div>
+{% ifnotequal product.product_image '' %}
+<div id="product_image"><strong>Product Image:</strong><br><img src="{{ product.product_image.url }}"></div>
+{% endifnotequal %}
+{% ifnotequal product.supplement_information_image '' %}
+<div id="product_supplement_information_image"><strong>Supplement Information Image:</strong><br><img src="{{ product.supplement_information_image.url }}"></div>
+{% endifnotequal %}
+<div id="product_store_link"><strong>Store Link:</strong>{{ product.store_link }}</div>
+<div id="product_categories">
+    <strong>Categories:</strong><br>
+    {% for cat in product.categories.all %}
+        {{ cat.name }}<br>
+    {% empty %}
+        No associated categories
+    {% endfor %}
+</div>
+<div id="product_functional_attributes">
+    <strong>Functional Attributes:</strong><br>
+    {% for atr in product.functional_attributes.all %}
+        {{ atr.name }}<br>
+    {% empty %}
+        No associated functional attributes.
+    {% endfor %}
+</div>
+<div id="product_nutritional_attributes">
+    <strong>Nutritional Attributes:</strong><br>
+    {% for atr in product.nutritional_attributes.all %}
+        {{ atr.name }}<br>
+    {% empty %}
+        No associated nutritional attributes.
+    {% endfor %}
+</div>
+<div id="product_for_athletes"><strong>For Athletes:</strong> {{ product.for_athletes }}</div>
+<div id="product_make_live"><strong>Make Live:</strong> {{ product.make_live }}</div>
+<div id="product_featured"><strong>Featured:</strong> {{ product.featured }}</div>
+<div id="product_sort_order"><strong>Sort Order:</strong> {{ product.sort_order }}</div>
+<div id="product_language"><strong>Language:</strong> {{ product.language }}</div>
 
 {% endblock %}

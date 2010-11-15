@@ -6,7 +6,6 @@
 {% url admin:jsi18n as jsi18nurl %}
 <script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
 {{ media }}
-<script type="text/javascript" src="/media/js/tinymce_addons.js"></script>
 {% endblock %}
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />{% endblock %}
@@ -62,42 +61,6 @@
 
 {% if adminform and add %}
    <script type="text/javascript">document.getElementById("{{ adminform.first_field.auto_id }}").focus();</script>
-{% endif %}
-
-{% if adminform and change %}
-<script type="text/javascript">
-
-    $(document).ready(function() {        
-        
-        var highlightCallback = function(editor) {
-            
-            // Highlight each conflicting form field.
-            if($.url.param('field_ids') != undefined) {
-                var $fields = $.url.param('field_ids').split(',');
-
-                for(var i = 0; i < $fields.length; i++) {
-                    if(tinyMCE.editors[$fields[i]].id == editor.id) {
-                        $('#' + $fields[i] + '_tbl').css('border', '2px solid red');
-                    }
-                }
-            }
-            
-            // Highlight each conflicting link.
-            var linkIds = $.url.param('links').split(',');
-            for(var j = 0; j < linkIds.length; j++) {
-                editor.dom.setStyle(linkIds[j], 'border', '2px solid red');
-            }
-
-        };
-        
-        tinyMCE.onAddEditor.add(function(mgr,ed) {
-            // Setup callback for editor init.
-            ed.onInit.add(function(ed) { highlightCallback(ed); });
-        });
-        
-    });
-
-</script>
 {% endif %}
 
 {# JavaScript for prepopulated fields #}

@@ -15,12 +15,14 @@ $(document).ready(function() {
         
         // Highlight each conflicting link.
         if($.url != undefined && $.url != null) {
-            var linkIds = $.url.param('links');
-            if(linkIds != 'undefined' && linkIds != null) {
-                linkIds = linkIds.split(',');
+            if($.url.param('links') != undefined && $.url.param('links') != null) {
+                var linkIds = $.url.param('links');
+                if(linkIds != 'undefined' && linkIds != null) {
+                    linkIds = linkIds.split(',');
         
-                for(var j = 0; j < linkIds.length; j++) {
-                    editor.dom.setStyle(linkIds[j], 'border', '2px solid red');
+                    for(var j = 0; j < linkIds.length; j++) {
+                        editor.dom.setStyle(linkIds[j], 'border', '2px solid red');
+                    }
                 }
             }
         }

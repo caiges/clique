@@ -4,7 +4,7 @@
 	<h2>All Products within category: {{ category }}</h2>
 	<ul>
 	{% for product in products %}
-		<li>{{ product.name }}</li>
+		<li><a href="{% url core.views.product_within_category_show category.url product.url %}" title="{{ product.name }}">{{ product.name }}</a></li>
 	{% empty %}
 		<li>No products.</li>
 	{% endfor %}
@@ -13,7 +13,7 @@
 	<h2>All Products with "for athletes" set within category: {{ category }}</h2>
 	<ul>
 	{% for product in athlete_products %}
-		<li>{{ product.name }}</li>
+		<li><a href="{% url core.views.product_within_category_show category.url product.url %}" title="{{ product.name }}">{{ product.name }}</a></li>
 	{% empty %}
 		<li>No products.</li>
 	{% endfor %}

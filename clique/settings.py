@@ -63,6 +63,7 @@ MEDIA_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'core', 'm
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = 'http://localhost:8000/media/'
 
+MEDIA_PREFIX = '/media/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
@@ -113,6 +114,7 @@ INSTALLED_APPS = (
     'external_apps.products',
     'external_apps.recipes',
     'external_apps.tags',
+    'filebrowser',
 )
 
 try:

@@ -37,17 +37,22 @@ def product_category_show(request, product_category_name):
         return render_to_response('core/product_categories/show.html', {'product_category' : product_category})
         
 """ Products """
-def products_within_category(request, product_category_name):
+def product_show(request, product_id):
     if(request.method == 'GET'):
-        product_category = ProductCategory.objects.filter(name__exact = product_category_name)[0]
-        products = Product.objects.filter(categories__name__exact = product_category)
-        athlete_products = Product.objects.filter(categories__name__exact = product_category, for_athletes__exact = True)
+        product = Product.objects.get(pk = product_id)
+        return render_to_response('core/products/show.html', {'product' : product})
+
+def products_within_category(request, product_category_url):
+    if(request.method == 'GET'):
+        product_category = ProductCategory.objects.filter(url__exact = product_category_url)[0]
+        products = Product.objects.filter(categories__exact = product_category)
+        athlete_products = Product.objects.filter(categories__exact = product_category, for_athletes__exact = True)
         return render_to_response('core/products/list.html', {'category' : product_category, 'products' : products, 'athlete_products' : athlete_products})
 
-def product_within_category_show(request, product_category_name, product_name):
+def product_within_category_show(request, product_category_url, product_url):
     if(request.method == 'GET'):
-        product_category = ProductCategory.objects.filter(name__exact = product_category_name)[0]
-        product = Product.objects.filter(categories__exact = product_category, name__exact = product_name)[0]
+        product_category = ProductCategory.objects.filter(url__exact = product_category_url)[0]
+        product = Product.objects.filter(categories__exact = product_category, url__exact = product_url)[0]
         return render_to_response('core/products/show.html', {'category' : product_category, 'product' : product})
 
 """ Content Association """ 

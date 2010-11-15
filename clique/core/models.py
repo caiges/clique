@@ -308,6 +308,10 @@ def orphan_association_check(sender, **kwargs):
             orphan_content_associations = ContentAssociation.objects.raw("select * from core_contentassociation where (source_model = '%s' and source_model_id = '%i' and target_model_link_id not in (%s))" % (inst.__class__.__name__.lower(), inst.id, ','.join(link_ids)))
             for oca in orphan_content_associations:
                 oca.delete()
+        else:
+            orphan_content_associations = ContentAssociation.objects.raw("select * from core_contentassociation where (source_model = '%s' and source_model_id = '%i')" % (inst.__class__.__name__.lower(), inst.id))
+            for oca in orphan_content_associations:
+                oca.delete()
         
 # Callback handler to clean up html related to content association.
 def clean_association_html(sender, **kwargs):
