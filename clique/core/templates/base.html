@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load navigation %}
+{% get_product_navigation as product_navigation %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -7,6 +9,9 @@
 
     <head>
         <title>{% block page_title %}Clique{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="/media/css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="/media/css/text.css" />
+        <link rel="stylesheet" type="text/css" href="/media/css/960.css" />
         <script type="text/javascript" src="/media/js/jquery-1.4.2.js"></script>
         <script type="text/javascript" src="/media/js/tiny_mce/tiny_mce_jquery_src.js"></script>
         <script type="text/javascript">
@@ -21,19 +26,37 @@
     </head>
     
     <body>
-    	<h1>Weider Nutrition Group</h1>
-	    <form action="/i18n/setlang/" method="post">
-		{% csrf_token %}
-		<input name="next" type="hidden" value="{{ request.path }}" />
-		<select name="language">
-		{% for lang in LANGUAGES %}
-		<option value="{{ lang.0 }}" {% >{{ lang.1 }}</option>
-		{% endfor %}
-		</select>
-		<input type="submit" value="Go" />
-		</form>
-		{{ LANGUAGE_CODE }}
-        {% block content %}{% endblock %}
+    	<div class="container_12">
+    	
+    		<div class="grid_12">
+    			<h1>Weider Nutrition Group</h1>
+			    <form action="/i18n/setlang/" method="post">
+				{% csrf_token %}
+				<input name="next" type="hidden" value="{{ request.path }}" />
+				<select name="language">
+				{% for lang in LANGUAGES %}
+					<option value="{{ lang.0 }}" {% >{{ lang.1 }}</option>
+				{% endfor %}
+				</select>
+				<input type="submit" value="Change Language" />
+				</form>
+				{{ LANGUAGE_CODE }}
+    		</div>
+    		<div class="clear"></div>
+    		
+	        <div class="grid_3">
+	        	{% block navigation %}
+	        		{% for p in product_navigation %}
+	        			{{ p.name }}<br>	
+	        		{% endfor %}
+	        	{% endblock %}
+	        </div>
+	        <div class="grid_9">	
+	        	{% block content %}{% endblock %}
+	        </div>
+	        <div class="clear"></div>
+	        
+    	</div>
     </body>
 
 </html>
