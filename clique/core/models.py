@@ -21,7 +21,7 @@ class CategoryPage(BasePage):
     default_category = models.BooleanField(blank = False, null = False, default = False, help_text = "If checked, this will become the default category.")
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
-    language = models.CharField(max_length = 20, blank = True, null = True, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
+    language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     class Meta:
         abstract = True

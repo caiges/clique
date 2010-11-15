@@ -377,7 +377,7 @@ admin.site.register(Product, ProductAdmin)
 class ProductCategoryAdmin(BaseCategoryAdmin):
     exclude = ('user',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_description', 'category_image', 'remove_category_image', 'default_category', 'language')
+            'fields': ('name', 'category_image', 'remove_category_image', 'make_live', 'language')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')

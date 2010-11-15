@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Recipe Show</h1>
+<div id="recipe_category"><strong>Category:</strong> {{ category.name }}</div>
+<div id="recipe_name"><strong>Recipe Name:</strong> {{ recipe.name }}</div>
+<div id="recipe_ingredients">{{ recipe.recipe_ingredients|safe }}</div>
+<div id="recipe_also_enjoy">
+<strong>Also Enjoy:</strong>
+<ul>
+{% for r in also_enjoy %}
+	<li>{{ r }}</li>
+{% empty %}
+	<li>None</li>
+{% endfor %}
+</ul>
+</div>
+
+{% endblock %}
