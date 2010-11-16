@@ -320,7 +320,7 @@ class PageAdmin(BasePageAdmin):
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
-    list_display = ('name', 'make_live', 'sort_order')
+    list_display = ('name', 'include_on_primary_navigation', 'make_live', 'sort_order')
     list_editable = ('make_live', 'sort_order',)
     ordering = ('sort_order', 'name',)
     save_on_top = True
