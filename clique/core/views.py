@@ -79,6 +79,29 @@ def fitness_tip_within_category_show(request, fitness_tip_category_url, fitness_
         fitness_tip = FitnessTip.objects.filter(categories__exact = fitness_tip_category, url__exact = fitness_tip_url)[0]
         return render_to_response('core/fitness_tips/show.html', {'fitness_tip_category' : fitness_tip_category, 'fitness_tip' : fitness_tip})
 
+""" Myth Buster Categories """
+def myth_buster_categories_list(request):
+    if(request.method == 'GET'):
+        myth_buster_categories = MythBusterCategory.objects.filter(myth_busters__isnull = False).distinct()
+        return render_to_response('core/myth_buster_categories/list.html', {'myth_buster_categories' : myth_buster_categories})
+
+""" Myth Busters """
+def myth_buster_show(request, myth_buster_id):
+    if(request.method == 'GET'):
+        myth_buster = MythBuster.objects.filter(url__exact = url, make_live__exact = True)
+        return render_to_response('core/myth_busters/show.html', {'myth_buster' : myth_buster})
+
+def myth_busters_within_category(request):
+    if(request.method == 'GET'):
+        categories = MythBusterCategory.objects.filter(myth_busters__isnull = False).distinct()
+        return render_to_response('core/myth_busters/list_by_category.html', {'categories' : categories})
+
+def myth_buster_within_category_show(request, myth_buster_category_url, myth_buster_url):
+    if(request.method == 'GET'):
+        myth_buster_category = MythBusterCategory.objects.filter(url__exact = myth_buster_category_url)[0]
+        myth_buster = MythBuster.objects.filter(categories__exact = myth_buster_category, url__exact = myth_buster_url)[0]
+        return render_to_response('core/myth_busters/show.html', {'myth_buster_category' : myth_buster_category, 'myth_buster' : myth_buster})
+
 """ Product Categories """
 def active_product_categories_list(request):
     if(request.method == 'GET'):
