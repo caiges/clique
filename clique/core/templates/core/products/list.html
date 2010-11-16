@@ -4,7 +4,12 @@
 	<h2>All Products within category: {{ category }}</h2>
 	<ul>
 	{% for product in products %}
-		<li><a href="{% url core.views.product_within_category_show category.url product.url %}" title="{{ product.name }}">{{ product.name }}</a></li>
+		<li>{% ifequal product.external_url 1 %}
+                        <a href="{{ product.url }}" title="{{ product.name }}" target="_blank">{{ product.name }}</a>
+                    {% else %}
+                        <a href="{% url core.views.product_within_category_show category.url product.url %}" title="{{ product.name }}">{{ product.name }} {{product.external_url}}</a>
+                    {% endifequal %}
+                </li>
 	{% empty %}
 		<li>No products.</li>
 	{% endfor %}
@@ -13,11 +18,11 @@
 	<h2>All Products with "for athletes" set within category: {{ category }}</h2>
 	<ul>
 	{% for product in athlete_products %}
-		<li>{% if product.external_url %}
-                        <a href="{{ product.url }}" title="{{ product.name }}">{{ product.name }}</a>
+		<li>{% ifequal product.external_url True %}
+                        <a href="{{ product.url }}" title="{{ product.name }}" target="_blank">{{ product.name }}</a>
                     {% else %}
                         <a href="{% url core.views.product_within_category_show category.url product.url %}" title="{{ product.name }}">{{ product.name }}</a>
-                    {% endif %}
+                    {% endifequal %}
                 </li>
 	{% empty %}
 		<li>No products.</li>
