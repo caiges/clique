@@ -17,7 +17,7 @@ def article_categories_list(request):
         return render_to_response('core/article_categories/list.html', {'article_categories' : article_categories})
 
 """ Articles """
-def article_show(request, article_id):
+def article_show(request, url):
     if(request.method == 'GET'):
         article = Article.objects.filter(url__exact = url, make_live__exact = True)
         return render_to_response('core/articles/show.html', {'article' : article})
@@ -40,7 +40,7 @@ def exercise_categories_list(request):
         return render_to_response('core/exercise_categories/list.html', {'exercise_categories' : exercise_categories})
 
 """ Exercises """
-def exercise_show(request, exercise_id):
+def exercise_show(request, url):
     if(request.method == 'GET'):
         exercise = Exercise.objects.filter(url__exact = url, make_live__exact = True)
         return render_to_response('core/exercises/show.html', {'exercise' : exercise})
@@ -63,7 +63,7 @@ def fitness_tip_categories_list(request):
         return render_to_response('core/fitness_tip_categories/list.html', {'fitness_tip_categories' : fitness_tip_categories})
 
 """ Fitness Tips """
-def fitness_tip_show(request, fitness_tip_id):
+def fitness_tip_show(request, url):
     if(request.method == 'GET'):
         fitness_tip = FitnessTip.objects.filter(url__exact = url, make_live__exact = True)
         return render_to_response('core/fitness_tips/show.html', {'fitness_tip' : fitness_tip})
@@ -86,7 +86,7 @@ def myth_buster_categories_list(request):
         return render_to_response('core/myth_buster_categories/list.html', {'myth_buster_categories' : myth_buster_categories})
 
 """ Myth Busters """
-def myth_buster_show(request, myth_buster_id):
+def myth_buster_show(request, url):
     if(request.method == 'GET'):
         myth_buster = MythBuster.objects.filter(url__exact = url, make_live__exact = True)
         return render_to_response('core/myth_busters/show.html', {'myth_buster' : myth_buster})
@@ -109,7 +109,7 @@ def nutrition_tip_categories_list(request):
         return render_to_response('core/nutrition_tip_categories/list.html', {'nutrition_tip_categories' : nutrition_tip_categories})
 
 """ Nutrition Tips """
-def nutrition_tip_show(request, nutrition_tip_id):
+def nutrition_tip_show(request, url):
     if(request.method == 'GET'):
         nutrition_tip = NutritionTip.objects.filter(url__exact = url, make_live__exact = True)
         return render_to_response('core/nutrition_tips/show.html', {'nutrition_tip' : nutrition_tip})
@@ -154,9 +154,9 @@ def product_category_show(request, product_category_url):
         return render_to_response('core/product_categories/show.html', {'product_category' : product_category})
         
 """ Products """
-def product_show(request, product_id):
+def product_show(request, url):
     if(request.method == 'GET'):
-        product = Product.objects.get(pk = product_id)
+        product = Product.objects.filter(url__exact = url, make_live_exact = True)
         return render_to_response('core/products/show.html', {'product' : product})
 
 def products_within_category(request, product_category_url):
@@ -173,7 +173,7 @@ def product_within_category_show(request, product_category_url, product_url):
         return render_to_response('core/products/show.html', {'category' : product_category, 'product' : product})
 
 """ Recipes """
-def recipe_show(request, recipe_id):
+def recipe_show(request, url):
     if(request.method == 'GET'):
         recipe = Recipe.objects.filter(url__exact = url, make_live__exact = True)
         return render_to_response('core/recipes/show.html', {'recipe' : recipe})

@@ -39,7 +39,7 @@ class Article(BasePage):
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     def get_absolute_url(self):
-        return '/articles/%i' % self.id
+        return '/articles/%s' % self.url
     
     def get_admin_url(self):
         return "/admin/core/article/%i" % self.id
@@ -67,7 +67,7 @@ class Exercise(BasePage):
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     def get_absolute_url(self):
-        return '/exercises/%i' % self.id
+        return '/exercises/%s' % self.url
     
     def get_admin_url(self):
         return "/admin/core/exercise/%i" % self.id
@@ -93,7 +93,7 @@ class FitnessTip(BasePage):
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     def get_absolute_url(self):
-        return '/fitness-tips/%i' % self.id
+        return '/fitness-tips/%s' % self.url
         
     def get_admin_url(self):
         return "/admin/core/fitnesstip/%i" % self.id
@@ -122,7 +122,7 @@ class MythBuster(BasePage):
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     def get_absolute_url(self):
-        return '/mythbusters/%i' % self.id
+        return '/myth-busters/%s' % self.url
 
     def get_admin_url(self):
         return "/admin/core/mythbuster/%i" % self.id
@@ -151,7 +151,7 @@ class NutritionTip(BasePage):
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     def get_absolute_url(self):
-        return '/nutrition-tips/%i' % self.id
+        return '/nutrition-tips/%s' % self.url
     
     def get_admin_url(self):
         return "/admin/core/nutritiontip/%i" % self.id
@@ -177,7 +177,7 @@ class Page(BasePage):
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     def get_absolute_url(self):
-        return '/pages/%i' % self.id
+        return '/pages/%s' % self.url
     
     def get_admin_url(self):
         return "/admin/core/page/%i" % self.id
@@ -217,10 +217,10 @@ class Product(BaseProduct):
         return self.language
     
     def get_absolute_url(self):
-        return "/products/%i" % self.id
+        return '/products/%s' % self.url
     
     def get_admin_url(self):
-        return "/admin/core/product/%i" % self.id
+        return '/admin/core/product/%i' % self.id
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
@@ -245,7 +245,7 @@ class Recipe(BaseRecipe):
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     def get_absolute_url(self):
-        return '/recipes/%i' % self.id
+        return '/recipes/%s' % self.url
         
     def get_admin_url(self):
         return "/admin/core/recipe/%i" % self.id
