@@ -38,9 +38,8 @@ class Article(BasePage):
     include_on_primary_navigation = models.BooleanField(default = False)
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
-    @models.permalink
     def get_absolute_url(self):
-        return ('article_show', [str(self.id)])
+        return '/articles/%i' % self.id
     
     def get_admin_url(self):
         return "/admin/core/article/%i" % self.id
@@ -67,9 +66,8 @@ class Exercise(BasePage):
     include_on_primary_navigation = models.BooleanField(default = False)
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
-    @models.permalink
     def get_absolute_url(self):
-        return ('exercise_show', [str(self.id)])
+        return '/exercises/%i' % self.id
     
     def get_admin_url(self):
         return "/admin/core/exercise/%i" % self.id
@@ -94,9 +92,8 @@ class FitnessTip(BasePage):
     include_on_primary_navigation = models.BooleanField(default = False)
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
-    @models.permalink
     def get_absolute_url(self):
-        return ('fitness_tip_show', [str(self.id)])
+        return '/fitness-tips/%i' % self.id
         
     def get_admin_url(self):
         return "/admin/core/fitnesstip/%i" % self.id
@@ -124,9 +121,8 @@ class MythBuster(BasePage):
     include_on_primary_navigation = models.BooleanField(default = False)    
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
-    @models.permalink
     def get_absolute_url(self):
-        return ('myth_buster_show', [str(self.id)])
+        return '/mythbusters/%i' % self.id
 
     def get_admin_url(self):
         return "/admin/core/mythbuster/%i" % self.id
@@ -154,9 +150,8 @@ class NutritionTip(BasePage):
     include_on_primary_navigation = models.BooleanField(default = False)    
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
-    @models.permalink
     def get_absolute_url(self):
-        return ('nutrition_tip_show', [str(self.id)])
+        return '/nutrition-tips/%i' % self.id
     
     def get_admin_url(self):
         return "/admin/core/nutritiontip/%i" % self.id
@@ -181,9 +176,8 @@ class Page(BasePage):
     include_on_primary_navigation = models.BooleanField(default = False)    
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
-    @models.permalink
     def get_absolute_url(self):
-        return ('page_show', [str(self.id)])
+        return '/pages/%i' % self.id
     
     def get_admin_url(self):
         return "/admin/core/page/%i" % self.id
@@ -250,9 +244,8 @@ class Recipe(BaseRecipe):
     include_on_primary_navigation = models.BooleanField(default = False)    
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
-    @models.permalink
     def get_absolute_url(self):
-        return ('recipe_show', [str(self.id)])
+        return '/recipes/%i' % self.id
         
     def get_admin_url(self):
         return "/admin/core/recipe/%i" % self.id

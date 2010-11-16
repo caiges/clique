@@ -1,14 +1,16 @@
 $(document).ready(function() {        
     
     var highlightCallback = function(editor) {
-        
-        // Highlight each conflicting form field.
-        if($.url != undefined && $.url != null && $.url.param('field_ids') != undefined && $.url.param('field_ids' != null)) {
-            var $fields = $.url.param('field_ids').split(',');
 
-            for(var i = 0; i < $fields.length; i++) {
-                if(tinyMCE.editors[$fields[i]].id == editor.id) {
-                    $('#' + $fields[i] + '_tbl').css('border', '2px solid red');
+        // Highlight each conflicting form field.
+        if(typeof $.url != undefined && $.url != null) {
+            if(typeof $.url.param('field_ids') != undefined && $.url.param('field_ids') != null) {
+                var $fields = $.url.param('field_ids').split(',');
+
+                for(var i = 0; i < $fields.length; i++) {
+                    if(tinyMCE.editors[$fields[i]].id == editor.id) {
+                        $('#' + $fields[i] + '_tbl').css('border', '2px solid red');
+                    }
                 }
             }
         }
