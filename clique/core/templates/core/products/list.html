@@ -13,7 +13,12 @@
 	<h2>All Products with "for athletes" set within category: {{ category }}</h2>
 	<ul>
 	{% for product in athlete_products %}
-		<li><a href="{% url core.views.product_within_category_show category.url product.url %}" title="{{ product.name }}">{{ product.name }}</a></li>
+		<li>{% if product.external_url %}
+                        <a href="{{ product.url }}" title="{{ product.name }}">{{ product.name }}</a>
+                    {% else %}
+                        <a href="{% url core.views.product_within_category_show category.url product.url %}" title="{{ product.name }}">{{ product.name }}</a>
+                    {% endif %}
+                </li>
 	{% empty %}
 		<li>No products.</li>
 	{% endfor %}
