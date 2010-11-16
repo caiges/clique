@@ -222,7 +222,7 @@ def content_association(request):
         content_association.target_model_field = target_model_field
                 
         # Get real target model so that we can store it's URL.
-        target_model_klass = ContentType.objects.get(model = target_model).model_class()
+        target_model_klass = ContentType.objects.get(app_label = 'core', model = target_model).model_class()
         target_model_instance = target_model_klass.objects.get(pk = target_model_id)
         content_association.target_model_link = target_model_instance.get_absolute_url()
         content_association.save()
