@@ -34,13 +34,11 @@ tinyMCE.init({
     theme_advanced_toolbar_location: "top",
     theme_advanced_toolbar_align: "left",
     theme_advanced_statusbar_location: "none",
-    theme_advanced_buttons1: "formatselect,bold,italic,underline,bullist,numlist,|,justifyleft,justifycenter,justifyright,justifyfull,|,undo,redo,link,unlink,hr,template,image,code,removeformat,fullscreen,cut,copy,paste,pastetext,pasteword,media,charmap,contentassociationlink,contentassociationunlink,|,tablecontrols",
+    theme_advanced_buttons1: "formatselect,bold,italic,underline,bullist,numlist,|,justifyleft,justifycenter,justifyright,justifyfull,|,undo,redo,anchor,link,unlink,hr,template,image,code,removeformat,fullscreen,cut,copy,paste,pastetext,pasteword,media,charmap,contentassociationlink,contentassociationunlink,|,tablecontrols",
     theme_advanced_buttons2: "",
     theme_advanced_buttons3: "",
     theme_advanced_path: false,
-    theme_advanced_blockformats: "p,h2,h3,h4,h5,h6",
-    width: '700',
-    height: '200',
+    theme_advanced_blockformats: "p,h1,h2,h3,h4,h5,h6",
     plugins: "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,contentassociation",
     advimage_styles: "Linksbündig neben Text=img_left;Rechtsbündig neben Text=img_right;Eigener Block=img_block",
     advlink_styles: "internal (sehmaschine.net)=internal;external (link to an external site)=external",
@@ -48,7 +46,7 @@ tinyMCE.init({
     file_browser_callback: "CustomFileBrowser",
     relative_urls: false,
     valid_elements : "" +
-    "-p," + 
+    "p," + 
     "a[href|target=_blank|class|id|rel]," +
     "-strong/-b," +
     "-em/-i," +
@@ -61,12 +59,13 @@ tinyMCE.init({
     "-h2,-h3,-h4," + 
     "-pre," +
     "-code," + 
-    "-div",
+    "-div," +
+    "hr",
     extended_valid_elements: "" + 
     "a[name|class|href|target|title|onclick|id|rel]," + 
     "img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name]," + 
     "br[clearfix]," + 
-    "-p[class<clearfix?summary?code]," + 
+    "-p[class<clearfix?summary?code|style]," + 
     "h2[class<clearfix],h3[class<clearfix],h4[class<clearfix]," + 
     "ul[class<clearfix],ol[class<clearfix]," + 
     "div[class],",
@@ -89,7 +88,7 @@ tinyMCE.init({
 	        description : "Standard product template."
         }
     ],
-    width: '100%',
+    width: '90%',
     height: '500px'
 });
 
