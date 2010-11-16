@@ -380,7 +380,7 @@ class ProductAdmin(admin.ModelAdmin):
     ),)
     list_display = ('name', 'product_categories', 'language', 'make_live', 'sort_order')
     list_editable = ('make_live', 'sort_order',)
-    ordering = ('sort_order', 'name',)
+    ordering = ('sort_order', 'name', 'language',)
     save_on_top = True
     
     class Media:
