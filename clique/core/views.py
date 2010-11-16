@@ -125,6 +125,17 @@ def nutrition_tip_within_category_show(request, nutrition_tip_category_url, nutr
         nutrition_tip = NutritionTip.objects.filter(categories__exact = nutrition_tip_category, url__exact = nutrition_tip_url)[0]
         return render_to_response('core/nutrition_tips/show.html', {'nutrition_tip_category' : nutrition_tip_category, 'nutrition_tip' : nutrition_tip})
 
+""" Pages """
+def pages_list(request):
+    if(request.method == 'GET'):
+        pages = Page.objects.filter(make_live__exact = True)
+        return render_to_response('core/pages/list.html', {'pages' : pages})
+        
+def page_show(request, url):
+    if(request.method == 'GET'):
+        page = Page.objects.filter(url__exact = url, make_live__exact = True)[0]
+        return render_to_response('core/pages/show.html', {'page' : page})
+
 """ Product Categories """
 def active_product_categories_list(request):
     if(request.method == 'GET'):
@@ -160,6 +171,23 @@ def product_within_category_show(request, product_category_url, product_url):
         product_category = ProductCategory.objects.filter(url__exact = product_category_url)[0]
         product = Product.objects.filter(categories__exact = product_category, url__exact = product_url)[0]
         return render_to_response('core/products/show.html', {'category' : product_category, 'product' : product})
+
+""" Recipes """
+def recipe_show(request, recipe_id):
+    if(request.method == 'GET'):
+        recipe = Recipe.objects.filter(url__exact = url, make_live__exact = True)
+        return render_to_response('core/recipes/show.html', {'recipe' : recipe})
+
+def recipes_within_category(request):
+    if(request.method == 'GET'):
+        categories = RecipeCategory.objects.filter(recipes__isnull = False).distinct()
+        return render_to_response('core/recipes/list_by_category.html', {'categories' : categories})
+
+def recipe_within_category_show(request, recipe_category_url, recipe_url):
+    if(request.method == 'GET'):
+        recipe_category = RecipeCategory.objects.filter(url__exact = recipe_category_url)[0]
+        recipe = Recipe.objects.filter(categories__exact = recipe_category, url__exact = recipe_url)[0]
+        return render_to_response('core/recipes/show.html', {'recipe_category' : recipe_category, 'recipe' : recipe})
 
 """ Content Association """ 
 def content_association(request):

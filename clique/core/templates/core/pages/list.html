@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2>Pages</h2>
+	<ul>
+	{% for page in pages %}
+		<li><a href="{% url core.views.page_show page.url %}">{{ page.name }}</a></li>
+	{% empty %}
+		<li>No pages.</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

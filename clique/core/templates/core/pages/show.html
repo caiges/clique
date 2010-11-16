@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Page Show</h1>
+
+<div><strong>Page Title:</strong> {{ page.page_title }}</div>
+<div><strong>Meta Description:</strong> {{ page.meta_description }}</div>
+<div><strong>Meta Keywords:</strong> {{ page.meta_keywords }}</div>
+<div><strong>Name:</strong> {{ page.name }}</div>
+<div><strong>Body:</strong><br>{{ page.body|safe }}</div>
+<div><strong>Make Live:</strong> {{ page.make_live }}</div>
+<div><strong>Featured:</strong> {{ page.featured }}</div>
+<div><strong>Include on primary navigation:</strong> {{ page.include_on_primary_navigation }}</div>
+<div><strong>Sort Order:</strong> {{ page.sort_order }}</div>
+<div><strong>Language:</strong> {{ page.language }}</div>
+
+{% endblock %}
