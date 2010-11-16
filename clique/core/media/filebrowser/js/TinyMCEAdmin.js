@@ -47,7 +47,7 @@ tinyMCE.init({
     relative_urls: false,
     valid_elements : "" +
     "p," + 
-    "a[href|target=_blank|class|id|rel]," +
+    "a[href|target=_blank|class|name|id|rel]," +
     "-strong/-b," +
     "-em/-i," +
     "-u," + 
@@ -65,7 +65,7 @@ tinyMCE.init({
     "a[name|class|href|target|title|onclick|id|rel]," + 
     "img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name]," + 
     "br[clearfix]," + 
-    "-p[class<clearfix?summary?code|style]," + 
+    "p[class<clearfix?summary?code|style]," + 
     "h2[class<clearfix],h3[class<clearfix],h4[class<clearfix]," + 
     "ul[class<clearfix],ol[class<clearfix]," + 
     "div[class],",
