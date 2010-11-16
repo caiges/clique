@@ -23,7 +23,7 @@ class ArticleAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
@@ -49,7 +49,7 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
@@ -80,7 +80,7 @@ class ExerciseAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
@@ -111,7 +111,7 @@ class ExerciseCategoryAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
@@ -142,7 +142,7 @@ class FitnessTipAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
@@ -168,7 +168,7 @@ class FitnessTipCategoryAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
@@ -204,7 +204,7 @@ class MythBusterAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         instance = form.save(commit = False)
@@ -230,7 +230,7 @@ class MythBusterCategoryAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
@@ -266,7 +266,7 @@ class NutritionTipAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
@@ -292,7 +292,7 @@ class NutritionTipCategoryAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
@@ -323,7 +323,7 @@ class PageAdmin(BasePageAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         instance = form.save(commit = False)
@@ -380,7 +380,7 @@ class ProductAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
         
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
@@ -402,9 +402,9 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 
 class ProductCategoryAdmin(BaseCategoryAdmin):
-    exclude = ('user', 'category_image',)
+    exclude = ('user',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'remove_category_image', 'make_live', 'language')
+            'fields': ('name', 'category_image', 'remove_category_image', 'make_live', 'language')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -416,7 +416,7 @@ class ProductCategoryAdmin(BaseCategoryAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
@@ -447,7 +447,7 @@ class RecipeAdmin(BaseRecipeAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
     
     def save_model(self, request, obj, form, change): 
         instance = form.save(commit = False)
@@ -473,7 +473,7 @@ class RecipeCategoryAdmin(admin.ModelAdmin):
         css = {
             "all" : ('/media/css/admin/common.css',)
         }
-        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js', '/media/js/tinymce_addons.js')
+        js = ('/media/js/jquery-1.4.2.js', '/media/js/jquery.url.js', '/media/js/tiny_mce/tiny_mce_jquery_src.js', '/media/filebrowser/js/TinyMCEAdmin.js', '/media/js/tinymce_addons.js',)
 
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
