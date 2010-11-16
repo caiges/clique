@@ -11,7 +11,7 @@ from external_apps.recipes.admin import BaseRecipeAdmin
 class ArticleAdmin(admin.ModelAdmin):
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
@@ -64,7 +64,7 @@ admin.site.register(ArticleCategory, ArticleCategoryAdmin)
 class ExerciseAdmin(admin.ModelAdmin):
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'exercise_image', 'remove_exercise_image', 'category', 'make_live', 'featured', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'exercise_image', 'remove_exercise_image', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
@@ -123,7 +123,7 @@ admin.site.register(ExerciseCategory, ExerciseCategoryAdmin)
 class FitnessTipAdmin(admin.ModelAdmin):
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
@@ -182,7 +182,7 @@ admin.site.register(FunctionalAttribute, FunctionalAttributeAdmin)
 class MythBusterAdmin(admin.ModelAdmin):
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
@@ -241,7 +241,7 @@ admin.site.register(NutritionalAttribute, NutritionalAttributeAdmin)
 class NutritionTipAdmin(admin.ModelAdmin):
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
@@ -295,7 +295,7 @@ admin.site.register(NutritionTipCategory, NutritionTipCategoryAdmin)
 class PageAdmin(BasePageAdmin):
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
@@ -408,7 +408,7 @@ admin.site.register(ProductCategory, ProductCategoryAdmin)
 class RecipeAdmin(BaseRecipeAdmin):
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'ingredients', 'directions', 'category', 'also_enjoy', 'make_live', 'featured', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'ingredients', 'directions', 'category', 'also_enjoy', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')

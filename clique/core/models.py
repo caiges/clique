@@ -35,6 +35,7 @@ class Article(BasePage):
     category = models.ManyToManyField('ArticleCategory', related_name = 'article_categories', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    include_on_primary_navigation = models.BooleanField(default = False)
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
@@ -63,6 +64,7 @@ class Exercise(BasePage):
     remove_exercise_image = models.BooleanField(blank = True, default = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    include_on_primary_navigation = models.BooleanField(default = False)
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
@@ -89,6 +91,7 @@ class FitnessTip(BasePage):
     category = models.ManyToManyField('FitnessTipCategory', related_name = 'fitness_tip_categories', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    include_on_primary_navigation = models.BooleanField(default = False)
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
@@ -118,6 +121,7 @@ class MythBuster(BasePage):
     category = models.ManyToManyField('MythBusterCategory', related_name = 'myth_buster_categories', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    include_on_primary_navigation = models.BooleanField(default = False)    
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
@@ -147,6 +151,7 @@ class NutritionTip(BasePage):
     category = models.ManyToManyField('NutritionTipCategory', related_name = 'nutrition_tip_categories', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    include_on_primary_navigation = models.BooleanField(default = False)    
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
@@ -173,6 +178,7 @@ class Page(BasePage):
     category = models.ManyToManyField('PageCategory', related_name = 'page_categories', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    include_on_primary_navigation = models.BooleanField(default = False)    
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
@@ -241,6 +247,7 @@ class Recipe(BaseRecipe):
     also_enjoy = models.ManyToManyField('self', blank = True, null = True)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
+    include_on_primary_navigation = models.BooleanField(default = False)    
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
     
     @models.permalink
