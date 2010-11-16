@@ -23,12 +23,16 @@
     </ul>
 {% else %}
     <p>{% blocktrans with object as escaped_object %}Are you sure you want to delete the {{ object_name }} "{{ escaped_object }}"? All of the following related items will be deleted:{% endblocktrans %}</p>
-    <ul>{{ deleted_objects|unordered_list }}</ul>
+    <ul>
+          {% for del_obj in deleted_objects %}
+               <li><a href="{{ del_obj.get_admin_url }}" target="_blank">{{ object }}</a></li>
+          {% endfor %}
+    </ul>
     {% if object.get_associated_content_items|length > 0 %}
     <p>In addition, the following items reference what you are about to delete. Click on any below that you wish to edit:
     <ul>
         {% for ca in object.get_associated_content_items %}
-            <li>{{ ca.instance|class_name_lookup|capfirst }}: <a href="{{ ca.instance.get_admin_url }}?links={{ ca.link_ids }}&field_ids={{ ca.field_ids }}" target="blank">{{ ca.instance }}</a></li>
+            <li>{{ ca.instance|class_name_lookup|capfirst }}: <a href="{{ ca.instance.get_admin_url }}?links={{ ca.link_ids }}&field_ids={{ ca.field_ids }}" target="_blank">{{ ca.instance }}</a></li>
         {% endfor %}
     </ul>
     <script type="text/javascript">
