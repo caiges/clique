@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2>Fitness Tip Categories</h2>
+	<ul>
+	{% for cat in fitness_tip_categories %}
+		<li><a href="{% url core.views.fitness_tip_within_category cat.url %}">{{ cat.name }}</a></li>
+	{% empty %}
+		<li>No categories.</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Fitness Tip Show</h1>
+
+<div><strong>Page Title:</strong> {{ fitness_tip.page_title }}</div>
+<div><strong>Meta Description:</strong> {{ fitness_tip.meta_description }}</div>
+<div><strong>Meta Keywords:</strong> {{ fitness_tip.meta_keywords }}</div>
+<div><strong>Name:</strong> {{ fitness_tip.name }}</div>
+<div><strong>Body:</strong><br>{{ fitness_tip.body|safe }}</div>
+<div>
+    <strong>Categories:</strong><br>
+    {% for cat in fitness_tip.categories.all %}
+        {{ cat.name }}<br>
+    {% empty %}
+        No associated categories
+    {% endfor %}
+</div>
+<div><strong>Make Live:</strong> {{ fitness_tip.make_live }}</div>
+<div><strong>Featured:</strong> {{ fitness_tip.featured }}</div>
+<div><strong>Include on primary navigation:</strong> {{ fitness_tip.include_on_primary_navigation }}</div>
+<div><strong>Sort Order:</strong> {{ fitness_tip.sort_order }}</div>
+<div><strong>Language:</strong> {{ fitness_tip.language }}</div>
+
+{% endblock %}

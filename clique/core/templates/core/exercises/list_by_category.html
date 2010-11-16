@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2>Exercises</h2>
+	<ul>
+	{% for category in categories %}
+		<li>
+		    {{ category.name }}
+		    <ul>
+		    {% for exercise in category.exercises.all %}
+		        <li><a href="{% url core.views.exercise_within_category_show category.url exercise.url %}">{{ exercise.name }}</a></li>
+		    {% empty %}
+		        <li>No exercises.</li>
+		    {% endfor %}
+		    </ul>
+		</li>
+	{% empty %}
+		<li>No categories.</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

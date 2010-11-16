@@ -33,6 +33,52 @@ def article_within_category_show(request, article_category_url, article_url):
         article = Article.objects.filter(categories__exact = article_category, url__exact = article_url)[0]
         return render_to_response('core/articles/show.html', {'article_category' : article_category, 'article' : article})
 
+""" Exercise Categories """
+def exercise_categories_list(request):
+    if(request.method == 'GET'):
+        exercise_categories = ExerciseCategory.objects.filter(exercises__isnull = False).distinct()
+        return render_to_response('core/exercise_categories/list.html', {'exercise_categories' : exercise_categories})
+
+""" Exercises """
+def exercise_show(request, exercise_id):
+    if(request.method == 'GET'):
+        exercise = Exercise.objects.filter(url__exact = url, make_live__exact = True)
+        return render_to_response('core/exercises/show.html', {'exercise' : exercise})
+
+def exercises_within_category(request):
+    if(request.method == 'GET'):
+        categories = ExerciseCategory.objects.filter(exercises__isnull = False).distinct()
+        return render_to_response('core/exercises/list_by_category.html', {'categories' : categories})
+
+def exercise_within_category_show(request, exercise_category_url, exercise_url):
+    if(request.method == 'GET'):
+        exercise_category = ExerciseCategory.objects.filter(url__exact = exercise_category_url)[0]
+        exercise = Exercise.objects.filter(categories__exact = exercise_category, url__exact = exercise_url)[0]
+        return render_to_response('core/exercises/show.html', {'exercise_category' : exercise_category, 'exercise' : exercise})
+
+""" Fitness Tip Categories """
+def fitness_tip_categories_list(request):
+    if(request.method == 'GET'):
+        fitness_tip_categories = FitnessTipCategory.objects.filter(fitness_tips__isnull = False).distinct()
+        return render_to_response('core/fitness_tip_categories/list.html', {'fitness_tip_categories' : fitness_tip_categories})
+
+""" Fitness Tips """
+def fitness_tip_show(request, fitness_tip_id):
+    if(request.method == 'GET'):
+        fitness_tip = FitnessTip.objects.filter(url__exact = url, make_live__exact = True)
+        return render_to_response('core/fitness_tips/show.html', {'fitness_tip' : fitness_tip})
+
+def fitness_tips_within_category(request):
+    if(request.method == 'GET'):
+        categories = FitnessTipCategory.objects.filter(fitness_tips__isnull = False).distinct()
+        return render_to_response('core/fitness_tips/list_by_category.html', {'categories' : categories})
+
+def fitness_tip_within_category_show(request, fitness_tip_category_url, fitness_tip_url):
+    if(request.method == 'GET'):
+        fitness_tip_category = FitnessTipCategory.objects.filter(url__exact = fitness_tip_category_url)[0]
+        fitness_tip = FitnessTip.objects.filter(categories__exact = fitness_tip_category, url__exact = fitness_tip_url)[0]
+        return render_to_response('core/fitness_tips/show.html', {'fitness_tip_category' : fitness_tip_category, 'fitness_tip' : fitness_tip})
+
 """ Product Categories """
 def active_product_categories_list(request):
     if(request.method == 'GET'):

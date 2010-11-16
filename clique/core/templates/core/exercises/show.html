@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Exercise Show</h1>
+
+<div><strong>Page Title:</strong> {{ exercise.page_title }}</div>
+<div><strong>Meta Description:</strong> {{ exercise.meta_description }}</div>
+<div><strong>Meta Keywords:</strong> {{ exercise.meta_keywords }}</div>
+<div><strong>Name:</strong> {{ exercise.name }}</div>
+<div><strong>Body:</strong><br>{{ exercise.body|safe }}</div>
+<div>
+    <strong>Categories:</strong><br>
+    {% for cat in exercise.categories.all %}
+        {{ cat.name }}<br>
+    {% empty %}
+        No associated categories
+    {% endfor %}
+</div>
+<div><strong>Make Live:</strong> {{ exercise.make_live }}</div>
+<div><strong>Featured:</strong> {{ exercise.featured }}</div>
+<div><strong>Include on primary navigation:</strong> {{ exercise.include_on_primary_navigation }}</div>
+<div><strong>Sort Order:</strong> {{ exercise.sort_order }}</div>
+<div><strong>Language:</strong> {{ exercise.language }}</div>
+
+{% endblock %}
