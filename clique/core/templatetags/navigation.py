@@ -6,7 +6,7 @@ register = template.Library()
 
 class ProductNavigationNode(template.Node):
     def __init__(self, variable):
-        product_categories = ProductCategory.objects.filter(product_categories__isnull = False).distinct().order_by('name')
+        product_categories = ProductCategory.objects.filter(products__isnull = False).distinct().order_by('name')
         print product_categories
         self.variable = variable
         self.product_categories = product_categories

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2>Active Categories</h2>
+	<ul>
+	{% for cat in page_categories %}
+		<li>{{ cat.name }}</li>
+	{% empty %}
+		<li>No categories.</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

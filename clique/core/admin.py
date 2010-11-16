@@ -12,11 +12,13 @@ class ArticleAdmin(admin.ModelAdmin):
     actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
     list_editable = ('sort_order',)
+    save_on_top = True
+    
     class Media:
         css = {
             "all" : ('/media/css/admin/common.css',)
@@ -41,6 +43,7 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
+    save_on_top = True
     
     class Media:
         css = {
@@ -66,11 +69,12 @@ class ExerciseAdmin(admin.ModelAdmin):
     actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'exercise_image', 'remove_exercise_image', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'exercise_image', 'remove_exercise_image', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
     list_editable = ('sort_order',)
+    save_on_top = True
     
     class Media:
         css = {
@@ -101,6 +105,7 @@ class ExerciseCategoryAdmin(admin.ModelAdmin):
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
+    save_on_top = True
     
     class Media:
         css = {
@@ -126,11 +131,12 @@ class FitnessTipAdmin(admin.ModelAdmin):
     actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
     list_editable = ('sort_order',)
+    save_on_top = True
     
     class Media:
         css = {
@@ -156,6 +162,7 @@ class FitnessTipCategoryAdmin(admin.ModelAdmin):
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
+    save_on_top = True
     
     class Media:
         css = {
@@ -186,11 +193,12 @@ class MythBusterAdmin(admin.ModelAdmin):
     actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
     list_editable = ('sort_order',)
+    save_on_top = True
     
     class Media:
         css = {
@@ -216,6 +224,7 @@ class MythBusterCategoryAdmin(admin.ModelAdmin):
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
+    save_on_top = True
     
     class Media:
         css = {
@@ -246,11 +255,12 @@ class NutritionTipAdmin(admin.ModelAdmin):
     actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
     list_editable = ('sort_order',)
+    save_on_top = True
     
     class Media:
         css = {
@@ -276,6 +286,7 @@ class NutritionTipCategoryAdmin(admin.ModelAdmin):
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
+    save_on_top = True
     
     class Media:
         css = {
@@ -301,11 +312,12 @@ class PageAdmin(BasePageAdmin):
     actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
     list_editable = ('sort_order',)
+    save_on_top = True
     
     class Media:
         css = {
@@ -331,6 +343,7 @@ class PageCategoryAdmin(BaseCategoryAdmin):
             'fields': ('page_title', 'meta_description', 'meta_keywords', 'body')
         }),
     )
+    save_on_top = True
     
     class Media:
         css = {
@@ -397,6 +410,7 @@ class ProductCategoryAdmin(BaseCategoryAdmin):
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
+    save_on_top = True
     
     class Media:
         css = {
@@ -422,11 +436,13 @@ class RecipeAdmin(BaseRecipeAdmin):
     actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
-                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'ingredients', 'directions', 'category', 'also_enjoy', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
+                                 'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'ingredients', 'directions', 'categories', 'also_enjoy', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
     list_display = ('name', 'sort_order')
     list_editable = ('sort_order',)
+    save_on_top = True
+    
     class Media:
         css = {
             "all" : ('/media/css/admin/common.css',)
@@ -451,6 +467,7 @@ class RecipeCategoryAdmin(admin.ModelAdmin):
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
+    save_on_top = True
     
     class Media:
         css = {

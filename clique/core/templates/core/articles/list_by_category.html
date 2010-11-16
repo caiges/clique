@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2>Articles</h2>
+	<ul>
+	{% for category in categories %}
+		<li>
+		    {{ category.name }}
+		    <ul>
+		    {% for article in category.articles.all %}
+		        <li><a href="{% url core.views.article_within_category_show category.url article.url %}">{{ article.name }}</a></li>
+		    {% empty %}
+		        <li>No articles.</li>
+		    {% endfor %}
+		    </ul>
+		</li>
+	{% empty %}
+		<li>No categories.</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

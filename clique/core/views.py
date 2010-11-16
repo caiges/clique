@@ -10,30 +10,44 @@ def index(request):
     if(request.method == 'GET'):
         return render_to_response('core/index.html')
 
-def article_show(request, url):
+""" Article Categories """
+def article_categories_list(request):
+    if(request.method == 'GET'):
+        article_categories = ArticleCategory.objects.filter(articles__isnull = False).distinct()
+        return render_to_response('core/article_categories/list.html', {'article_categories' : article_categories})
+
+""" Articles """
+def article_show(request, article_id):
     if(request.method == 'GET'):
         article = Article.objects.filter(url__exact = url, make_live__exact = True)
         return render_to_response('core/articles/show.html', {'article' : article})
 
-def association_test(request):
+def articles_within_category(request):
     if(request.method == 'GET'):
-        return render_to_response('core/association-test.html')
+        categories = ArticleCategory.objects.filter(articles__isnull = False).distinct()
+        return render_to_response('core/articles/list_by_category.html', {'categories' : categories})
+
+def article_within_category_show(request, article_category_url, article_url):
+    if(request.method == 'GET'):
+        article_category = ArticleCategory.objects.filter(url__exact = article_category_url)[0]
+        article = Article.objects.filter(categories__exact = article_category, url__exact = article_url)[0]
+        return render_to_response('core/articles/show.html', {'article_category' : article_category, 'article' : article})
 
 """ Product Categories """
 def active_product_categories_list(request):
     if(request.method == 'GET'):
-        product_categories = ProductCategory.objects.filter(product_categories__isnull = False).distinct()
+        product_categories = ProductCategory.objects.filter(products__isnull = False).distinct()
         return render_to_response('core/product_categories/active_list.html', {'product_categories' : product_categories})
     
 def product_categories_list(request):
     if(request.method == 'GET'):
         product_categories = ProductCategory.objects.all()
-        athlete_product_categories = ProductCategory.objects.filter(product_categories__isnull = False, product_categories__for_athletes = True).distinct()
+        athlete_product_categories = ProductCategory.objects.filter(products__isnull = False, products__for_athletes = True).distinct()
         return render_to_response('core/product_categories/list.html', {'product_categories' : product_categories, 'athlete_product_categories' : athlete_product_categories})
 
-def product_category_show(request, product_category_name):
+def product_category_show(request, product_category_url):
     if(request.method == 'GET'):
-        product_category = ProductCategory.objects.filter(name__exact = product_category_name)[0]
+        product_category = ProductCategory.objects.filter(url__exact = product_category_url)[0]
         return render_to_response('core/product_categories/show.html', {'product_category' : product_category})
         
 """ Products """

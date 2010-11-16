@@ -32,7 +32,7 @@ class ContentAssociation(BaseContentAssociation):
     target_model_link_id = models.CharField(max_length = 36, blank = False, null = False, default = uuid.uuid4())   
 
 class Article(BasePage):
-    category = models.ManyToManyField('ArticleCategory', related_name = 'article_categories', blank = False, null = False)
+    categories = models.ManyToManyField('ArticleCategory', related_name = 'articles', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
     include_on_primary_navigation = models.BooleanField(default = False)
@@ -58,7 +58,7 @@ class ArticleCategory(CategoryPage):
         verbose_name_plural = 'Article Categories'
         
 class Exercise(BasePage):
-    category = models.ManyToManyField('ExerciseCategory', related_name = 'exercise_categories', blank = False, null = False)
+    categories = models.ManyToManyField('ExerciseCategory', related_name = 'exercises', blank = False, null = False)
     exercise_image = models.ImageField(upload_to = 'exercise_images/%Y/%m/%d', blank = True, null = True, default = None)
     remove_exercise_image = models.BooleanField(blank = True, default = False)
     featured = models.BooleanField(blank = True)
@@ -86,7 +86,7 @@ class ExerciseCategory(CategoryPage):
         verbose_name_plural = 'Exercise Categories'
 
 class FitnessTip(BasePage):
-    category = models.ManyToManyField('FitnessTipCategory', related_name = 'fitness_tip_categories', blank = False, null = False)
+    categories = models.ManyToManyField('FitnessTipCategory', related_name = 'fitness_tips', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
     include_on_primary_navigation = models.BooleanField(default = False)
@@ -115,7 +115,7 @@ class FunctionalAttribute(BaseTag):
     pass
        
 class MythBuster(BasePage):
-    category = models.ManyToManyField('MythBusterCategory', related_name = 'myth_buster_categories', blank = False, null = False)
+    categories = models.ManyToManyField('MythBusterCategory', related_name = 'myth_busters', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
     include_on_primary_navigation = models.BooleanField(default = False)    
@@ -144,7 +144,7 @@ class NutritionalAttribute(BaseTag):
     pass
 
 class NutritionTip(BasePage):
-    category = models.ManyToManyField('NutritionTipCategory', related_name = 'nutrition_tip_categories', blank = False, null = False)
+    categories = models.ManyToManyField('NutritionTipCategory', related_name = 'nutrition_tips', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
     include_on_primary_navigation = models.BooleanField(default = False)    
@@ -170,7 +170,7 @@ class NutritionTipCategory(CategoryPage):
         verbose_name_plural = 'Nutrition Tip Categories'
 
 class Page(BasePage):
-    category = models.ManyToManyField('PageCategory', related_name = 'page_categories', blank = False, null = False)
+    categories = models.ManyToManyField('PageCategory', related_name = 'pages', blank = False, null = False)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
     include_on_primary_navigation = models.BooleanField(default = False)    
@@ -197,7 +197,7 @@ class PageCategory(CategoryPage):
     
 class Product(BaseProduct):   
     mobile_description = models.TextField(blank = True, null = True, default = None)
-    categories = models.ManyToManyField('ProductCategory', related_name = 'product_categories', blank = False, null = False)
+    categories = models.ManyToManyField('ProductCategory', related_name = 'products', blank = False, null = False)
     product_image = models.ImageField(upload_to = 'product_images/%Y/%m/%d', blank = True, null = True)
     remove_product_image = models.BooleanField(blank = True, default = False)
     supplement_information_image = models.ImageField(upload_to = 'product_supplement_information_images/%Y/%m/%d', blank = True, null = True)
@@ -237,7 +237,7 @@ class ProductCategory(CategoryPage):
         verbose_name_plural = 'Product Categories'
 
 class Recipe(BaseRecipe):
-    category = models.ManyToManyField('RecipeCategory', related_name = 'recipe_categories', blank = False, null = False)
+    categories = models.ManyToManyField('RecipeCategory', related_name = 'recipes', blank = False, null = False)
     also_enjoy = models.ManyToManyField('self', blank = True, null = True)
     featured = models.BooleanField(blank = True)
     sort_order = models.DecimalField(decimal_places = 2, max_digits = 5, blank = True, null = True)
