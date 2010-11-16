@@ -36,9 +36,9 @@ class ArticleAdmin(admin.ModelAdmin):
 admin.site.register(Article, ArticleAdmin)
 
 class ArticleCategoryAdmin(admin.ModelAdmin):
-    exclude = ('user', 'category_description',)
+    exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_image', 'remove_category_image', 'default_category', 'language')
+            'fields': ('name', 'category_image', 'remove_category_image', 'language')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -99,9 +99,9 @@ class ExerciseAdmin(admin.ModelAdmin):
 admin.site.register(Exercise, ExerciseAdmin)
 
 class ExerciseCategoryAdmin(admin.ModelAdmin):
-    exclude = ('user', 'category_description',)
+    exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_image', 'remove_category_image', 'default_category', 'language')
+            'fields': ('name', 'category_image', 'remove_category_image', 'language')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -157,9 +157,9 @@ class FitnessTipAdmin(admin.ModelAdmin):
 admin.site.register(FitnessTip, FitnessTipAdmin)
 
 class FitnessTipCategoryAdmin(admin.ModelAdmin):
-    exclude = ('user', 'category_description',)
+    exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_image', 'remove_category_image', 'default_category', 'language')
+            'fields': ('name', 'category_image', 'remove_category_image', 'language')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -220,9 +220,9 @@ class MythBusterAdmin(admin.ModelAdmin):
 admin.site.register(MythBuster, MythBusterAdmin)
 
 class MythBusterCategoryAdmin(admin.ModelAdmin):
-    exclude = ('user', 'category_description',)
+    exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_image', 'remove_category_image', 'default_category', 'language')
+            'fields': ('name', 'category_image', 'remove_category_image', 'language')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -283,9 +283,9 @@ class NutritionTipAdmin(admin.ModelAdmin):
 admin.site.register(NutritionTip, NutritionTipAdmin)
 
 class NutritionTipCategoryAdmin(admin.ModelAdmin):
-    exclude = ('user', 'category_description',)
+    exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_image', 'remove_category_image', 'default_category', 'language')
+            'fields': ('name', 'category_image', 'remove_category_image', 'language')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
@@ -341,9 +341,9 @@ class PageAdmin(BasePageAdmin):
 admin.site.register(Page, PageAdmin)
 
 class PageCategoryAdmin(BaseCategoryAdmin):
-    exclude = ('user', 'category_description',)
+    exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_image', 'remove_category_image', 'default_category', 'language')
+            'fields': ('name', 'category_image', 'remove_category_image', 'language')
         }),
         ('Page Info', {
             'fields': ('page_title', 'meta_description', 'meta_keywords', 'body')
@@ -467,9 +467,9 @@ class RecipeAdmin(BaseRecipeAdmin):
 admin.site.register(Recipe, RecipeAdmin)
 
 class RecipeCategoryAdmin(admin.ModelAdmin):
-    exclude = ('user', 'category_description',)
+    exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
-            'fields': ('name', 'category_image', 'remove_category_image', 'default_category', 'language')
+            'fields': ('name', 'category_image', 'remove_category_image', 'language')
         }),
         ('Page Info', {
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
