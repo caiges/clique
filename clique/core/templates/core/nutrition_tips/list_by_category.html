@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2>Nutrition Tips</h2>
+	<ul>
+	{% for category in categories %}
+		<li>
+		    {{ category.name }}
+		    <ul>
+		    {% for nutrition_tip in category.nutrition_tips.all %}
+		        <li><a href="{% url core.views.nutrition_tip_within_category_show category.url nutrition_tip.url %}">{{ nutrition_tip.name }}</a></li>
+		    {% empty %}
+		        <li>No nutrition tips.</li>
+		    {% endfor %}
+		    </ul>
+		</li>
+	{% empty %}
+		<li>No categories.</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

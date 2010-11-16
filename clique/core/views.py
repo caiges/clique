@@ -102,6 +102,29 @@ def myth_buster_within_category_show(request, myth_buster_category_url, myth_bus
         myth_buster = MythBuster.objects.filter(categories__exact = myth_buster_category, url__exact = myth_buster_url)[0]
         return render_to_response('core/myth_busters/show.html', {'myth_buster_category' : myth_buster_category, 'myth_buster' : myth_buster})
 
+""" Nutrition Tip Categories """
+def nutrition_tip_categories_list(request):
+    if(request.method == 'GET'):
+        nutrition_tip_categories = NutritionTipCategory.objects.filter(nutrition_tips__isnull = False).distinct()
+        return render_to_response('core/nutrition_tip_categories/list.html', {'nutrition_tip_categories' : nutrition_tip_categories})
+
+""" Nutrition Tips """
+def nutrition_tip_show(request, nutrition_tip_id):
+    if(request.method == 'GET'):
+        nutrition_tip = NutritionTip.objects.filter(url__exact = url, make_live__exact = True)
+        return render_to_response('core/nutrition_tips/show.html', {'nutrition_tip' : nutrition_tip})
+
+def nutrition_tips_within_category(request):
+    if(request.method == 'GET'):
+        categories = NutritionTipCategory.objects.filter(nutrition_tips__isnull = False).distinct()
+        return render_to_response('core/nutrition_tips/list_by_category.html', {'categories' : categories})
+
+def nutrition_tip_within_category_show(request, nutrition_tip_category_url, nutrition_tip_url):
+    if(request.method == 'GET'):
+        nutrition_tip_category = NutritionTipCategory.objects.filter(url__exact = nutrition_tip_category_url)[0]
+        nutrition_tip = NutritionTip.objects.filter(categories__exact = nutrition_tip_category, url__exact = nutrition_tip_url)[0]
+        return render_to_response('core/nutrition_tips/show.html', {'nutrition_tip_category' : nutrition_tip_category, 'nutrition_tip' : nutrition_tip})
+
 """ Product Categories """
 def active_product_categories_list(request):
     if(request.method == 'GET'):
