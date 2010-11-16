@@ -382,6 +382,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ('make_live', 'sort_order',)
     ordering = ('sort_order', 'name', 'language',)
     save_on_top = True
+    search_fields = ('name', 'categories__name',)
     
     class Media:
         css = {
