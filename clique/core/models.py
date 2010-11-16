@@ -209,6 +209,7 @@ class Product(BaseProduct):
     nutritional_attributes = models.ManyToManyField(NutritionalAttribute, blank = True, null = True)
     store_link = models.CharField(max_length = 255, blank = True, null = True, default = None)
     language = models.CharField(max_length = 20, blank = False, null = False, choices = [(lang[0], lang[1]) for lang in settings.LANGUAGES])
+    external_url = models.BooleanField(help_text = "Is this product going to point to an external URL?")
     
     def product_categories(self):
         return ', '.join([cat.name for cat in self.categories.all()])
