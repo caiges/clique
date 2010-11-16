@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2>Myth Busters</h2>
+	<ul>
+	{% for category in categories %}
+		<li>
+		    {{ category.name }}
+		    <ul>
+		    {% for myth_buster in category.myth_busters.all %}
+		        <li><a href="{% url core.views.myth_buster_within_category_show category.url myth_buster.url %}">{{ myth_buster.name }}</a></li>
+		    {% empty %}
+		        <li>No myth_busters.</li>
+		    {% endfor %}
+		    </ul>
+		</li>
+	{% empty %}
+		<li>No categories.</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

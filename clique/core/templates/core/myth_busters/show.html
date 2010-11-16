@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Myth Buster Show</h1>
+
+<div><strong>Page Title:</strong> {{ myth_buster.page_title }}</div>
+<div><strong>Meta Description:</strong> {{ myth_buster.meta_description }}</div>
+<div><strong>Meta Keywords:</strong> {{ myth_buster.meta_keywords }}</div>
+<div><strong>Name:</strong> {{ myth_buster.name }}</div>
+<div><strong>Body:</strong><br>{{ myth_buster.body|safe }}</div>
+<div>
+    <strong>Categories:</strong><br>
+    {% for cat in myth_buster.categories.all %}
+        {{ cat.name }}<br>
+    {% empty %}
+        No associated categories
+    {% endfor %}
+</div>
+<div><strong>Make Live:</strong> {{ myth_buster.make_live }}</div>
+<div><strong>Featured:</strong> {{ myth_buster.featured }}</div>
+<div><strong>Include on primary navigation:</strong> {{ myth_buster.include_on_primary_navigation }}</div>
+<div><strong>Sort Order:</strong> {{ myth_buster.sort_order }}</div>
+<div><strong>Language:</strong> {{ myth_buster.language }}</div>
+
+{% endblock %}
