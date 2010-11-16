@@ -16,8 +16,8 @@ $(document).ready(function() {
         }
         
         // Highlight each conflicting link.
-        if($.url != undefined && $.url != null) {
-            if($.url.param('links') != undefined && $.url.param('links') != null) {
+        if(typeof $.url != undefined && $.url != null) {
+            if(typeof $.url.param('links') != undefined && $.url.param('links') != null) {
                 var linkIds = $.url.param('links');
                 if(linkIds != 'undefined' && linkIds != null) {
                     linkIds = linkIds.split(',');

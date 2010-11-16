@@ -9,6 +9,7 @@ from external_apps.products.admin import BaseProductAdmin
 from external_apps.recipes.admin import BaseRecipeAdmin
 
 class ArticleAdmin(admin.ModelAdmin):
+    actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
@@ -62,6 +63,7 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
 admin.site.register(ArticleCategory, ArticleCategoryAdmin)
 
 class ExerciseAdmin(admin.ModelAdmin):
+    actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'exercise_image', 'remove_exercise_image', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
@@ -121,6 +123,7 @@ class ExerciseCategoryAdmin(admin.ModelAdmin):
 admin.site.register(ExerciseCategory, ExerciseCategoryAdmin)
 
 class FitnessTipAdmin(admin.ModelAdmin):
+    actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
@@ -180,6 +183,7 @@ class FunctionalAttributeAdmin(admin.ModelAdmin):
 admin.site.register(FunctionalAttribute, FunctionalAttributeAdmin)
 
 class MythBusterAdmin(admin.ModelAdmin):
+    actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
@@ -239,6 +243,7 @@ class NutritionalAttributeAdmin(admin.ModelAdmin):
 admin.site.register(NutritionalAttribute, NutritionalAttributeAdmin)
 
 class NutritionTipAdmin(admin.ModelAdmin):
+    actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
@@ -293,6 +298,7 @@ class NutritionTipCategoryAdmin(admin.ModelAdmin):
 admin.site.register(NutritionTipCategory, NutritionTipCategoryAdmin)
 
 class PageAdmin(BasePageAdmin):
+    actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'category', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
@@ -413,6 +419,7 @@ class ProductCategoryAdmin(BaseCategoryAdmin):
 admin.site.register(ProductCategory, ProductCategoryAdmin)
 
 class RecipeAdmin(BaseRecipeAdmin):
+    actions = None
     exclude = ('user',)
     fieldsets = (('Basic Info', {
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'ingredients', 'directions', 'category', 'also_enjoy', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
