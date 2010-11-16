@@ -15,8 +15,9 @@ class ArticleAdmin(admin.ModelAdmin):
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
-    list_display = ('name', 'sort_order')
-    list_editable = ('sort_order',)
+    list_display = ('name', 'make_live', 'sort_order')
+    list_editable = ('make_live', 'sort_order',)
+    ordering = ('sort_order', 'name',)
     save_on_top = True
     
     class Media:
@@ -72,8 +73,9 @@ class ExerciseAdmin(admin.ModelAdmin):
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'exercise_image', 'remove_exercise_image', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
-    list_display = ('name', 'sort_order')
-    list_editable = ('sort_order',)
+    list_display = ('name', 'make_live', 'sort_order')
+    list_editable = ('make_live', 'sort_order',)
+    ordering = ('sort_order', 'name',)
     save_on_top = True
     
     class Media:
@@ -134,8 +136,9 @@ class FitnessTipAdmin(admin.ModelAdmin):
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
-    list_display = ('name', 'sort_order')
-    list_editable = ('sort_order',)
+    list_display = ('name', 'make_live', 'sort_order')
+    list_editable = ('make_live', 'sort_order',)
+    ordering = ('sort_order', 'name',)
     save_on_top = True
     
     class Media:
@@ -196,8 +199,9 @@ class MythBusterAdmin(admin.ModelAdmin):
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
-    list_display = ('name', 'sort_order')
-    list_editable = ('sort_order',)
+    list_display = ('name', 'make_live', 'sort_order')
+    list_editable = ('make_live', 'sort_order',)
+    ordering = ('sort_order', 'name',)
     save_on_top = True
     
     class Media:
@@ -258,8 +262,9 @@ class NutritionTipAdmin(admin.ModelAdmin):
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
-    list_display = ('name', 'sort_order')
-    list_editable = ('sort_order',)
+    list_display = ('name', 'make_live', 'sort_order')
+    list_editable = ('make_live', 'sort_order',)
+    ordering = ('sort_order', 'name',)
     save_on_top = True
     
     class Media:
@@ -315,8 +320,9 @@ class PageAdmin(BasePageAdmin):
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
-    list_display = ('name', 'sort_order')
-    list_editable = ('sort_order',)
+    list_display = ('name', 'make_live', 'sort_order')
+    list_editable = ('make_live', 'sort_order',)
+    ordering = ('sort_order', 'name',)
     save_on_top = True
     
     class Media:
@@ -372,8 +378,9 @@ class ProductAdmin(admin.ModelAdmin):
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'long_description', 'product_details', 'mobile_description', 'product_image', 'remove_product_image', 'supplement_information_image', 'remove_supplement_information_image', 'store_link', 'categories', 'functional_attributes', 'nutritional_attributes', 'for_athletes', 'make_live', 'featured', 'sort_order', 'language')
                                  }
     ),)
-    list_display = ('name', 'product_categories', 'language', 'sort_order')
-    list_editable = ('sort_order',)
+    list_display = ('name', 'product_categories', 'language', 'make_live', 'sort_order')
+    list_editable = ('make_live', 'sort_order',)
+    ordering = ('sort_order', 'name',)
     save_on_top = True
     
     class Media:
@@ -439,8 +446,9 @@ class RecipeAdmin(BaseRecipeAdmin):
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'ingredients', 'directions', 'categories', 'also_enjoy', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
-    list_display = ('name', 'sort_order')
-    list_editable = ('sort_order',)
+    list_display = ('name', 'make_live', 'sort_order')
+    list_editable = ('make_live', 'sort_order',)
+    ordering = ('sort_order', 'name',)
     save_on_top = True
     
     class Media:
