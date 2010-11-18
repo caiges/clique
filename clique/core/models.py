@@ -47,7 +47,26 @@ class Article(BasePage):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        source_instances = dict()
+        content_association_source_instances = []
+        
+        for ca in content_associations:
+            # Need array containing field_ids, instance, and link_ids
+            instance = ContentType.objects.get(app_label = 'core', model = ca.source_model).model_class().objects.get(pk = ca.source_model_id)
+            class_name = instance.__class__.__name__.lower()
+            if class_name not in source_instances:
+                source_instances[class_name] = dict(field_ids = [], link_ids = [], instance = instance)           
+            
+            source_instances[class_name]['field_ids'].append(ca.target_model_field)
+            source_instances[class_name]['field_ids'] = list(set(source_instances[class_name]['field_ids']))
+            source_instances[class_name]['link_ids'].append(ca.target_model_link_id)
+            source_instances[class_name]['link_ids'] = list(set(source_instances[class_name]['link_ids']))
+        
+        for k in source_instances:
+            source_instances[k]['field_ids'] = ','.join(source_instances[k]['field_ids'])
+            source_instances[k]['link_ids'] = ','.join(source_instances[k]['link_ids'])
+            content_association_source_instances.append(source_instances[k])
+
         return content_association_source_instances
     
     def orphan_fields(self):
@@ -75,7 +94,26 @@ class Exercise(BasePage):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        source_instances = dict()
+        content_association_source_instances = []
+        
+        for ca in content_associations:
+            # Need array containing field_ids, instance, and link_ids
+            instance = ContentType.objects.get(app_label = 'core', model = ca.source_model).model_class().objects.get(pk = ca.source_model_id)
+            class_name = instance.__class__.__name__.lower()
+            if class_name not in source_instances:
+                source_instances[class_name] = dict(field_ids = [], link_ids = [], instance = instance)           
+            
+            source_instances[class_name]['field_ids'].append(ca.target_model_field)
+            source_instances[class_name]['field_ids'] = list(set(source_instances[class_name]['field_ids']))
+            source_instances[class_name]['link_ids'].append(ca.target_model_link_id)
+            source_instances[class_name]['link_ids'] = list(set(source_instances[class_name]['link_ids']))
+        
+        for k in source_instances:
+            source_instances[k]['field_ids'] = ','.join(source_instances[k]['field_ids'])
+            source_instances[k]['link_ids'] = ','.join(source_instances[k]['link_ids'])
+            content_association_source_instances.append(source_instances[k])
+
         return content_association_source_instances
 
     def orphan_fields(self):
@@ -101,7 +139,26 @@ class FitnessTip(BasePage):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        source_instances = dict()
+        content_association_source_instances = []
+        
+        for ca in content_associations:
+            # Need array containing field_ids, instance, and link_ids
+            instance = ContentType.objects.get(app_label = 'core', model = ca.source_model).model_class().objects.get(pk = ca.source_model_id)
+            class_name = instance.__class__.__name__.lower()
+            if class_name not in source_instances:
+                source_instances[class_name] = dict(field_ids = [], link_ids = [], instance = instance)           
+            
+            source_instances[class_name]['field_ids'].append(ca.target_model_field)
+            source_instances[class_name]['field_ids'] = list(set(source_instances[class_name]['field_ids']))
+            source_instances[class_name]['link_ids'].append(ca.target_model_link_id)
+            source_instances[class_name]['link_ids'] = list(set(source_instances[class_name]['link_ids']))
+        
+        for k in source_instances:
+            source_instances[k]['field_ids'] = ','.join(source_instances[k]['field_ids'])
+            source_instances[k]['link_ids'] = ','.join(source_instances[k]['link_ids'])
+            content_association_source_instances.append(source_instances[k])
+
         return content_association_source_instances
 
     def orphan_fields(self):
@@ -129,8 +186,26 @@ class MythBuster(BasePage):
         return "/admin/core/mythbuster/%i" % self.id
 
     def get_associated_content_items(self):
-        content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        source_instances = dict()
+        content_association_source_instances = []
+        
+        for ca in content_associations:
+            # Need array containing field_ids, instance, and link_ids
+            instance = ContentType.objects.get(app_label = 'core', model = ca.source_model).model_class().objects.get(pk = ca.source_model_id)
+            class_name = instance.__class__.__name__.lower()
+            if class_name not in source_instances:
+                source_instances[class_name] = dict(field_ids = [], link_ids = [], instance = instance)           
+            
+            source_instances[class_name]['field_ids'].append(ca.target_model_field)
+            source_instances[class_name]['field_ids'] = list(set(source_instances[class_name]['field_ids']))
+            source_instances[class_name]['link_ids'].append(ca.target_model_link_id)
+            source_instances[class_name]['link_ids'] = list(set(source_instances[class_name]['link_ids']))
+        
+        for k in source_instances:
+            source_instances[k]['field_ids'] = ','.join(source_instances[k]['field_ids'])
+            source_instances[k]['link_ids'] = ','.join(source_instances[k]['link_ids'])
+            content_association_source_instances.append(source_instances[k])
+
         return content_association_source_instances
 
     def orphan_fields(self):
@@ -158,8 +233,26 @@ class NutritionTip(BasePage):
         return "/admin/core/nutritiontip/%i" % self.id
 
     def get_associated_content_items(self):
-        content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        source_instances = dict()
+        content_association_source_instances = []
+        
+        for ca in content_associations:
+            # Need array containing field_ids, instance, and link_ids
+            instance = ContentType.objects.get(app_label = 'core', model = ca.source_model).model_class().objects.get(pk = ca.source_model_id)
+            class_name = instance.__class__.__name__.lower()
+            if class_name not in source_instances:
+                source_instances[class_name] = dict(field_ids = [], link_ids = [], instance = instance)           
+            
+            source_instances[class_name]['field_ids'].append(ca.target_model_field)
+            source_instances[class_name]['field_ids'] = list(set(source_instances[class_name]['field_ids']))
+            source_instances[class_name]['link_ids'].append(ca.target_model_link_id)
+            source_instances[class_name]['link_ids'] = list(set(source_instances[class_name]['link_ids']))
+        
+        for k in source_instances:
+            source_instances[k]['field_ids'] = ','.join(source_instances[k]['field_ids'])
+            source_instances[k]['link_ids'] = ','.join(source_instances[k]['link_ids'])
+            content_association_source_instances.append(source_instances[k])
+
         return content_association_source_instances
 
     def orphan_fields(self):
@@ -186,7 +279,25 @@ class Page(BasePage):
     def get_associated_content_items(self):
 
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = ContentType.objects.get(app_label = 'core', model = source_model).model_class().objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        source_instances = dict()
+        content_association_source_instances = []
+        
+        for ca in content_associations:
+            # Need array containing field_ids, instance, and link_ids
+            instance = ContentType.objects.get(app_label = 'core', model = ca.source_model).model_class().objects.get(pk = ca.source_model_id)
+            class_name = instance.__class__.__name__.lower()
+            if class_name not in source_instances:
+                source_instances[class_name] = dict(field_ids = [], link_ids = [], instance = instance)           
+            
+            source_instances[class_name]['field_ids'].append(ca.target_model_field)
+            source_instances[class_name]['field_ids'] = list(set(source_instances[class_name]['field_ids']))
+            source_instances[class_name]['link_ids'].append(ca.target_model_link_id)
+            source_instances[class_name]['link_ids'] = list(set(source_instances[class_name]['link_ids']))
+        
+        for k in source_instances:
+            source_instances[k]['field_ids'] = ','.join(source_instances[k]['field_ids'])
+            source_instances[k]['link_ids'] = ','.join(source_instances[k]['link_ids'])
+            content_association_source_instances.append(source_instances[k])
         return content_association_source_instances
  
     def orphan_fields(self):
@@ -228,6 +339,8 @@ class Product(BaseProduct):
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
         source_instances = dict()
+        content_association_source_instances = []
+        
         for ca in content_associations:
             # Need array containing field_ids, instance, and link_ids
             instance = ContentType.objects.get(app_label = 'core', model = ca.source_model).model_class().objects.get(pk = ca.source_model_id)
@@ -235,12 +348,16 @@ class Product(BaseProduct):
             if class_name not in source_instances:
                 source_instances[class_name] = dict(field_ids = [], link_ids = [], instance = instance)           
             
-            source_instances[class_name].field_ids.append(ca.target_model_field)
-            source_instances[class_name].field_ids = list(set(source_instances[class_name].field_ids))
-            source_instances[class_name].link_ids.append(ca.target_model_link_id)
-            source_instances[class_name].link_ids = list(set(source_instances[class_name].link_ids))
+            source_instances[class_name]['field_ids'].append(ca.target_model_field)
+            source_instances[class_name]['field_ids'] = list(set(source_instances[class_name]['field_ids']))
+            source_instances[class_name]['link_ids'].append(ca.target_model_link_id)
+            source_instances[class_name]['link_ids'] = list(set(source_instances[class_name]['link_ids']))
         
-        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = ContentType.objects.get(app_label = 'core', model = ca.source_model).model_class().objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        for k in source_instances:
+            source_instances[k]['field_ids'] = ','.join(source_instances[k]['field_ids'])
+            source_instances[k]['link_ids'] = ','.join(source_instances[k]['link_ids'])
+            content_association_source_instances.append(source_instances[k])
+
         return content_association_source_instances
         
     def orphan_fields(self):
@@ -267,8 +384,25 @@ class Recipe(BaseRecipe):
         return "/admin/core/recipe/%i" % self.id
 
     def get_associated_content_items(self):
-        content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        source_instances = dict()
+        content_association_source_instances = []
+        
+        for ca in content_associations:
+            # Need array containing field_ids, instance, and link_ids
+            instance = ContentType.objects.get(app_label = 'core', model = ca.source_model).model_class().objects.get(pk = ca.source_model_id)
+            class_name = instance.__class__.__name__.lower()
+            if class_name not in source_instances:
+                source_instances[class_name] = dict(field_ids = [], link_ids = [], instance = instance)           
+            
+            source_instances[class_name]['field_ids'].append(ca.target_model_field)
+            source_instances[class_name]['field_ids'] = list(set(source_instances[class_name]['field_ids']))
+            source_instances[class_name]['link_ids'].append(ca.target_model_link_id)
+            source_instances[class_name]['link_ids'] = list(set(source_instances[class_name]['link_ids']))
+        
+        for k in source_instances:
+            source_instances[k]['field_ids'] = ','.join(source_instances[k]['field_ids'])
+            source_instances[k]['link_ids'] = ','.join(source_instances[k]['link_ids'])
+            content_association_source_instances.append(source_instances[k])
         return content_association_source_instances
 
     def orphan_fields(self):
