@@ -79,12 +79,28 @@
             // Add a node change handler, selects the button in the UI when a image is selected
 			ed.onNodeChange.add(function(ed, cm, n, co) {
 			    if($('#model_id').val() != '' && $('#model_name').val() != '') {
-			    
-				    cm.setDisabled('contentassociationlink', co && n.nodeName == 'A' && $(n).attr('rel') != 'undefined' && $(n).attr('rel') == 'contentassociation');
-				    cm.setActive('contentassociationlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') != 'contentassociation');
-				
-				    cm.setDisabled('contentassociationunlink', co && n.nodeName != 'A');
-				    cm.setActive('contentassociationunlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') == 'contentassociation');
+				    // Disable if nothing selected.
+				    // Disable if already a contentassociation link.
+				    if(n.nodeName == 'A' && $(n).attr('rel') != 'undefined' && $(n).attr('rel') == 'contentassociation') { // Already a content association.
+					cm.setDisabled('contentassociationlink', true);
+					cm.setActive('contentassociationlink', false);
+					
+					cm.setDisabled('contentassociationunlink', false);
+					cm.setActive('contentassociationunlink', true);
+				    } else if(co) { // Empty selection (collapsed)
+					cm.setDisabled('contentassociationlink', true);
+					cm.setActive('contentassociationlink', false);
+					
+					cm.setDisabled('contentassociationunlink', true);
+					cm.setActive('contentassociationunlink', false);
+				    } else { // (Expanded) Selection
+					cm.setDisabled('contentassociationlink', false);
+					cm.setActive('contentassociationlink', true);
+					
+					cm.setDisabled('contentassociationunlink', true);
+					cm.setActive('contentassociationunlink', false);
+				    }				
+				    
 			    } else {
 			        cm.setDisabled('contentassociationlink', true);
 			        cm.setDisabled('contentassociationunlink', true);
