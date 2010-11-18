@@ -45,30 +45,6 @@ tinyMCE.init({
     advimage_update_dimensions_onchange: true,
     file_browser_callback: "CustomFileBrowser",
     relative_urls: false,
-    valid_elements : "" +
-    "p," + 
-    "a[href|target=_blank|class|name|id|rel]," +
-    "-strong/-b," +
-    "-em/-i," +
-    "-u," + 
-    "-ol," + 
-    "-ul," + 
-    "-li," + 
-    "br," + 
-    "img[class|src|alt=|width|height]," + 
-    "-h2,-h3,-h4," + 
-    "-pre," +
-    "-code," + 
-    "-div," +
-    "hr",
-    extended_valid_elements: "" + 
-    "a[name|class|href|target|title|onclick|id|rel]," + 
-    "img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name]," + 
-    "br[clearfix]," + 
-    "p[class<clearfix?summary?code|style]," + 
-    "h2[class<clearfix],h3[class<clearfix],h4[class<clearfix]," + 
-    "ul[class<clearfix],ol[class<clearfix]," + 
-    "div[class],",
     convert_urls : false,
     theme_advanced_resizing : true,
 	template_templates : [

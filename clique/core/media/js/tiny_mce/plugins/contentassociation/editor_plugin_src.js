@@ -80,8 +80,8 @@
 			ed.onNodeChange.add(function(ed, cm, n, co) {
 			    if($('#model_id').val() != '' && $('#model_name').val() != '') {
 			    
-                    cm.setDisabled('contentassociationlink', co && n.nodeName != 'A' && $(n).attr('rel') != 'undefined');
-				    cm.setActive('contentassociationlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') == 'contentassociation');
+				    cm.setDisabled('contentassociationlink', co && n.nodeName == 'A' && $(n).attr('rel') != 'undefined' && $(n).attr('rel') == 'contentassociation');
+				    cm.setActive('contentassociationlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') != 'contentassociation');
 				
 				    cm.setDisabled('contentassociationunlink', co && n.nodeName != 'A');
 				    cm.setActive('contentassociationunlink', n.nodeName == 'A' && !n.name && $(n).attr('rel') == 'contentassociation');

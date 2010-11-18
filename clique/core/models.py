@@ -2,6 +2,7 @@ import uuid
 
 from BeautifulSoup import BeautifulSoup 
 
+from django.contrib.contenttypes.models import ContentType
 from django.db import backend
 from django.db import models
 from django.db.models.signals import pre_save
@@ -183,8 +184,9 @@ class Page(BasePage):
         return "/admin/core/page/%i" % self.id
 
     def get_associated_content_items(self):
+
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = ContentType.objects.get(app_label = 'core', model = source_model).model_class().objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
  
     def orphan_fields(self):
@@ -225,7 +227,20 @@ class Product(BaseProduct):
 
     def get_associated_content_items(self):
         content_associations = ContentAssociation.objects.filter(target_model__exact = self.__class__.__name__.lower(), target_model_id = self.id)
-        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = globals()[ca.source_model.capitalize()].objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
+        source_instances = dict()
+        for ca in content_associations:
+            # Need array containing field_ids, instance, and link_ids
+            instance = ContentType.objects.get(app_label = 'core', model = ca.source_model).model_class().objects.get(pk = ca.source_model_id)
+            class_name = instance.__class__.__name__.lower()
+            if class_name not in source_instances:
+                source_instances[class_name] = dict(field_ids = [], link_ids = [], instance = instance)           
+            
+            source_instances[class_name].field_ids.append(ca.target_model_field)
+            source_instances[class_name].field_ids = list(set(source_instances[class_name].field_ids))
+            source_instances[class_name].link_ids.append(ca.target_model_link_id)
+            source_instances[class_name].link_ids = list(set(source_instances[class_name].link_ids))
+        
+        content_association_source_instances = [dict(field_ids = ','.join(list(set([cai.target_model_field for cai in content_associations]))), instance = ContentType.objects.get(app_label = 'core', model = ca.source_model).model_class().objects.get(pk = ca.source_model_id), link_ids = ','.join([cal.target_model_link_id for cal in content_associations])) for ca in content_associations]
         return content_association_source_instances
         
     def orphan_fields(self):
