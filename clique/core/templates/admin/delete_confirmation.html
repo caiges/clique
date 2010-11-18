@@ -25,7 +25,7 @@
     <p>{% blocktrans with object as escaped_object %}Are you sure you want to delete the {{ object_name }} "{{ escaped_object }}"? All of the following related items will be deleted:{% endblocktrans %}</p>
     <ul>
           {% for del_obj in deleted_objects %}
-               <li><a href="{{ del_obj.get_admin_url }}" target="_blank">{{ object }}</a></li>
+               <li>{{ del_obj }}</li>
           {% endfor %}
     </ul>
     {% if object.get_associated_content_items|length > 0 %}
