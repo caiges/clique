@@ -25,6 +25,7 @@ tinyMCE.init({
     theme: "advanced",
     language: "en",
     skin: "o2k7",
+    content_css: "/media/css/tiny_mce_content.css",
     browsers: "gecko",
     dialog_type: "modal",
     object_resizing: true,

@@ -9,7 +9,7 @@ $(document).ready(function() {
 
                 for(var i = 0; i < $fields.length; i++) {
                     if(tinyMCE.editors[$fields[i]].id == editor.id) {
-                        $('#' + $fields[i] + '_tbl').css('border', '2px solid red');
+                        $('#' + $fields[i] + '_tbl').css('border', '2px solid red !important');
                     }
                 }
             }
@@ -23,7 +23,7 @@ $(document).ready(function() {
                     linkIds = linkIds.split(',');
         
                     for(var j = 0; j < linkIds.length; j++) {
-                        editor.dom.setStyle(linkIds[j], 'border', '2px solid red');
+                        editor.dom.setStyle(linkIds[j], 'border', '2px solid red !important');
                     }
                 }
             }
