@@ -235,4 +235,28 @@ def remove_content_association(request):
         content_association = ContentAssociation.objects.filter(target_model_link_id__exact = link_id)
         content_association.delete()
         return HttpResponse("Content association removed")
+        
+def invalid_content_associations(request):
+    if(request.method == 'POST'):
+        # Get all content associations where target_model from the the content_association table doesn't exist and source_model/source_model_id equals the passed source.
+        source_model_name = request.POST['model_name']
+        source_model_id = request.POST['model_id']
+        
+        content_associations = ContentAssociation.objects.filter(source_model__exact = source_model_name, source_model_id__exact = source_model_id)
+        invalid_content_associations = []
+        ica = None
+        
+        for ca in content_associations:
+            
+            try:
+                target_model_klass = ContentType.objects.get(app_label = 'core', model = ca.target_model).model_class()
+                target_model_klass_inst = target_model_klass.objects.get(pk = ca.target_model_id)
+            except Exception as e:
+                invalid_content_associations.append(ca)
+        
+        ica = json.dumps(dict(links = [dict(link_id = ca.target_model_link_id) for ca in invalid_content_associations]))
+        print ica
+        return HttpResponse('monkey')
+
+        
 

@@ -32,7 +32,7 @@
     <p>In addition, the following items reference what you are about to delete. Click on any below that you wish to edit:
     <ul>
         {% for ca in object.get_associated_content_items %}
-            <li>{{ ca.instance|class_name_lookup|capfirst }}: <a href="{{ ca.instance.get_admin_url }}?links={{ ca.link_ids }}&field_ids={{ ca.field_ids }}" target="_blank">{{ ca.instance }}</a></li>
+            <li>{{ ca.instance|class_name_lookup|capfirst }}: <a href="{{ ca.instance.get_admin_url }}?links={{ ca.link_ids }}&field_ids={{ ca.field_ids }}" target="_blank">{{ ca.instance.name }}</a></li>
         {% endfor %}
     </ul>
     <script type="text/javascript">

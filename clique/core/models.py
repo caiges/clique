@@ -363,7 +363,6 @@ class Product(BaseProduct):
     def orphan_fields(self):
         return ['long_description', 'product_details', 'mobile_description']
     
-
 class ProductCategory(CategoryPage):
     
     class Meta(CategoryPage.Meta):

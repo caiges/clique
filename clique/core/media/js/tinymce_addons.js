@@ -1,5 +1,5 @@
 $(document).ready(function() {        
-    
+        
     var highlightCallback = function(editor) {
 
         // Highlight each conflicting form field.
@@ -23,12 +23,36 @@ $(document).ready(function() {
                     linkIds = linkIds.split(',');
         
                     for(var j = 0; j < linkIds.length; j++) {
-                        //editor.dom.setStyle(linkIds[j], 'border', '2px solid red !important');
                         editor.dom.addClass(linkIds[j], 'contentassociationconflict');
                     }
                 }
             }
         }
+        
+        // Highlight content associations that are no longer valid.
+        var invalid_content_associations_url = '/content-association/content_items/invalid.json';
+        var $model_name = $('#model_name');
+        var $model_id = $('#model_id');
+        
+        var callbacks = {
+            
+            success : function(data) {
+                var linkIds = $.parseJSON(data);
+                //console.log(linkIds);
+                for(var j = 0; j < linkIds.length; j++) { 
+                    editor.dom.addClass(linkIds[j], 'contentassociationconflict');
+                }             
+            },
+            
+            error : function(data) {
+                // Do nothing.
+            }
+        };
+        
+        //$.ajax({url : invalid_content_associations_url, type : 'POST', data : {model_name : $model_name.val(), model_id : $model_id.val()}, success : callbacks.success, error : callbacks.error});
+    
+        
+        
     };
     
     tinyMCE.onAddEditor.add(function(mgr,ed) {
