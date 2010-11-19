@@ -71,9 +71,18 @@ class Article(BasePage):
     
     def orphan_fields(self):
         return ['body']
+        
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
     
 class ArticleCategory(CategoryPage):
     
+    def get_admin_url(self):
+        return "/admin/core/articlecategory/%i" % self.id
+    
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
+        
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Article Categories'
         
@@ -118,8 +127,17 @@ class Exercise(BasePage):
 
     def orphan_fields(self):
         return ['body']
+        
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
             
 class ExerciseCategory(CategoryPage):
+    
+    def get_admin_url(self):
+        return "/admin/core/exercisecategory/%i" % self.id
+    
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
         
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Exercise Categories'
@@ -163,9 +181,18 @@ class FitnessTip(BasePage):
 
     def orphan_fields(self):
         return ['body']
+        
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
 
 class FitnessTipCategory(CategoryPage):
     
+    def get_admin_url(self):
+        return "/admin/core/fitnesstipcategory/%i" % self.id
+    
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
+        
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Fitness Tip Categories'
 
@@ -210,9 +237,18 @@ class MythBuster(BasePage):
 
     def orphan_fields(self):
         return ['body']
+
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
             
 class MythBusterCategory(CategoryPage):
     
+    def get_admin_url(self):
+        return "/admin/core/mythbustercategory/%i" % self.id
+    
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
+        
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Myth Buster Categories'
 
@@ -258,8 +294,17 @@ class NutritionTip(BasePage):
     def orphan_fields(self):
         return ['body']
         
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
+        
 class NutritionTipCategory(CategoryPage):
     
+    def get_admin_url(self):
+        return "/admin/core/nutritiontipcategory/%i" % self.id
+    
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
+        
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Nutrition Tip Categories'
 
@@ -303,8 +348,17 @@ class Page(BasePage):
     def orphan_fields(self):
         return ['body']
         
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
+        
 class PageCategory(CategoryPage):
     
+    def get_admin_url(self):
+        return "/admin/core/pagecategory/%i" % self.id
+     
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
+       
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Page Categories'
     
@@ -362,8 +416,17 @@ class Product(BaseProduct):
         
     def orphan_fields(self):
         return ['long_description', 'product_details', 'mobile_description']
+        
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
     
 class ProductCategory(CategoryPage):
+    
+    def get_admin_url(self):
+        return "/admin/core/productcategory/%i" % self.id
+    
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
     
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Product Categories'
@@ -406,8 +469,17 @@ class Recipe(BaseRecipe):
 
     def orphan_fields(self):
         return ['ingredients', 'directions']
+        
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
     
 class RecipeCategory(CategoryPage):
+    
+    def get_admin_url(self):
+        return "/admin/core/recipecategory/%i" % self.id
+    
+    def __unicode__(self):
+        return "%s - %s" % (self.name, self.language)
     
     class Meta(CategoryPage.Meta):
         verbose_name_plural = 'Recipe Categories'

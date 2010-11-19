@@ -40,6 +40,7 @@ class ArticleAdmin(admin.ModelAdmin):
 admin.site.register(Article, ArticleAdmin)
 
 class ArticleCategoryAdmin(admin.ModelAdmin):
+    actions = None
     exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
             'fields': ('name', 'category_image', 'remove_category_image', 'language')
@@ -103,6 +104,7 @@ class ExerciseAdmin(admin.ModelAdmin):
 admin.site.register(Exercise, ExerciseAdmin)
 
 class ExerciseCategoryAdmin(admin.ModelAdmin):
+    actions = None
     exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
             'fields': ('name', 'category_image', 'remove_category_image', 'language')
@@ -161,6 +163,7 @@ class FitnessTipAdmin(admin.ModelAdmin):
 admin.site.register(FitnessTip, FitnessTipAdmin)
 
 class FitnessTipCategoryAdmin(admin.ModelAdmin):
+    actions = None
     exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
             'fields': ('name', 'category_image', 'remove_category_image', 'language')
@@ -224,6 +227,7 @@ class MythBusterAdmin(admin.ModelAdmin):
 admin.site.register(MythBuster, MythBusterAdmin)
 
 class MythBusterCategoryAdmin(admin.ModelAdmin):
+    actions = None
     exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
             'fields': ('name', 'category_image', 'remove_category_image', 'language')
@@ -287,6 +291,7 @@ class NutritionTipAdmin(admin.ModelAdmin):
 admin.site.register(NutritionTip, NutritionTipAdmin)
 
 class NutritionTipCategoryAdmin(admin.ModelAdmin):
+    actions = None
     exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
             'fields': ('name', 'category_image', 'remove_category_image', 'language')
@@ -345,6 +350,7 @@ class PageAdmin(BasePageAdmin):
 admin.site.register(Page, PageAdmin)
 
 class PageCategoryAdmin(BaseCategoryAdmin):
+    actions = None
     exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
             'fields': ('name', 'category_image', 'remove_category_image', 'language')
@@ -414,6 +420,7 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 
 class ProductCategoryAdmin(BaseCategoryAdmin):
+    actions = None
     exclude = ('user',)
     fieldsets = (('Category Info', {
             'fields': ('name', 'category_image', 'remove_category_image', 'make_live', 'language')
@@ -472,6 +479,7 @@ class RecipeAdmin(BaseRecipeAdmin):
 admin.site.register(Recipe, RecipeAdmin)
 
 class RecipeCategoryAdmin(admin.ModelAdmin):
+    actions = None
     exclude = ('user', 'category_description', 'default_category',)
     fieldsets = (('Category Info', {
             'fields': ('name', 'category_image', 'remove_category_image', 'language')

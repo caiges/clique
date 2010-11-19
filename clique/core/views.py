@@ -193,14 +193,14 @@ def recipe_within_category_show(request, recipe_category_url, recipe_url):
 """ Content Association """ 
 def content_association(request):
     if(request.method == 'GET'):
-        articles = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Article.objects.all()]
-        exercises = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Exercise.objects.all()]
-        fitnesstips = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in FitnessTip.objects.all()]
-        mythbusters = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in MythBuster.objects.all()]
-        nutritiontips = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in NutritionTip.objects.all()]
-        pages = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Page.objects.all()]
-        products = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Product.objects.all()]
-        recipes = [dict(model = p.__class__.__name__.lower(), id = p.id, name = p.name) for p in Recipe.objects.all()]
+        articles = [dict(model = p.__class__.__name__.lower(), id = p.id, name = "%s - %s" % (p.name, p.language)) for p in Article.objects.all()]
+        exercises = [dict(model = p.__class__.__name__.lower(), id = p.id, name = "%s - %s" % (p.name, p.language)) for p in Exercise.objects.all()]
+        fitnesstips = [dict(model = p.__class__.__name__.lower(), id = p.id, name = "%s - %s" % (p.name, p.language)) for p in FitnessTip.objects.all()]
+        mythbusters = [dict(model = p.__class__.__name__.lower(), id = p.id, name = "%s - %s" % (p.name, p.language)) for p in MythBuster.objects.all()]
+        nutritiontips = [dict(model = p.__class__.__name__.lower(), id = p.id, name = "%s - %s" % (p.name, p.language)) for p in NutritionTip.objects.all()]
+        pages = [dict(model = p.__class__.__name__.lower(), id = p.id, name = "%s - %s" % (p.name, p.language)) for p in Page.objects.all()]
+        products = [dict(model = p.__class__.__name__.lower(), id = p.id, name = "%s - %s" % (p.name, p.language)) for p in Product.objects.all()]
+        recipes = [dict(model = p.__class__.__name__.lower(), id = p.id, name = "%s - %s" % (p.name, p.language)) for p in Recipe.objects.all()]
         items = dict(Articles = articles, Exercises = exercises, FitnessTips = fitnesstips, MythBusters = mythbusters, NutritionTips = nutritiontips, Pages = pages, Products = products, Recipes = recipes)
         items_json = json.dumps(items)
         return HttpResponse(items_json)

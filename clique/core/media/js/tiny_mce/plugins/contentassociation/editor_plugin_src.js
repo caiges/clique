@@ -26,7 +26,7 @@
 			ed.addCommand('mceContentAssociationLinkContent', function() {
 				ed.windowManager.open({
 					file : url + '/dialog.htm',
-					width : 400 + parseInt(ed.getLang('contentassociation.delta_width', 0)),
+					width : 600 + parseInt(ed.getLang('contentassociation.delta_width', 0)),
 					height : 240 + parseInt(ed.getLang('contentassociation.delta_height', 0)),
 					inline : 1
 				}, {
