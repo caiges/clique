@@ -32,13 +32,14 @@ tinyMCE.init({
     cleanup_on_startup: true,
     forced_root_block: "p",
     remove_trailing_nbsp: true,
+    theme_advanced_layout_manager: "SimpleLayout",
+    theme_advanced_path: true,
     theme_advanced_toolbar_location: "top",
     theme_advanced_toolbar_align: "left",
-    theme_advanced_statusbar_location: "none",
+    theme_advanced_statusbar_location: "bottom",
     theme_advanced_buttons1: "formatselect,bold,italic,underline,bullist,numlist,|,justifyleft,justifycenter,justifyright,justifyfull,|,undo,redo,anchor,link,unlink,hr,template,image,code,removeformat,cut,copy,paste,pastetext,pasteword,media,charmap,contentassociationlink,contentassociationunlink,|,tablecontrols",
     theme_advanced_buttons2: "",
     theme_advanced_buttons3: "",
-    theme_advanced_path: false,
     theme_advanced_blockformats: "p,h1,h2,h3,h4,h5,h6",
     plugins: "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,noneditable,visualchars,nonbreaking,xhtmlxtras,template,contentassociation",
     advimage_styles: "Linksbündig neben Text=img_left;Rechtsbündig neben Text=img_right;Eigener Block=img_block",
@@ -49,7 +50,7 @@ tinyMCE.init({
     convert_urls : false,
     theme_advanced_resizing : true,
 	template_templates : [
-	    {
+	{
 	        title : "Standard Recipe",
 	        src : "/media/js/tiny_mce/templates/recipe.html",
 	        description : "Standard recipe template."

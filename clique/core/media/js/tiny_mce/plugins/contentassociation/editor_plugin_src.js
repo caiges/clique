@@ -94,7 +94,6 @@
 					cm.setDisabled('contentassociationunlink', true);
 					cm.setActive('contentassociationunlink', false);
 				    } else { // (Expanded) Selection
-					console.log('valid selection');
 					cm.setDisabled('contentassociationlink', false);
 					cm.setActive('contentassociationlink', true);
 					
