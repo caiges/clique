@@ -81,7 +81,7 @@
 			    if($('#model_id').val() != '' && $('#model_name').val() != '') {
 				    // Disable if nothing selected.
 				    // Disable if already a contentassociation link.
-				    if(n.nodeName == 'A' && $(n).attr('rel') != 'undefined' && $(n).attr('rel') == 'contentassociation') { // Already a content association.
+				    if(n.nodeName == 'A' && typeof $(n).attr('rel') != 'undefined' && $(n).attr('rel') == 'contentassociation') { // Already a content association.
 					cm.setDisabled('contentassociationlink', true);
 					cm.setActive('contentassociationlink', false);
 					
@@ -94,6 +94,7 @@
 					cm.setDisabled('contentassociationunlink', true);
 					cm.setActive('contentassociationunlink', false);
 				    } else { // (Expanded) Selection
+					console.log('valid selection');
 					cm.setDisabled('contentassociationlink', false);
 					cm.setActive('contentassociationlink', true);
 					

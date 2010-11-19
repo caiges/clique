@@ -435,6 +435,8 @@ def orphan_association_check(sender, **kwargs):
                         
                 for e in elements:
                     link_id = e['id']
+                    e['class'] = ''
+                    e['style'] = ''
                     if link_ids.count("'%s'" % link_id) == 0:
                         # New link.
                         link_ids.append("'%s'" % link_id)                        
@@ -474,11 +476,11 @@ def common_signal_callback(sender, **kwargs):
 
 
 # Register models with the orphan association check callback.
-#pre_save.connect(common_signal_callback, sender = Article)
-#pre_save.connect(common_signal_callback, sender = Exercise)    
-#pre_save.connect(common_signal_callback, sender = FitnessTip)
-#pre_save.connect(common_signal_callback, sender = MythBuster)    
-#pre_save.connect(common_signal_callback, sender = NutritionTip)
-#pre_save.connect(common_signal_callback, sender = Page)
+pre_save.connect(common_signal_callback, sender = Article, dispatch_uid = uuid.uuid4())
+pre_save.connect(common_signal_callback, sender = Exercise, dispatch_uid = uuid.uuid4())    
+pre_save.connect(common_signal_callback, sender = FitnessTip, dispatch_uid = uuid.uuid4())
+pre_save.connect(common_signal_callback, sender = MythBuster, dispatch_uid = uuid.uuid4())    
+pre_save.connect(common_signal_callback, sender = NutritionTip, dispatch_uid = uuid.uuid4())
+pre_save.connect(common_signal_callback, sender = Page, dispatch_uid = uuid.uuid4())
 pre_save.connect(orphan_association_check, sender = Product, dispatch_uid = uuid.uuid4())
-#pre_save.connect(common_signal_callback, sender = Recipe)
+pre_save.connect(common_signal_callback, sender = Recipe, dispatch_uid = uuid.uuid4())

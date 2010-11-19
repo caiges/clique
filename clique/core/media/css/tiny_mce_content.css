@@ -1,1 +1,3 @@
-a[rel='contentassociation'] { border: 2px dotted #4A9F45; }
+/*a[rel='contentassociation'] { border: 2px dotted #4A9F45; }*/
+a[rel='contentassociation']:before { content : url(/media/js/tiny_mce/plugins/contentassociation/img/link-content.png); cursor: pointer; }
+a[rel='contentassociation'].contentassociationconflict:before { content : url(/media/js/tiny_mce/plugins/contentassociation/img/link-content-conflict.png); cursor: pointer; }

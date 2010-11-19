@@ -29,6 +29,10 @@ class ArticleAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change): 
         inst = form.save(commit = False)
         inst.user = request.user
+        # Unique URL validation.
+        #conflicting_urls = Article.objects.filter(url__exact = inst.url, lanugage__exact = lang_code)
+        #if len(conflicting_urls) > 0:
+        #    pass
         inst.save()
         form.save_m2m()
         return inst
