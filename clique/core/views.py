@@ -4,12 +4,13 @@ import uuid
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
+from django.template import RequestContext
 from models import *
 import models as m
 
 def index(request):
     if(request.method == 'GET'):
-        return render_to_response('core/index.html')
+        return render_to_response('core/index.html', {}, context_instance = RequestContext(request))
 
 """ Article Categories """
 def article_categories_list(request):
