@@ -49,7 +49,7 @@
 	        	<h2>Products</h2>
 	        	{% block navigation %}
 	        		{% for p in product_navigation %}
-	        			<a href="{% url core.views.products_within_category p.url %}" title="{{ p.name }}">{{ p.name }}</a><br>	
+	        			<a href="{% url products_within_category p.url %}" title="{{ p.name }}">{{ p.name }}</a><br>	
 	        		{% endfor %}
 	        	<br>
 	        	<h2>Resources</h2>

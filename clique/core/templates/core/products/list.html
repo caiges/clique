@@ -4,7 +4,7 @@
 	<h2>All Products within category: {{ category }}</h2>
 	<ul>
 	{% for product in products %}
-		<li><a href="{% url core.views.product_within_category_show category.url product.url %}" title="{{ product.name }}">{{ product.name }}</a></li>
+		<li><a href="{% url product_within_category category.url product.url %}" title="{{ product.name }}">{{ product.name }}</a></li>
 	{% empty %}
 		<li>No products.</li>
 	{% endfor %}
@@ -16,7 +16,7 @@
 		<li>{% if product.external_url %}
                         <a href="{{ product.url }}" title="{{ product.name }}">{{ product.name }}</a>
                     {% else %}
-                        <a href="{% url core.views.product_within_category_show category.url product.url %}" title="{{ product.name }}">{{ product.name }}</a>
+                        <a href="{% url product_within_category category.url product.url %}" title="{{ product.name }}">{{ product.name }}</a>
                     {% endif %}
                 </li>
 	{% empty %}

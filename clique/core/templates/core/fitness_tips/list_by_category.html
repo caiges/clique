@@ -8,7 +8,7 @@
 		    {{ category.name }}
 		    <ul>
 		    {% for fitness_tip in category.fitness_tips.all %}
-		        <li><a href="{% url core.views.fitness_tip_within_category_show category.url fitness_tip.url %}">{{ fitness_tip.name }}</a></li>
+		        <li><a href="{% url fitness_tip_within_category category.url fitness_tip.url %}">{{ fitness_tip.name }}</a></li>
 		    {% empty %}
 		        <li>No fitness tips.</li>
 		    {% endfor %}

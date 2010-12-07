@@ -8,7 +8,6 @@ class ProductNavigationNode(template.Node):
     def __init__(self, variable):
         self.variable = variable
     def render(self, context):
-        print context
         product_categories = ProductCategory.objects.filter(products__isnull = False, language__exact = context['LANGUAGE_CODE']).distinct().order_by('name')
         self.product_categories = product_categories
         context[self.variable] = self.product_categories
