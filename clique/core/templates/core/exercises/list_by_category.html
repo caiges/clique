@@ -8,7 +8,7 @@
 		    {{ category.name }}
 		    <ul>
 		    {% for exercise in category.exercises.all %}
-		        <li><a href="{% url core.views.exercise_within_category_show category.url exercise.url %}">{{ exercise.name }}</a></li>
+		        <li><a href="{% url exercise_within_category category.url exercise.url %}">{{ exercise.name }}</a></li>
 		    {% empty %}
 		        <li>No exercises.</li>
 		    {% endfor %}

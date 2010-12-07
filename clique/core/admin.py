@@ -429,6 +429,7 @@ class ProductCategoryAdmin(BaseCategoryAdmin):
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
+    list_display = ('name', 'language',)
     save_on_top = True
     
     class Media:

@@ -8,7 +8,7 @@
 		    {{ category.name }}
 		    <ul>
 		    {% for myth_buster in category.myth_busters.all %}
-		        <li><a href="{% url core.views.myth_buster_within_category_show category.url myth_buster.url %}">{{ myth_buster.name }}</a></li>
+		        <li><a href="{% url myth_buster_within_category category.url myth_buster.url %}">{{ myth_buster.name }}</a></li>
 		    {% empty %}
 		        <li>No myth_busters.</li>
 		    {% endfor %}

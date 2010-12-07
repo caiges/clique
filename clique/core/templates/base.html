@@ -1,8 +1,9 @@
 {% load i18n %}
+{% load localeurl_tags %}
 {% load navigation %}
-{% get_product_navigation as product_navigation %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
+{% get_product_navigation as product_navigation %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
@@ -31,10 +32,10 @@
     	
     		<div class="grid_12">
     			<h1>Weider Nutrition Group</h1>
-			    <form action="/i18n/setlang/" method="post">
+			    <form action="{% url localeurl_change_locale %}" method="post">
 				{% csrf_token %}
 				<input name="next" type="hidden" value="{{ request.path }}" />
-				<select name="language">
+				<select name="locale">
 				{% for lang in LANGUAGES %}
 					<option value="{{ lang.0 }}" {% >{{ lang.1 }}</option>
 				{% endfor %}
@@ -49,17 +50,17 @@
 	        	<h2>Products</h2>
 	        	{% block navigation %}
 	        		{% for p in product_navigation %}
-	        			<a href="{% url core.views.products_within_category p.url %}" title="{{ p.name }}">{{ p.name }}</a><br>	
+	        			<a href="{% url products_within_category p.url %}" title="{{ p.name }}">{{ p.name }}</a><br>	
 	        		{% endfor %}
 	        	<br>
 	        	<h2>Resources</h2>
-	        	<a href="/article-categories/articles/">Articles</a><br>
-	        	<a href="/exercise-categories/exercises/">Exercises</a><br>
-	        	<a href="/fitness-tip-categories/fitness-tips/">Fitness Tips</a><br>
-	        	<a href="/myth-buster-categories/myth-busters/">Myth Busters</a><br>
-	        	<a href="/nutrition-tip-categories/nutrition-tips/">Nutrition Tips</a><br>
-	        	<a href="/pages/">Pages</a><br>
-	        	<a href="/recipe-categories/recipes/">Recipes</a><br>
+                <a href="{% url articles_within_category %}">Articles</a><br>
+                <a href="{% url exercises_within_category %}">Exercises</a><br>
+                <a href="{% url fitness_tips_within_category %}">Fitness Tips</a><br>
+                <a href="{% url myth_busters_within_category %}">Myth Busters</a><br>
+                <a href="{% url nutrition_tips_within_category %}">Nutrition Tips</a><br>
+                <a href="{% url pages_list %}">Pages</a><br>
+                <a href="{% url recipes_within_category %}">Recipes</a><br>
 	        	{% endblock %}
 	        </div>
 	        <div class="grid_9">	

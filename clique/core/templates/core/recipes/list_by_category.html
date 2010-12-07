@@ -8,7 +8,7 @@
 		    {{ category.name }}
 		    <ul>
 		    {% for recipe in category.recipes.all %}
-		        <li><a href="{% url core.views.recipe_within_category_show category.url recipe.url %}">{{ recipe.name }}</a></li>
+		        <li><a href="{% url recipe_within_category category.url recipe.url %}">{{ recipe.name }}</a></li>
 		    {% empty %}
 		        <li>No recipes.</li>
 		    {% endfor %}
