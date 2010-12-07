@@ -3,3 +3,4 @@ MySQL-Python
 simplejson
 PIL
 BeautifulSoup
+django-localeurl

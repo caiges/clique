@@ -15,7 +15,7 @@ def index(request):
 """ Article Categories """
 def article_categories_list(request):
     if(request.method == 'GET'):
-        article_categories = ArticleCategory.objects.filter(articles__isnull = False).distinct()
+        article_categories = ArticleCategory.objects.filter(articles__isnull = False, language__exact = request.LANGUAGE_CODE).distinct()
         return render_to_response('core/article_categories/list.html', {'article_categories' : article_categories})
 
 """ Articles """
