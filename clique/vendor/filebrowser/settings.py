@@ -110,7 +110,7 @@ DEFAULT_SORTING_BY = getattr(settings, "FILEBROWSER_DEFAULT_SORTING_BY", "date")
 DEFAULT_SORTING_ORDER = getattr(settings, "FILEBROWSER_DEFAULT_SORTING_ORDER", "desc")
 
 # Default upload frontend is uploadify, raither use simple
-UPLOAD_FRONTEND = getattr(settings, "FILEBROWSER_UPLOAD_FRONTEND", "uploadify")
+UPLOAD_FRONTEND = getattr(settings, "FILEBROWSER_UPLOAD_FRONTEND", "simple")
 
 SKIN = getattr(settings, "FILEBROWSER_SKIN", "default")
 

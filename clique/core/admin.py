@@ -17,6 +17,7 @@ class ArticleAdmin(admin.ModelAdmin):
     ),)
     list_display = ('name', 'make_live', 'sort_order')
     list_editable = ('make_live', 'sort_order',)
+    list_filter = ('categories',)
     ordering = ('sort_order', 'name',)
     save_on_top = True
     
