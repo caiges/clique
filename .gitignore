@@ -4,3 +4,7 @@ env/*
 *.komodoproject
 .project
 .pydevproject
+product_supplement_information_images/
+uploads/*
+product_supplement_information_images/*
+uploads/
