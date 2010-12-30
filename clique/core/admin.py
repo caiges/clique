@@ -15,7 +15,7 @@ class ArticleAdmin(admin.ModelAdmin):
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
-    list_display = ('name', 'make_live', 'sort_order')
+    list_display = ('name', 'language', 'make_live', 'sort_order')
     list_editable = ('make_live', 'sort_order',)
     ordering = ('sort_order', 'name',)
     save_on_top = True
@@ -49,6 +49,7 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
             'fields': ('page_title', 'url', 'meta_description', 'meta_keywords', 'body')
         }),
     )
+    list_display = ('name', 'language',)
     save_on_top = True
     
     class Media:
@@ -359,6 +360,7 @@ class PageCategoryAdmin(BaseCategoryAdmin):
             'fields': ('page_title', 'meta_description', 'meta_keywords', 'body')
         }),
     )
+    list_display = ('name', 'language',)
     save_on_top = True
     
     class Media:
@@ -390,7 +392,7 @@ class ProductAdmin(admin.ModelAdmin):
     ),)
     list_display = ('name', 'product_categories', 'language', 'make_live', 'sort_order')
     list_editable = ('make_live', 'sort_order',)
-    list_filter = ('categories',)
+    list_filter = ('categories', 'language',)
     ordering = ('sort_order', 'name', 'language',)
     save_on_top = True
     search_fields = ('name', 'categories__name',)

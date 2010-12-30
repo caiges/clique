@@ -188,8 +188,8 @@ def products_within_category(request, product_category_url):
 # Display a product within a category.
 def product_within_category_show(request, product_category_url, product_url):
     if(request.method == 'GET'):
-        product_category = ProductCategory.objects.filter(url__exact = product_category_url)[0]
-        product = Product.objects.filter(categories__exact = product_category, url__exact = product_url)[0]
+        product_category = ProductCategory.objects.filter(url__exact = product_category_url, language__exact = request.LANGUAGE_CODE)[0]
+        product = Product.objects.filter(categories__exact = product_category, url__exact = product_url, language__exact = request.LANGUAGE_CODE)[0]
         return render_to_response('core/products/show.html', {'category' : product_category, 'product' : product})
 
 """ Recipes """
