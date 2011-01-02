@@ -17,7 +17,7 @@ class ArticleAdmin(admin.ModelAdmin):
     ),)
     list_display = ('name', 'language', 'make_live', 'sort_order')
     list_editable = ('make_live', 'sort_order',)
-    list_filter = ('categories',)
+    list_filter = ('categories', 'language',)
     ordering = ('sort_order', 'name',)
     save_on_top = True
     
@@ -80,8 +80,9 @@ class ExerciseAdmin(admin.ModelAdmin):
                                  'fields' : ('name', 'page_title', 'url', 'meta_description', 'meta_keywords', 'body', 'exercise_image', 'remove_exercise_image', 'categories', 'make_live', 'featured', 'include_on_primary_navigation', 'sort_order', 'language')
                                  }
     ),)
-    list_display = ('name', 'make_live', 'sort_order')
+    list_display = ('name', 'make_live', 'sort_order', 'language',)
     list_editable = ('make_live', 'sort_order',)
+    list_filter = ('language',)
     ordering = ('sort_order', 'name',)
     save_on_top = True
     
@@ -465,6 +466,7 @@ class RecipeAdmin(BaseRecipeAdmin):
     ),)
     list_display = ('name', 'make_live', 'sort_order')
     list_editable = ('make_live', 'sort_order',)
+    list_filter = ('language',)
     ordering = ('sort_order', 'name',)
     save_on_top = True
     
